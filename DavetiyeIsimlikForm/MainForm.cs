@@ -8,11 +8,11 @@ namespace DavetiyeIsimlikForm
     public partial class MainForm : Form
     {
         public const string browserTarget = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-        public static string textPath = Application.StartupPath + "Web_Davetiye›simlik\\davetliler.txt";
-        public static string dataPath = Application.StartupPath + "Web_Davetiye›simlik\\data.js";
-        public static string settingsPath = Application.StartupPath + "Web_Davetiye›simlik\\settingsData.js";
-        public static string settingsTempPath = Application.StartupPath + "Web_Davetiye›simlik\\settingsTempData.js";
-        public static string htmlpageUrl = Application.StartupPath + "Web_Davetiye›simlik\\Davetiye›simlik.html";
+        public static string textPath = Application.StartupPath + "Web\\davetliler.txt";
+        public static string dataPath = Application.StartupPath + "Web\\data.js";
+        public static string settingsPath = Application.StartupPath + "Web\\settingsData.js";
+        public static string settingsTempPath = Application.StartupPath + "Web\\settingsTempData.js";
+        public static string htmlpageUrl = Application.StartupPath + "Web\\Davetiye›simlik.html";
         public Settings settings = new Settings();
         public Settings pastSettings = new Settings();
         public Settings defaultSettings = new Settings();
