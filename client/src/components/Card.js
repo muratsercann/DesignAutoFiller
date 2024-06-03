@@ -20,8 +20,10 @@ export default function Card({ formData }) {
       return `translate(${0}px, ${0}px) rotate(${-45}deg)`;
     }
 
-    const rad = (angle * Math.PI) / 180;
+    const rad = ((90 - Math.abs(angle)) * Math.PI) / 180;
+    const rad2 = (Math.abs(angle) * Math.PI) / 180;
     const sin = Math.sin(rad);
+    const sin2 = Math.sin(rad2);
     const cos = Math.cos(rad);
 
     const rect = element.getBoundingClientRect();
@@ -36,13 +38,13 @@ export default function Card({ formData }) {
       Math.abs(element.offsetWidth * sin) +
       Math.abs(element.offsetHeight * cos);
 
-    const centerX = newWidth / 2;
-    const centerY = newHeight / 2;
+    const centerX = element.offsetWidth / 2;
+    const centerY = element.offsetHeight / 2;
 
     let translateX = 0;
     let translateY = 0;
 
-    translateX = Math.abs(sin * centerX) - centerX;
+    translateX = Math.abs(sin * centerX) + Math.abs(sin2 * centerY) - centerX;
 
     // Return the new transform style
     return `translate(${translateX}px, ${translateY}px) rotate(${angle}deg)`;
