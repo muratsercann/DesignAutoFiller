@@ -54,16 +54,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+
+  background-color: red;
+    width: 250px;
+    height: 1px;
 }
 
 .outer .header {
   font-size: 26px;
-  padding: 5px;
+  /* padding: 5px; */
   /* background-color: yellow; */
   font-family: "Courgette", cursive;
   font-size: 35px;
   color: #907b83;
-  width: 250px;
+  /* width: 250px; */
 }
 
 .outer .text {
