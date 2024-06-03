@@ -16,19 +16,16 @@ export default function Card({ formData }) {
 
   function getRotatedStyle(element, angle, align) {
     // Calculate the initial transform
-    if (angle === 0) {
-      return `translate(${0}px, ${0}px) rotate(${-45}deg)`;
-    }
+    // if (angle === 0) {
+    //   return `translate(${0}px, ${0}px) rotate(${-45}deg)`;
+    // }
+
 
     const rad = ((90 - Math.abs(angle)) * Math.PI) / 180;
     const rad2 = (Math.abs(angle) * Math.PI) / 180;
     const sin = Math.sin(rad);
     const sin2 = Math.sin(rad2);
     const cos = Math.cos(rad);
-
-    const rect = element.getBoundingClientRect();
-
-    const a = window.getComputedStyle(element);
 
     // Calculate the bounding box after rotation
     const newWidth =

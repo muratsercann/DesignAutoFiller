@@ -12,7 +12,7 @@ export default function Customize({ data, setdata }) {
   return (
     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
       <Form.Label>rotation</Form.Label>
-      <Form.Control type="text" onChange={onChangeRotate} />
+      <Form.Control type="number" onChange={onChangeRotate} />
     </Form.Group>
   );
 }
