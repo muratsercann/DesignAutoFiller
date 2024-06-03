@@ -15,12 +15,6 @@ export default function Card({ formData }) {
   }, [formData, rotate, align]);
 
   function getRotatedStyle(element, angle, align) {
-    // Calculate the initial transform
-    // if (angle === 0) {
-    //   return `translate(${0}px, ${0}px) rotate(${-45}deg)`;
-    // }
-
-
     const rad = ((90 - Math.abs(angle)) * Math.PI) / 180;
     const rad2 = (Math.abs(angle) * Math.PI) / 180;
     const sin = Math.sin(rad);
@@ -41,7 +35,11 @@ export default function Card({ formData }) {
     let translateX = 0;
     let translateY = 0;
 
-    translateX = Math.abs(sin * centerX) + Math.abs(sin2 * centerY) - centerX;
+    //for left alignment
+    //translateX = Math.abs(sin * centerX) + Math.abs(sin2 * centerY) - centerX;
+    
+    //for right alignment
+    translateX = centerX - Math.abs(sin * centerX) - Math.abs(sin2 * centerY);
 
     // Return the new transform style
     return `translate(${translateX}px, ${translateY}px) rotate(${angle}deg)`;
