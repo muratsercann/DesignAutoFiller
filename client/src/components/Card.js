@@ -16,18 +16,8 @@ export default function Card({ formData }) {
 
   function getRotatedStyle(element, angle, align) {
     const rad = ((90 - Math.abs(angle)) * Math.PI) / 180;
-    const rad2 = (Math.abs(angle) * Math.PI) / 180;
     const sin = Math.sin(rad);
-    const sin2 = Math.sin(rad2);
     const cos = Math.cos(rad);
-
-    // Calculate the bounding box after rotation
-    const newWidth =
-      Math.abs(element.offsetWidth * cos) +
-      Math.abs(element.offsetHeight * sin);
-    const newHeight =
-      Math.abs(element.offsetWidth * sin) +
-      Math.abs(element.offsetHeight * cos);
 
     const centerX = element.offsetWidth / 2;
     const centerY = element.offsetHeight / 2;
@@ -36,10 +26,13 @@ export default function Card({ formData }) {
     let translateY = 0;
 
     //for left alignment
-    //translateX = Math.abs(sin * centerX) + Math.abs(sin2 * centerY) - centerX;
-    
+    translateX = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerX;
+
     //for right alignment
-    translateX = centerX - Math.abs(sin * centerX) - Math.abs(sin2 * centerY);
+    //translateX = centerX - Math.abs(sin * centerX) - Math.abs(cos * centerY);
+
+    //for top alignment
+    translateY = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerY;
 
     // Return the new transform style
     return `translate(${translateX}px, ${translateY}px) rotate(${angle}deg)`;
