@@ -28,6 +28,7 @@ export default function Card({ formData }) {
     let translateY = 0;
 
     //for left alignment
+
     if (align.includes("left")) {
       style.left = "0px";
       translateX = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
@@ -54,6 +55,16 @@ export default function Card({ formData }) {
 
       translateY =
         centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
+    }
+
+    if (align.includes("centerX")) {
+      translateX = 0;
+      style.left = `calc(50% - ${centerX}px)`;
+    }
+
+    if (align.includes("centerY")) {
+      translateY = 0;
+      style.top = `calc(50% - ${centerY}px )`;
     }
 
     // Return the new transform style
