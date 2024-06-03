@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import backgroundImage from "./background.png";
 
 export default function Card({ formData }) {
-  const [rotationStyle, setRotationStyle] = useState("");
+  const [style, setStyle] = useState({});
   const outerRef = useRef(null);
   const rotate = formData?.rotate || 0;
   const align = formData?.align || "top-left"; // Varsayılan olarak center hizalanır
@@ -10,11 +10,13 @@ export default function Card({ formData }) {
   useEffect(() => {
     if (outerRef.current) {
       const newStyle = getRotatedStyle(outerRef.current, rotate, align);
-      setRotationStyle(newStyle);
+      setStyle(newStyle);
     }
   }, [formData, rotate, align]);
 
   function getRotatedStyle(element, angle, align) {
+    let style = {};
+
     const rad = (Math.abs(angle) * Math.PI) / 180;
     const sin = Math.sin(rad);
     const cos = Math.cos(rad);
@@ -26,19 +28,39 @@ export default function Card({ formData }) {
     let translateY = 0;
 
     //for left alignment
-    translateX = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
+    if (align.includes("left")) {
+      style.left = "0px";
+      translateX = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
+    }
 
     //for right alignment
-    //translateX = centerX - (Math.abs(cos * centerX) + Math.abs(sin * centerY));
+    if (align.includes("right")) {
+      style.right = "0px";
+
+      translateX =
+        centerX - (Math.abs(cos * centerX) + Math.abs(sin * centerY));
+    }
 
     //for top alignment
-    //translateY = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
+    if (align.includes("top")) {
+      style.top = "0px";
+
+      translateY = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
+    }
 
     //for bottom alignment
-    translateY = centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
+    if (align.includes("bottom")) {
+      style.bottom = "0px";
+
+      translateY =
+        centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
+    }
 
     // Return the new transform style
-    return `translate(${translateX}px, ${translateY}px) rotate(${angle}deg)`;
+
+    style.transform = `translate(${translateX}px, ${translateY}px) rotate(${angle}deg)`;
+
+    return style;
   }
 
   return (
@@ -46,11 +68,7 @@ export default function Card({ formData }) {
       <div>
         <img src={backgroundImage} className="img-fluid" alt="" />
 
-        <div
-          ref={outerRef}
-          style={{ transform: rotationStyle }}
-          className="outer"
-        >
+        <div ref={outerRef} style={style} className="outer">
           murat
           {/* <div className="header">DAVETLİSİNİZ</div> */}
         </div>
