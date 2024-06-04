@@ -1,5 +1,11 @@
 import React from "react";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import HorizontalAlignment from "./HorizontalAlignment";
+import VerticalAlignment from "./VerticalAlignment";
 
 export default function Customize({ data, setdata }) {
   const onChangeRotate = (e) => {
@@ -16,13 +22,41 @@ export default function Customize({ data, setdata }) {
     setdata({ ...data, align: e.target.value });
   };
 
-  return (
-    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-      <Form.Label>rotation</Form.Label>
-      <Form.Control type="number" onChange={onChangeRotate} />
+  const handleHorAlignment = (e) => {
+    if (!data) {
+      return;
+    }
+    setdata({ ...data, horizontalAlignment: e.target.value });
+  };
+  const handleVerAlignment = (e) => {
+    if (!data) {
+      return;
+    }
+    setdata({ ...data, verticalAlignment: e.target.value });
+  };
 
-      <Form.Label>alignment</Form.Label>
-      <Form.Control type="text" onChange={onChangeAlignment} />
-    </Form.Group>
+  return (
+    <div style={{ padding: "20px" }}>
+      <Form>
+        <Row className="mb-3">
+          <Col>
+            <Form.Label htmlFor="basic-url">Align</Form.Label>
+            <HorizontalAlignment onChange={handleHorAlignment} />
+          </Col>
+        </Row>
+
+        <Row className="mb-3">
+          <Col>
+            <VerticalAlignment onChange={handleVerAlignment} />
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col>
+            <Form.Label>Rotation</Form.Label>
+            <Form.Control type="number" onChange={onChangeRotate} />
+          </Col>
+        </Row>
+      </Form>
+    </div>
   );
 }

@@ -6,6 +6,8 @@ export default function Card({ formData }) {
   const outerRef = useRef(null);
   const rotate = formData?.rotate || 0;
   const align = formData?.align || "top-left"; // Varsayılan olarak center hizalanır
+  const horAlign = formData?.horizontalAlignment || "Left"; // Varsayılan olarak center hizalanır
+  const verAlign = formData?.verticalAlignment || "Top"; // Varsayılan olarak center hizalanır
 
   useEffect(() => {
     if (outerRef.current) {
@@ -27,42 +29,28 @@ export default function Card({ formData }) {
     let translateX = 0;
     let translateY = 0;
 
-    //for left alignment
-
-    if (align.includes("left")) {
+    if (horAlign === "Left") {
       style.left = "0px";
       translateX = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
-    }
-
-    //for right alignment
-    if (align.includes("right")) {
+    } else if (horAlign === "Right") {
       style.right = "0px";
 
       translateX =
         centerX - (Math.abs(cos * centerX) + Math.abs(sin * centerY));
-    }
-
-    //for top alignment
-    if (align.includes("top")) {
-      style.top = "0px";
-
-      translateY = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
-    }
-
-    //for bottom alignment
-    if (align.includes("bottom")) {
-      style.bottom = "0px";
-
-      translateY =
-        centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
-    }
-
-    if (align.includes("centerX")) {
+    } else if (horAlign === "Center") {
       translateX = 0;
       style.left = `calc(50% - ${centerX}px)`;
     }
 
-    if (align.includes("centerY")) {
+    if (verAlign === "Top") {
+      style.top = "0px";
+      translateY = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
+    } else if (verAlign === "Bottom") {
+      style.bottom = "0px";
+
+      translateY =
+        centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
+    } else if (verAlign === "Center") {
       translateY = 0;
       style.top = `calc(50% - ${centerY}px )`;
     }
