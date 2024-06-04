@@ -4,19 +4,18 @@ import backgroundImage from "./background.png";
 export default function Card({ formData }) {
   const [style, setStyle] = useState({});
   const outerRef = useRef(null);
-  const rotate = formData?.rotate || 0;
-  const align = formData?.align || "top-left"; // Varsayılan olarak center hizalanır
+  const rotationAngle = formData?.rotate || 0;
   const horAlign = formData?.horizontalAlignment || "Left"; // Varsayılan olarak center hizalanır
   const verAlign = formData?.verticalAlignment || "Top"; // Varsayılan olarak center hizalanır
 
   useEffect(() => {
     if (outerRef.current) {
-      const newStyle = getRotatedStyle(outerRef.current, rotate, align);
+      const newStyle = getRotatedStyle(outerRef.current, rotationAngle);
       setStyle(newStyle);
     }
-  }, [formData, rotate, align]);
+  }, [formData, rotationAngle]);
 
-  function getRotatedStyle(element, angle, align) {
+  function getRotatedStyle(element, angle) {
     let style = {};
 
     const rad = (Math.abs(angle) * Math.PI) / 180;

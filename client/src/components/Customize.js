@@ -15,13 +15,6 @@ export default function Customize({ data, setdata }) {
     setdata({ ...data, rotate: e.target.value });
   };
 
-  const onChangeAlignment = (e) => {
-    if (!data) {
-      return;
-    }
-    setdata({ ...data, align: e.target.value });
-  };
-
   const handleHorAlignment = (e) => {
     if (!data) {
       return;
