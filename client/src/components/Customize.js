@@ -8,6 +8,7 @@ import HorizontalAlignment from "./HorizontalAlignment";
 import VerticalAlignment from "./VerticalAlignment";
 
 export default function Customize({ data, setdata }) {
+
   const onChangeRotate = (e) => {
     if (!data) {
       return;
@@ -34,13 +35,13 @@ export default function Customize({ data, setdata }) {
         <Row className="mb-3">
           <Col>
             <Form.Label htmlFor="basic-url">Align</Form.Label>
-            <HorizontalAlignment onChange={handleHorAlignment} />
+            <HorizontalAlignment onChange={handleHorAlignment} value="Left" />
           </Col>
         </Row>
 
         <Row className="mb-3">
           <Col>
-            <VerticalAlignment onChange={handleVerAlignment} />
+            <VerticalAlignment onChange={handleVerAlignment} value="Top" />
           </Col>
         </Row>
         <Row className="mb-3">
