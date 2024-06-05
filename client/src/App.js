@@ -6,8 +6,8 @@ import Customize from "./components/Customize";
 
 function App() {
   const [settings, setSettings] = useState({
-    horizontalAlignment: "Left",
-    verticalAlignment: "Top",
+    horizontalAlignment: "Center",
+    verticalAlignment: "Center",
   });
 
   const changeSettings = (newSettings) => {

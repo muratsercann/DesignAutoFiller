@@ -6,8 +6,8 @@ import HorizontalAlignment from "./HorizontalAlignment";
 import VerticalAlignment from "./VerticalAlignment";
 
 export default function Customize({ settings, setSettings }) {
-  const translateX = settings?.translateX ?? 0;
-  const translateY = settings?.translateY ?? 0;
+  const translateX = settings?.translateX || 0;
+  const translateY = settings?.translateY || 0;
 
   const onChangeRotate = (e) => {
     if (!settings) {
@@ -15,7 +15,9 @@ export default function Customize({ settings, setSettings }) {
     }
 
     const horAlignment =
-      settings.horizontalAlignment === "Center" ? settings.horizontalAlignment : "";
+      settings.horizontalAlignment === "Center"
+        ? settings.horizontalAlignment
+        : "";
 
     const verAlignment =
       settings.verticalAlignment === "Center" ? settings.verticalAlignment : "";
@@ -93,8 +95,11 @@ export default function Customize({ settings, setSettings }) {
         </Row>
         <Row className="mb-3">
           <Col>
-            <Form.Label>Rotation</Form.Label>
-            <Form.Control type="number" onChange={onChangeRotate} />
+            <Form.Label>Rotate</Form.Label>
+            <Form.Control
+              type="number"
+              onChange={onChangeRotate}
+            />
           </Col>
         </Row>
 
