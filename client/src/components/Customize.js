@@ -5,23 +5,23 @@ import Col from "react-bootstrap/Col";
 import HorizontalAlignment from "./HorizontalAlignment";
 import VerticalAlignment from "./VerticalAlignment";
 
-export default function Customize({ data, setdata }) {
-  const translateX = data?.translateX ?? 0;
-  const translateY = data?.translateY ?? 0;
+export default function Customize({ settings, setSettings }) {
+  const translateX = settings?.translateX ?? 0;
+  const translateY = settings?.translateY ?? 0;
 
   const onChangeRotate = (e) => {
-    if (!data) {
+    if (!settings) {
       return;
     }
 
     const horAlignment =
-      data.horizontalAlignment === "Center" ? data.horizontalAlignment : "";
+      settings.horizontalAlignment === "Center" ? settings.horizontalAlignment : "";
 
     const verAlignment =
-      data.verticalAlignment === "Center" ? data.verticalAlignment : "";
+      settings.verticalAlignment === "Center" ? settings.verticalAlignment : "";
 
-    setdata({
-      ...data,
+    setSettings({
+      ...settings,
       rotate: e.target.value,
       horizontalAlignment: horAlignment,
       verticalAlignment: verAlignment,
@@ -29,42 +29,42 @@ export default function Customize({ data, setdata }) {
   };
 
   const handleHorAlignment = (e) => {
-    if (!data) {
+    if (!settings) {
       return;
     }
-    setdata({
-      ...data,
+    setSettings({
+      ...settings,
       horizontalAlignment: e.target.value,
     });
   };
   const handleVerAlignment = (e) => {
-    if (!data) {
+    if (!settings) {
       return;
     }
-    setdata({
-      ...data,
+    setSettings({
+      ...settings,
       verticalAlignment: e.target.value,
     });
   };
 
   const handleTranslateX = (e) => {
-    if (!data) {
+    if (!settings) {
       return;
     }
 
-    setdata({
-      ...data,
+    setSettings({
+      ...settings,
       translateX: Number(e.target.value),
       horizontalAlignment: "",
     });
   };
 
   const handleTranslateY = (e) => {
-    if (!data) {
+    if (!settings) {
       return;
     }
-    setdata({
-      ...data,
+    setSettings({
+      ...settings,
       translateY: Number(e.target.value),
       verticalAlignment: "",
     });
@@ -78,7 +78,7 @@ export default function Customize({ data, setdata }) {
             <Form.Label htmlFor="basic-url">Align</Form.Label>
             <HorizontalAlignment
               onChange={handleHorAlignment}
-              value={data.horizontalAlignment}
+              value={settings.horizontalAlignment}
             />
           </Col>
         </Row>
@@ -87,7 +87,7 @@ export default function Customize({ data, setdata }) {
           <Col>
             <VerticalAlignment
               onChange={handleVerAlignment}
-              value={data.verticalAlignment}
+              value={settings.verticalAlignment}
             />
           </Col>
         </Row>

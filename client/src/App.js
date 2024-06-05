@@ -5,24 +5,27 @@ import { useState } from "react";
 import Customize from "./components/Customize";
 
 function App() {
-  const [formData, setFormData] = useState({
+  const [settings, setSettings] = useState({
     horizontalAlignment: "Left",
     verticalAlignment: "Top",
   });
 
-  const changeFormData = (formData) => {
-    setFormData(formData);
+  const changeSettings = (newSettings) => {
+    setSettings(newSettings);
   };
 
   return (
     <div className="App bg-dark">
       <div style={{ height: "100%" }} className="row">
         <div className="col-sm-4 bg-light">
-          <Customize data={formData} setdata={changeFormData}></Customize>
+          <Customize
+            settings={settings}
+            setSettings={changeSettings}
+          ></Customize>
         </div>
 
         <div className="col">
-          <Card formData={formData} setFormData={changeFormData}></Card>
+          <Card settings={settings} setSettings={changeSettings}></Card>
         </div>
       </div>
     </div>

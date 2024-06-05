@@ -1,22 +1,22 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import backgroundImage from "./background.png";
 
-export default function Card({ formData, setFormData }) {
+export default function Card({ settings, setSettings }) {
   const itemRef = useRef(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   useEffect(() => {
     console.log("card.js is executed");
   });
   useEffect(() => {
-    console.log("formData is changed in Card.js : ", formData);
-  }, [formData]);
+    console.log("setting have been changed : ", settings);
+  }, [settings]);
 
   useLayoutEffect(() => {
-    const rotationAngle = formData?.rotate || 0;
-    const horAlign = formData?.horizontalAlignment || "";
-    const verAlign = formData?.verticalAlignment || "";
-    const translateX = formData?.translateX || 0;
-    const translateY = formData?.translateY || 0;
+    const rotationAngle = settings?.rotate || 0;
+    const horAlign = settings?.horizontalAlignment || "";
+    const verAlign = settings?.verticalAlignment || "";
+    const translateX = settings?.translateX || 0;
+    const translateY = settings?.translateY || 0;
 
     if (itemRef.current && isImageLoaded) {
       const newTranslateX = calculateTranslateX(
@@ -33,21 +33,21 @@ export default function Card({ formData, setFormData }) {
       );
 
       if (
-        newTranslateX !== formData.translateX ||
-        newTranslateY !== formData.translateY
+        newTranslateX !== settings.translateX ||
+        newTranslateY !== settings.translateY
       ) {
-        setFormData({
-          ...formData,
+        setSettings({
+          ...settings,
           translateX: newTranslateX,
           translateY: newTranslateY,
         });
       }
     }
-  }, [isImageLoaded, formData, setFormData]);
+  }, [isImageLoaded, settings, setSettings]);
 
-  const translateX = formData?.translateX ?? 0;
-  const translateY = formData?.translateY ?? 0;
-  const rotationAngle = formData?.rotate ?? 0;
+  const translateX = settings?.translateX ?? 0;
+  const translateY = settings?.translateY ?? 0;
+  const rotationAngle = settings?.rotate ?? 0;
 
   return (
     <div style={{ width: 250, position: "relative", marginTop: "150px" }}>
