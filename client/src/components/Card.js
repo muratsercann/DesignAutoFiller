@@ -1,17 +1,40 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import backgroundImage from "./background.png";
 
-export default function Card({ formData }) {
-  const [style, setStyle] = useState({});
-  const outerRef = useRef(null);
-
+export default function Card({ formData, setFormData }) {
+  const itemRef = useRef(null);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   useEffect(() => {
-    const rotationAngle = formData?.rotate || 0;
-    const horAlign = formData?.horizontalAlignment || "Left"; // Varsayılan olarak center hizalanır
-    const verAlign = formData?.verticalAlignment || "Top"; // Varsayılan olarak center hizalanır
+    console.log("car.js is executed");
+  });
+  useEffect(() => {
+    console.log("formData is changed in Card.js : ", formData);
+  }, [formData]);
 
-    function getRotatedStyle(element, angle, horAlign, verAlign) {
-      let style = {};
+  // let now = performance.now();
+  // while (performance.now() - now < 100) {
+  //   // Do nothing for a bit...
+  // }
+
+  useLayoutEffect(() => {
+    const rotationAngle = formData?.rotate || 0;
+    const horAlign = formData?.horizontalAlignment || "";
+    const verAlign = formData?.verticalAlignment || "";
+    const translateX = formData?.translateX || 0;
+    const translateY = formData?.translateY || 0;
+
+    function getRotatedStyle(
+      element,
+      angle,
+      horAlign,
+      verAlign,
+      translateX,
+      translateY
+    ) {
+      let data = {
+        translateX: 0,
+        translateY: 0,
+      };
 
       const rad = (Math.abs(angle) * Math.PI) / 180;
       const sin = Math.sin(rad);
@@ -20,64 +43,87 @@ export default function Card({ formData }) {
       const centerX = element.offsetWidth / 2;
       const centerY = element.offsetHeight / 2;
 
-      let translateX = 0;
-      let translateY = 0;
+      const parentWidth = element.offsetParent.offsetWidth;
+      const parentHeight = element.offsetParent.offsetHeight;
 
       if (horAlign === "Left") {
-        style.left = "0px";
         translateX =
           Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
       } else if (horAlign === "Right") {
-        style.right = "0px";
-
         translateX =
           centerX - (Math.abs(cos * centerX) + Math.abs(sin * centerY));
+        translateX += parentWidth - element.offsetWidth;
       } else if (horAlign === "Center") {
-        translateX = 0;
-        style.left = `calc(50% - ${centerX}px)`;
+        translateX = (parentWidth - element.offsetWidth) / 2;
       }
 
       if (verAlign === "Top") {
-        style.top = "0px";
         translateY =
           Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
+        translateY -= parentHeight;
       } else if (verAlign === "Bottom") {
-        style.bottom = "0px";
-
         translateY =
           centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
+        translateY -= element.offsetHeight;
       } else if (verAlign === "Center") {
         translateY = 0;
-        style.top = `calc(50% - ${centerY}px )`;
+        translateY -= (parentHeight + element.offsetHeight) / 2;
       }
 
-      // Return the new transform style
+      data.translateX = translateX;
+      data.translateY = translateY;
 
-      style.transform = `translate(${translateX}px, ${translateY}px) rotate(${angle}deg)`;
-
-      return style;
+      return data;
     }
 
-    if (outerRef.current) {
+    if (itemRef.current && isImageLoaded) {
       const newStyle = getRotatedStyle(
-        outerRef.current,
+        itemRef.current,
         rotationAngle,
         horAlign,
-        verAlign
+        verAlign,
+        translateX,
+        translateY
       );
 
-      setStyle(newStyle);
+      if (
+        newStyle.translateX !== formData.translateX ||
+        newStyle.translateY !== formData.translateY
+      ) {
+        setFormData({
+          ...formData,
+          translateX: newStyle.translateX,
+          translateY: newStyle.translateY,
+        });
+      }
     }
-  }, [formData]);
+  }, [isImageLoaded, formData, setFormData]);
+
+  const translateX = formData?.translateX ?? 0;
+  const translateY = formData?.translateY ?? 0;
+  const rotationAngle = formData?.rotate ?? 0;
 
   return (
     <div style={{ width: 250, position: "relative", marginTop: "150px" }}>
       <div>
-        <img src={backgroundImage} className="img-fluid" alt="" />
+        <img
+          src={backgroundImage}
+          className="img-fluid"
+          alt=""
+          onLoad={() => setIsImageLoaded(true)}
+        />
 
-        <div ref={outerRef} style={style} className="outer">
-          <div className="header">DAVETLİSİNİZ</div>
-        </div>
+        {isImageLoaded && (
+          <div
+            ref={itemRef}
+            style={{
+              transform: `translate(${translateX}px, ${translateY}px) rotate(${rotationAngle}deg)`,
+            }}
+            className="outer"
+          >
+            <div className="header">DAVETLİSİNİZ</div>
+          </div>
+        )}
       </div>
     </div>
   );

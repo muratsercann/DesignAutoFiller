@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 
-export default function VerticalAlignment({ onChange, value }) {
-  const [alignment, setAlignment] = useState(value ? value : "Center");
-
+export default function VerticalAlignment({ value, onChange }) {
   const handleChanges = (e) => {
-    setAlignment(e.target.value);
     onChange(e);
   };
 
@@ -15,21 +12,21 @@ export default function VerticalAlignment({ onChange, value }) {
     <>
       <InputGroup className="mb-">
         <Form.Control
-          className={alignment === "Top" && focusedButton}
+          className={value === "Top" && focusedButton}
           type="button"
           onClick={handleChanges}
           value="Top"
         />
 
         <Form.Control
-          className={alignment === "Center" && focusedButton}
+          className={value === "Center" && focusedButton}
           type="button"
           onClick={handleChanges}
           value="Center"
         />
 
         <Form.Control
-          className={alignment === "Bottom" && focusedButton}
+          className={value === "Bottom" && focusedButton}
           type="button"
           onClick={handleChanges}
           value="Bottom"

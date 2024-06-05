@@ -5,12 +5,8 @@ import Button from "react-bootstrap/esm/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export default function HorizontalAlignment({ onChange, value }) {
-  const [alignment, setAlignment] = useState(value ? value : "Left");
-
-  
+export default function HorizontalAlignment({ value, onChange }) {
   const handleChanges = (e) => {
-    setAlignment(e.target.value);
     onChange(e);
   };
 
@@ -20,21 +16,21 @@ export default function HorizontalAlignment({ onChange, value }) {
     <>
       <InputGroup className="mb-">
         <Form.Control
-          className={alignment === "Left" && focusedButton}
+          className={value === "Left" && focusedButton}
           type="button"
           onClick={handleChanges}
           value="Left"
         />
 
         <Form.Control
-          className={alignment === "Center" && focusedButton}
+          className={value === "Center" && focusedButton}
           type="button"
           onClick={handleChanges}
           value="Center"
         />
 
         <Form.Control
-          className={alignment === "Right" && focusedButton}
+          className={value === "Right" && focusedButton}
           type="button"
           onClick={handleChanges}
           value="Right"

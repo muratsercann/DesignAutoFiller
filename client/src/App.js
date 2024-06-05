@@ -6,17 +6,24 @@ import { useState } from "react";
 import Customize from "./components/Customize";
 
 function App() {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    horizontalAlignment: "Left",
+    verticalAlignment: "Top",
+  });
+
+  const changeFormData = (formData) => {
+    setFormData(formData);
+  };
 
   return (
     <div className="App bg-dark">
       <div style={{ height: "100%" }} className="row">
         <div className="col-sm-4 bg-light">
-          <Customize data={formData} setdata={setFormData}></Customize>
+          <Customize data={formData} setdata={changeFormData}></Customize>
         </div>
 
         <div className="col">
-          <Card formData={formData}></Card>
+          <Card formData={formData} setFormData={changeFormData}></Card>
         </div>
       </div>
     </div>
