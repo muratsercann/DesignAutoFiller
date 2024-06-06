@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import backgroundImage from "./background.png";
 import Item from "./Item";
 
-export default function PagePreview({ settings, previewWidth, previewHeight }) {
+export default function PagePreview({ settings, scale }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
     <div
+      className="preview"
       style={{
-        width: `${previewWidth}px`,
-        height: `${previewHeight}px`,
+        transform: `scale(${scale})`
       }}
     >
-      <div>
+      <div className="content" style={{ width: settings.width, height: settings.height }}>
         <img
           src={backgroundImage}
           className="img-fluid"
@@ -21,14 +21,13 @@ export default function PagePreview({ settings, previewWidth, previewHeight }) {
         />
 
         {isImageLoaded &&
-          settings.items.map((page) => {
+          settings.items.map((item) => {
             return (
               <Item
-                settings={page}
+                key={item.id}
+                settings={item}
                 originalWidth={settings.width}
                 originalHeight={settings.height}
-                previewWidth={previewWidth}
-                previewHeight={previewHeight}
               ></Item>
             );
           })}

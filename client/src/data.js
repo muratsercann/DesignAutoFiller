@@ -94,4 +94,100 @@ export const designs = [
       },
     ],
   },
+
+  {
+    id: 4,
+    userId: 1,
+    title: "Invitation Card",
+    pages: [
+      {
+        id: 121,
+        designId: 2,
+        width: 250,
+        height: 400,
+        bgColor: "red",
+        bgImageUri: "https://r.resimlink.com/u-A1rvJDjhe.png",
+        items: [
+          {
+            id: 1111,
+            pageId: 121,
+            type: "text",
+            value: "Invitation",
+            rotationAngle: "25",
+            translateX: 40,
+            translateY: -130,
+            horizontalAlignment: "Left",
+            verticalAlignment: "Top",
+            fontSize: 18,
+            fontColor: "green",
+            fontFamily: "",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    userId: 1,
+    title: "Invitation Card",
+    pages: [
+      {
+        id: 121,
+        designId: 2,
+        width: 250,
+        height: 400,
+        bgColor: "red",
+        bgImageUri: "https://r.resimlink.com/u-A1rvJDjhe.png",
+        items: [
+          {
+            id: 1111,
+            pageId: 121,
+            type: "text",
+            value: "Invitation",
+            rotationAngle: "25",
+            translateX: 40,
+            translateY: -130,
+            horizontalAlignment: "Left",
+            verticalAlignment: "Top",
+            fontSize: 18,
+            fontColor: "green",
+            fontFamily: "",
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: 3,
+    userId: 1,
+    title: "Invitation Card",
+    pages: [
+      {
+        id: 121,
+        designId: 2,
+        width: 250,
+        height: 400,
+        bgColor: "red",
+        bgImageUri: "https://r.resimlink.com/u-A1rvJDjhe.png",
+        items: [
+          {
+            id: 1111,
+            pageId: 121,
+            type: "text",
+            value: "Invitation",
+            rotationAngle: "25",
+            translateX: 40,
+            translateY: -130,
+            horizontalAlignment: "Left",
+            verticalAlignment: "Top",
+            fontSize: 18,
+            fontColor: "green",
+            fontFamily: "",
+          },
+        ],
+      },
+    ],
+  },
 ];
