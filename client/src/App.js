@@ -3,34 +3,37 @@ import Card from "./components/Card";
 
 import { useState } from "react";
 import Customize from "./components/Customize";
+import Home from "./components/Home";
 
 function App() {
   const [settings, setSettings] = useState({
     horizontalAlignment: "Center",
     verticalAlignment: "Center",
-    containerWidth : 250,
+    containerWidth: 250,
   });
 
   const changeSettings = (newSettings) => {
     setSettings(newSettings);
   };
 
-  return (
-    <div className="App bg-dark">
-      <div style={{ height: "100%" }} className="row">
-        <div className="col-sm-4 bg-light">
-          <Customize
-            settings={settings}
-            setSettings={changeSettings}
-          ></Customize>
-        </div>
+  return <Home></Home>;
 
-        <div className="col">
-          <Card settings={settings} setSettings={changeSettings}></Card>
-        </div>
-      </div>
-    </div>
-  );
+  // return (
+  //   <div className="App bg-dark">
+  //     <div style={{ height: "100%" }} className="row">
+  //       <div className="col-sm-4 bg-light">
+  //         <Customize
+  //           settings={settings}
+  //           setSettings={changeSettings}
+  //         ></Customize>
+  //       </div>
+
+  //       <div className="col">
+  //         <Card settings={settings} setSettings={changeSettings}></Card>
+  //       </div>
+  //     </div>
+  //   </div>
+  // );
 }
 
 export default App;

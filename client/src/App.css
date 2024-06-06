@@ -44,6 +44,13 @@
 
 /* msercan*/
 
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
 .outer {
   position: absolute;
   transform: translate(0%, 0%) rotate(0deg);
@@ -71,4 +78,64 @@
   font-size: 21px;
   color: #8d6d1f;
   /* background-color: yellow; */
+}
+
+.home {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.home .header {
+  width: 100%;
+  height: 300px;
+  background-color: #0177a9;
+  color: white;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.home .header > h1 {
+  font-size: 75px;
+  font-weight: 300;
+}
+
+.home .header > p {
+  font-size: 35px;
+  font-weight: 400;
+}
+
+.home .design-list {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+.design-list .item {
+  position: relative;
+  width: 150px;
+  height: 240px;
+  padding: 10px 25px 10px 25px;
+  margin: 20px;
+  border: 2px solid #0177a90f;
+  border-radius: 10px;
+}
+
+.item-design-title {
+  margin-top: 0px;
+  position: absolute;
+  left: 0px;
+  bottom: -33px;
+  width: 100%;
+  padding-left: 3px;
+  padding-bottom: 3px;
+  align-items: center;
+  font-size: 15px;
+  color: #585858;
+  text-align: center;
 }

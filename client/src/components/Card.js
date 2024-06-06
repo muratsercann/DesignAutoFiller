@@ -8,6 +8,7 @@ export default function Card({ settings, setSettings }) {
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
   const initialTranslate = useRef({ x: 0, y: 0 });
+  
   useLayoutEffect(() => {
     const rotationAngle = settings?.rotate || 0;
     const horAlign = settings?.horizontalAlignment || "";
