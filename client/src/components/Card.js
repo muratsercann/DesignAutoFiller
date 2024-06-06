@@ -15,6 +15,7 @@ export default function Card({ settings, setSettings }) {
     const verAlign = settings?.verticalAlignment || "";
     const translateX = settings?.translateX || 0;
     const translateY = settings?.translateY || 0;
+    
     if (itemRef.current && isImageLoaded) {
       const newTranslateX = calculateTranslateX(
         itemRef.current,

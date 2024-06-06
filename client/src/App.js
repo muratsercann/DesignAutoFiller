@@ -4,6 +4,7 @@ import Card from "./components/Card";
 import { useState } from "react";
 import Customize from "./components/Customize";
 import Home from "./components/Home";
+import Edit from "./components/Edit";
 
 function App() {
   const [settings, setSettings] = useState({
@@ -16,7 +17,7 @@ function App() {
     setSettings(newSettings);
   };
 
-  return <Home></Home>;
+  return <Edit />;
 
   // return (
   //   <div className="App bg-dark">
