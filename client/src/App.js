@@ -8,6 +8,7 @@ function App() {
   const [settings, setSettings] = useState({
     horizontalAlignment: "Center",
     verticalAlignment: "Center",
+    containerWidth : 250,
   });
 
   const changeSettings = (newSettings) => {

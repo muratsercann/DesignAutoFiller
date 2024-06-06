@@ -8,8 +8,6 @@ export default function Card({ settings, setSettings }) {
   const [isDragging, setIsDragging] = useState(false);
   const dragStart = useRef({ x: 0, y: 0 });
   const initialTranslate = useRef({ x: 0, y: 0 });
-  const imgUrl =
-    "https://img.freepik.com/free-vector/rectangle-gold-frame-with-olive-branch-pattern-vector_53876-109042.jpg?t=st=1717629916~exp=1717633516~hmac=480ccc57e3b207f32b28d16dae6fc6f73bfd0cba30008d706301912487d58a39&w=360";
   useLayoutEffect(() => {
     const rotationAngle = settings?.rotate || 0;
     const horAlign = settings?.horizontalAlignment || "";
@@ -149,32 +147,46 @@ export default function Card({ settings, setSettings }) {
   });
 
   return (
-    <div style={{ width: 250, position: "relative", marginTop: "150px" }}>
-      <div>
-        <img
-          src={imgUrl}
-          className="img-fluid"
-          alt=""
-          onLoad={() => setIsImageLoaded(true)}
-          onClick={handleNonSelectedClick}
-        />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <div
+        style={{ width: `${settings.containerWidth}px`, position: "relative" }}
+      >
+        <div>
+          <img
+            src={backgroundImage}
+            className="img-fluid"
+            alt=""
+            onLoad={() => setIsImageLoaded(true)}
+            onClick={handleNonSelectedClick}
+          />
 
-        {isImageLoaded && (
-          <div
-            ref={itemRef}
-            style={{
-              transform: `translate(${translateX}px, ${translateY}px) rotate(${rotationAngle}deg)`,
-              border:
-                selectedDiv === itemRef.current ? "2px dotted #a686ff" : "none",
-              cursor: "move",
-            }}
-            className="outer"
-            onClick={handleClick}
-            onMouseDown={handleMouseDown}
-          >
-            Hello :)
-          </div>
-        )}
+          {isImageLoaded && (
+            <div
+              ref={itemRef}
+              style={{
+                transform: `translate(${translateX}px, ${translateY}px) rotate(${rotationAngle}deg)`,
+                border:
+                  selectedDiv === itemRef.current
+                    ? "2px dotted #a686ff"
+                    : "none",
+                cursor: "move",
+              }}
+              className="outer"
+              onClick={handleClick}
+              onMouseDown={handleMouseDown}
+            >
+              Invitation For You
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

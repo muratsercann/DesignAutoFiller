@@ -6,8 +6,8 @@ import HorizontalAlignment from "./HorizontalAlignment";
 import VerticalAlignment from "./VerticalAlignment";
 
 export default function Customize({ settings, setSettings }) {
-  const translateX = settings?.translateX || 0;
-  const translateY = settings?.translateY || 0;
+  const translateX = settings.translateX || 0;
+  const translateY = settings.translateY || 0;
 
   const onChangeRotate = (e) => {
     if (!settings) {
@@ -72,9 +72,27 @@ export default function Customize({ settings, setSettings }) {
     });
   };
 
+  const handleWidthChange = (e) => {
+    const value =  Number(e.target.value);
+    setSettings({
+      ...settings,
+      containerWidth: value,
+    });
+  };
   return (
     <div style={{ padding: "20px" }}>
       <Form>
+        <Row className="mb-3">
+          <Col>
+            <Form.Label>Width</Form.Label>
+            <Form.Control
+              type="number"
+              onChange={handleWidthChange}
+              defaultValue={settings.containerWidth}
+            />
+          </Col>
+        </Row>
+
         <Row className="mb-3">
           <Col>
             <Form.Label htmlFor="basic-url">Align</Form.Label>
@@ -96,10 +114,7 @@ export default function Customize({ settings, setSettings }) {
         <Row className="mb-3">
           <Col>
             <Form.Label>Rotate</Form.Label>
-            <Form.Control
-              type="number"
-              onChange={onChangeRotate}
-            />
+            <Form.Control type="number" onChange={onChangeRotate} />
           </Col>
         </Row>
 
