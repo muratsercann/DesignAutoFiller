@@ -10,7 +10,7 @@ export default function HorizontalAlignment({ value, onChange }) {
 
   return (
     <>
-      <InputGroup className="mb-">
+      <InputGroup className="mb-3">
         <Form.Control
           className={value === "Left" && focusedButton}
           type="button"

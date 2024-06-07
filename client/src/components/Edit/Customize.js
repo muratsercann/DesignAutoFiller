@@ -1,104 +1,108 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import HorizontalAlignment from "./HorizontalAlignment";
 import VerticalAlignment from "./VerticalAlignment";
 
-export default function Customize({ settings, setSettings }) {
-  const translateX = settings.translateX || 0;
-  const translateY = settings.translateY || 0;
+export default function Customize({ item, onItemChanged }) {
+  const [rotationAngle, setRotationAngle] = useState(item.rotationAngle);
+  const [translateX, setTranslateX] = useState(item.translateX);
+  const [translateY, setTranslateY] = useState(item.translateY);
+
+  useEffect(() => {
+    setTranslateX(item.translateX);
+    setTranslateY(item.translateY);
+    setRotationAngle(item.rotationAngle);
+  }, [item]);
 
   const onChangeRotate = (e) => {
-    if (!settings) {
+    const value = e.target.value;
+
+    if (!item) {
+      return;
+    }
+
+    if (value === "-" || value === "") {
+      setRotationAngle(value);
       return;
     }
 
     const horAlignment =
-      settings.horizontalAlignment === "Center"
-        ? settings.horizontalAlignment
-        : "";
+      item.horizontalAlignment === "Center" ? item.horizontalAlignment : "";
 
     const verAlignment =
-      settings.verticalAlignment === "Center" ? settings.verticalAlignment : "";
+      item.verticalAlignment === "Center" ? item.verticalAlignment : "";
 
-    setSettings({
-      ...settings,
-      rotate: e.target.value,
+    onItemChanged({
+      rotationAngle: Number(value),
       horizontalAlignment: horAlignment,
       verticalAlignment: verAlignment,
     });
   };
 
   const handleHorAlignment = (e) => {
-    if (!settings) {
+    const value = e.target.value;
+    if (!item) {
       return;
     }
-    setSettings({
-      ...settings,
-      horizontalAlignment: e.target.value,
+
+    onItemChanged({
+      horizontalAlignment: value,
     });
   };
   const handleVerAlignment = (e) => {
-    if (!settings) {
+    const value = e.target.value;
+    if (!item) {
       return;
     }
-    setSettings({
-      ...settings,
-      verticalAlignment: e.target.value,
+    onItemChanged({
+      verticalAlignment: value,
     });
   };
 
   const handleTranslateX = (e) => {
-    if (!settings) {
+    const value = e.target.value;
+    if (!item) {
+      return;
+    }
+    if (value === "-" || value === "") {
+      setTranslateX(value);
       return;
     }
 
-    setSettings({
-      ...settings,
-      translateX: Number(e.target.value),
+    onItemChanged({
+      translateX: Number(value),
       horizontalAlignment: "",
     });
   };
 
   const handleTranslateY = (e) => {
-    if (!settings) {
+    const value = e.target.value;
+
+    if (!item) {
       return;
     }
-    setSettings({
-      ...settings,
-      translateY: Number(e.target.value),
+
+    if (value === "-" || value === "") {
+      setTranslateY(value);
+      return;
+    }
+    onItemChanged({
+      translateY: Number(value),
       verticalAlignment: "",
     });
   };
 
-  const handleWidthChange = (e) => {
-    const value =  Number(e.target.value);
-    setSettings({
-      ...settings,
-      containerWidth: value,
-    });
-  };
   return (
     <div style={{ padding: "20px" }}>
       <Form>
         <Row className="mb-3">
           <Col>
-            <Form.Label>Width</Form.Label>
-            <Form.Control
-              type="number"
-              onChange={handleWidthChange}
-              defaultValue={settings.containerWidth}
-            />
-          </Col>
-        </Row>
-
-        <Row className="mb-3">
-          <Col>
             <Form.Label htmlFor="basic-url">Align</Form.Label>
             <HorizontalAlignment
               onChange={handleHorAlignment}
-              value={settings.horizontalAlignment}
+              value={item.horizontalAlignment}
             />
           </Col>
         </Row>
@@ -107,14 +111,18 @@ export default function Customize({ settings, setSettings }) {
           <Col>
             <VerticalAlignment
               onChange={handleVerAlignment}
-              value={settings.verticalAlignment}
+              value={item.verticalAlignment}
             />
           </Col>
         </Row>
         <Row className="mb-3">
           <Col>
             <Form.Label>Rotate</Form.Label>
-            <Form.Control type="number" onChange={onChangeRotate} />
+            <Form.Control
+              type="number"
+              value={rotationAngle}
+              onChange={onChangeRotate}
+            />
           </Col>
         </Row>
 

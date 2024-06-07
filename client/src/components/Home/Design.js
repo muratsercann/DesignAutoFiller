@@ -1,5 +1,5 @@
 import PagePreview from "./PagePreview";
-import { designs } from "../data";
+import { designs } from "../../data";
 export default function Design() {
   return (
     <div className="savings">
