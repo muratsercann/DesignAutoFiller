@@ -1,9 +1,9 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 
 export default function ItemEdit({
   item,
-   selectedItemElement,
-   setSelectedItemElement,
+  selectedItemElement,
+  setSelectedItemElement,
   onItemChanged,
   onMouseDown,
 }) {
@@ -57,7 +57,9 @@ export default function ItemEdit({
         cursor: "inherit",
         transform: `translate(${item.translateX}px, ${item.translateY}px) rotate(${item.rotationAngle}deg)`,
         outline:
-          Number(selectedItemElement?.id) === item.id ? "2px dotted #a686ff" : "none",
+          Number(selectedItemElement?.id) === item.id
+            ? "2px dotted #a686ff"
+            : "none",
       }}
       onClick={handleClick}
       onMouseDown={onMouseDown}

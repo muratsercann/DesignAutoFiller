@@ -206,3 +206,52 @@ export const designs = [
     ],
   },
 ];
+
+export const defaultData = {
+  id: 101,
+  designId: 1,
+  width: 250,
+  height: 400,
+  bgColor: "red",
+  bgImageUri: "https://r.resimlink.com/u-A1rvJDjhe.png",
+  items: [
+    {
+      id: 1001,
+      pageId: 101,
+      type: "text",
+      value: "Hi !",
+      rotationAngle: -45,
+      translateX: 0,
+      translateY: -358,
+      fontSize: 24,
+      fontColor: "red",
+      fontFamily: "",
+    },
+
+    {
+      id: 1002,
+      pageId: 101,
+      type: "text",
+      value: "Welcome",
+      rotationAngle: -45,
+      translateX: 100,
+      translateY: -358,
+      fontSize: 24,
+      fontColor: "blue",
+      fontFamily: "",
+    },
+
+    {
+      id: 1003,
+      pageId: 101,
+      type: "text",
+      value: "People",
+      rotationAngle: 0,
+      translateX: 40,
+      translateY: -180,
+      fontSize: 24,
+      fontColor: "blue",
+      fontFamily: "",
+    },
+  ],
+};

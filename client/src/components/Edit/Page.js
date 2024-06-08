@@ -12,12 +12,7 @@ export default function Page({
   const itemRef = useRef(null);
 
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-
   const [draggingItem, setDraggingItem] = useState(null);
-
-  const dragStart = useRef({ x: 0, y: 0 });
-  const initialTranslate = useRef({ x: 0, y: 0 });
 
   useLayoutEffect(() => {
     const rotationAngle = settings?.rotationAngle || 0;
@@ -112,7 +107,7 @@ export default function Page({
   const handleMouseMove = (e) => {
     if (!draggingItem) return;
 
-    const { item, startX, startY, initialTranslateX, initialTranslateY } =
+    const { startX, startY, initialTranslateX, initialTranslateY } =
       draggingItem;
     const newTranslateX = initialTranslateX + (e.clientX - startX);
     const newTranslateY = initialTranslateY + (e.clientY - startY);
