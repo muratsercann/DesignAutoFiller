@@ -85,7 +85,7 @@ const MultiplyImage = () => {
         </div>
         <button type="button" onClick={handleDuplicateImages}>Çoğalt</button>
       </form>
-      <div className="image-container" style={{ display: 'flex', flexWrap: 'wrap', }}>
+      <div className="image-container" style={{ display: 'flex', flexWrap: 'wrap', gap:'1cm'}}>
         {images.map((url, index) => (
           <img
             key={index}
