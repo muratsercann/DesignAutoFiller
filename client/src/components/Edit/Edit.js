@@ -3,10 +3,15 @@ import Page from "./Page";
 import Customize from "./Customize";
 import "../../style/Edit.css";
 import Ribbon from "./Ribbon";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
+
 import { defaultData } from "../../data.js";
+import DataTab from "./DataTab.js";
 export default function Edit() {
   const [settings, setSettings] = useState(getData());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
+  const [activeCustomizeTab, setActiveCustomizeTab] = useState("Data");
 
   function getData() {
     const savedData = localStorage.getItem("userData");
@@ -48,7 +53,19 @@ export default function Edit() {
       <div style={{ height: "100%" }} className="row">
         {/* {selectedItemElement && isEditClicked && ( */}
         <div className="col-5 bg-light">
-          <Customize item={selectedItem} onItemChanged={onItemChanged} />
+          <Tabs
+            id="controlled-tab-example"
+            activeKey={activeCustomizeTab}
+            onSelect={(k) => setActiveCustomizeTab(k)}
+            className="mb-3"
+          >
+            <Tab eventKey="Position" title="Position">
+              <Customize item={selectedItem} onItemChanged={onItemChanged} />
+            </Tab>
+            <Tab eventKey="Data" title="Data">
+              <DataTab/>
+            </Tab>
+          </Tabs>
         </div>
         {/* )} */}
 

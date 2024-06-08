@@ -10,6 +10,8 @@ import ImageRatioApp from "./components/Samples/ImageRatioApp";
 import MultiplyImage from "./components/Samples/MultiplyImage";
 
 function App() {
+  //localStorage.removeItem("userData");
+
   return <Edit />;
 }
 
