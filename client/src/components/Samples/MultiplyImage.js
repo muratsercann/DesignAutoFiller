@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from "react";
 
 const MultiplyImage = () => {
-  const [imageUrl, setImageUrl] = useState('');
-  const [imageWidth, setImageWidth] = useState('');
-  const [imageHeight, setImageHeight] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
+  const [imageWidth, setImageWidth] = useState("");
+  const [imageHeight, setImageHeight] = useState("");
   const [imageCount, setImageCount] = useState(1);
   const [images, setImages] = useState([]);
   const [naturalWidth, setNaturalWidth] = useState(null);
   const [naturalHeight, setNaturalHeight] = useState(null);
+  const printRef = useRef(null);
 
   const handleImageLoad = (e) => {
     setNaturalWidth(e.target.naturalWidth);
     setNaturalHeight(e.target.naturalHeight);
-    setImageWidth((e.target.naturalWidth / 96 * 2.54).toFixed(3)); // cm cinsinden genişlik
-    setImageHeight((e.target.naturalHeight / 96 * 2.54).toFixed(3)); // cm cinsinden yükseklik
+    setImageWidth(((e.target.naturalWidth / 96) * 2.54).toFixed(3)); // cm cinsinden genişlik
+    setImageHeight(((e.target.naturalHeight / 96) * 2.54).toFixed(3)); // cm cinsinden yükseklik
   };
 
   const handleWidthChange = (e) => {
@@ -39,6 +40,36 @@ const MultiplyImage = () => {
     setImages(newImages);
   };
 
+  const handlePrint = () => {
+    const printContent = printRef.current.innerHTML;
+    const printWindow = window.open("", "", "height=500,width=800");
+    printWindow.document.write("<html><head><title>Print</title>");
+    printWindow.document.write(
+      `
+       <style>
+        @media print {
+          body, html {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            margin: 0 !important;
+            padding: 0 !important;
+          }
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+          /* Diğer gerekli yazdırma stillerini buraya ekleyin */
+        }
+      </style>
+      `
+    );
+    printWindow.document.write("</head><body>");
+    printWindow.document.write(printContent);
+    printWindow.document.write("</body></html>");
+    printWindow.document.close();
+    printWindow.print();
+  };
+
   return (
     <div>
       <form>
@@ -49,11 +80,13 @@ const MultiplyImage = () => {
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
-          <button type="button" onClick={() => setImageUrl(imageUrl)}>Resmi Yükle</button>
+          <button type="button" onClick={() => setImageUrl(imageUrl)}>
+            Resmi Yükle
+          </button>
           {imageUrl && (
             <img
               src={imageUrl}
-              style={{ display: 'none' }}
+              style={{ display: "none" }}
               onLoad={handleImageLoad}
               alt=""
             />
@@ -83,17 +116,27 @@ const MultiplyImage = () => {
             onChange={(e) => setImageCount(e.target.value)}
           />
         </div>
-        <button type="button" onClick={handleDuplicateImages}>Çoğalt</button>
+        <button type="button" onClick={handleDuplicateImages}>
+          Çoğalt
+        </button>
       </form>
-      <div className="image-container" style={{ display: 'flex', flexWrap: 'wrap', gap:'1cm'}}>
-        {images.map((url, index) => (
-          <img
-            key={index}
-            src={url}
-            style={{ width: `${imageWidth}cm`, height: `${imageHeight}cm` }}
-            alt=""
-          />
-        ))}
+
+      <button onClick={handlePrint}>Yazdır</button>
+
+      <div ref={printRef}>
+        <div
+          className="image-container"
+          style={{ display: "flex", flexWrap: "wrap", gap: "1cm" }}
+        >
+          {images.map((url, index) => (
+            <img
+              key={index}
+              src={url}
+              style={{ width: `${imageWidth}cm`, height: `${imageHeight}cm` }}
+              alt=""
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Page from "./Page";
 import Customize from "./Customize";
 import "../../style/Edit.css";
@@ -6,7 +6,6 @@ import Ribbon from "./Ribbon";
 import { defaultData } from "../../data.js";
 export default function Edit() {
   const [settings, setSettings] = useState(getData());
-  const [isEditClicked, setIsEditClicked] = useState(false);
   const [selectedItemElement, setSelectedItemElement] = useState(null);
 
   function getData() {
@@ -27,16 +26,6 @@ export default function Edit() {
     );
   }
 
-  useEffect(() => {
-    if (!selectedItem) {
-      setIsEditClicked(false);
-    }
-  }, [selectedItem]);
-
-  const handleEditButtonClick = () => {
-    setIsEditClicked(true);
-  };
-
   const onItemChanged = (newItem) => {
     const itemId = selectedItem.id;
 
@@ -53,16 +42,17 @@ export default function Edit() {
 
   return (
     <div className="edit">
+      <div
+        style={{ width: "100%", height: "60px", backgroundColor: "green" }}
+      ></div>
       <div style={{ height: "100%" }} className="row">
-        {selectedItemElement && isEditClicked && (
-          <div className="col-sm-4 bg-light">
-            <Customize item={selectedItem} onItemChanged={onItemChanged} />
-          </div>
-        )}
+        {/* {selectedItemElement && isEditClicked && ( */}
+        <div className="col-5 bg-light">
+          <Customize item={selectedItem} onItemChanged={onItemChanged} />
+        </div>
+        {/* )} */}
 
-        <div className="col" style={{ paddingLeft: "0px" }}>
-          <Ribbon onClick={handleEditButtonClick} selectedItem={selectedItem} />
-
+        <div className="col-5">
           <Page
             settings={settings}
             selectedItem={selectedItem}
@@ -70,6 +60,10 @@ export default function Edit() {
             setSelectedItem={setSelectedItemElement}
             onItemChanged={onItemChanged}
           />
+        </div>
+
+        <div className="col bg-light" style={{ paddingLeft: "0" }}>
+          <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
         </div>
       </div>
     </div>

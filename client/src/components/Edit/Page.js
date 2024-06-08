@@ -143,7 +143,6 @@ export default function Page({
         alignItems: "center",
         width: "100%",
         height: "100%",
-        backgroundColor: "#ebecf0",
       }}
     >
       <div style={{ width: `${settings.width}px`, position: "relative" }}>

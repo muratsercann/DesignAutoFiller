@@ -53,7 +53,10 @@ export default function ItemEdit({
       style={{
         position: "absolute",
         fontSize: item.fontSize + "px",
+        width: item?.width + "px",
+        height: item?.height,
         color: item.fontColor,
+        textAlign: item.textAlign,
         cursor: "inherit",
         transform: `translate(${item.translateX}px, ${item.translateY}px) rotate(${item.rotationAngle}deg)`,
         outline:
