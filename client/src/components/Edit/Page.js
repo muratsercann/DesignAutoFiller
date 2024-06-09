@@ -138,16 +138,6 @@ export default function Page({
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100%",
-      }}
-    >
-      <div>
-    <div
-      style={{
         width: `${settings.width}px`,
         position: "relative",
         display: "flex",
@@ -172,8 +162,6 @@ export default function Page({
             onMouseDown={(e) => handleMouseDown(item, e)}
           />
         ))}
-        </div>
-      </div>
     </div>
   );
 }

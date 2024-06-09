@@ -31,7 +31,7 @@ export default function Edit() {
   );
   }
 
-  const onItemChanged = (newItem) => {    
+  const onItemChanged = (newItem) => {
     const itemId = selectedItem.id;
 
     const newData = {
@@ -43,6 +43,14 @@ export default function Edit() {
 
     localStorage.setItem("userData", JSON.stringify(newData));
     setSettings(newData);
+  };
+
+  const handleSpaceClick = (e) => {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    setSelectedItemElement(null);
   };
 
   return (
@@ -68,6 +76,16 @@ export default function Edit() {
         </div>
 
         <div className="col-5">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+            onClick={handleSpaceClick}
+          >
             <Page
               settings={settings}
               selectedItem={selectedItem}
@@ -75,12 +93,13 @@ export default function Edit() {
               setSelectedItemElement={setSelectedItemElement}
               onItemChanged={onItemChanged}
             />
+          </div>
         </div>
 
         <div className="col bg-light" style={{ paddingLeft: "0" }}>
           <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
         </div>
-        </div>
       </div>
+    </div>
   );
 }
