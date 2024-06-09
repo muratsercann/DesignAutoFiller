@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef } from "react";
+import * as utils from "./utils";
 
 export default function ItemEdit({
   item,
@@ -20,14 +21,14 @@ export default function ItemEdit({
     const translateX = item?.translateX || 0;
     const translateY = item?.translateY || 0;
 
-    const newTranslateX = calculateTranslateX(
+    const newTranslateX = utils.calculateTranslateX(
       itemRef.current,
       rotationAngle,
       horAlign,
       translateX
     );
 
-    const newTranslateY = calculateTranslateY(
+    const newTranslateY = utils.calculateTranslateY(
       itemRef.current,
       rotationAngle,
       verAlign,
@@ -70,68 +71,4 @@ export default function ItemEdit({
       {item.value}
     </div>
   );
-}
-
-function calculateTranslateX(
-  element,
-  rotationAngle,
-  horizantalAlignment,
-  translateX
-) {
-  let newTranslateX = translateX;
-
-  const rad = (Math.abs(rotationAngle) * Math.PI) / 180;
-  const sin = Math.sin(rad);
-  const cos = Math.cos(rad);
-
-  const centerX = element.offsetWidth / 2;
-  const centerY = element.offsetHeight / 2;
-
-  const parentWidth = element.offsetParent.offsetWidth;
-
-  //Horizontal
-  if (horizantalAlignment === "Left") {
-    newTranslateX = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
-  } else if (horizantalAlignment === "Right") {
-    newTranslateX =
-      centerX - (Math.abs(cos * centerX) + Math.abs(sin * centerY));
-    newTranslateX += parentWidth - element.offsetWidth;
-  } else if (horizantalAlignment === "Center") {
-    newTranslateX = (parentWidth - element.offsetWidth) / 2;
-  }
-
-  return newTranslateX;
-}
-
-function calculateTranslateY(
-  element,
-  rotationAngle,
-  verticalAlignment,
-  translateY
-) {
-  let newTranslateY = translateY;
-
-  const rad = (Math.abs(rotationAngle) * Math.PI) / 180;
-  const sin = Math.sin(rad);
-  const cos = Math.cos(rad);
-
-  const centerX = element.offsetWidth / 2;
-  const centerY = element.offsetHeight / 2;
-
-  const parentHeight = element.offsetParent.offsetHeight;
-
-  //Vertical
-  if (verticalAlignment === "Top") {
-    newTranslateY = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
-    // newTranslateY -= parentHeight;
-  } else if (verticalAlignment === "Bottom") {
-    newTranslateY =
-      centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
-    newTranslateY += parentHeight - element.offsetHeight;
-  } else if (verticalAlignment === "Center") {
-    newTranslateY = 0;
-    newTranslateY += (parentHeight - element.offsetHeight) / 2;
-  }
-
-  return newTranslateY;
 }

@@ -5,23 +5,14 @@ import "../../style/Edit.css";
 import Ribbon from "./Ribbon";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import { getPageInfo } from "./utils.js";
 
-import { defaultData } from "../../data.js";
 import DataTab from "./DataTab.js";
+
 export default function Edit() {
-  const [page, setPage] = useState(getData());
+  const [page, setPage] = useState(getPageInfo());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [activeCustomizeTab, setActiveCustomizeTab] = useState("Data");
-
-  function getData() {
-    const savedData = localStorage.getItem("userData");
-    if (savedData && savedData !== "") {
-      const jsonData = JSON.parse(savedData);
-      return jsonData;
-    } else {
-      return defaultData;
-    }
-  }
 
   const getSelectedItem = () => {
     let selected = null;
@@ -30,7 +21,6 @@ export default function Edit() {
         (item) => item.id === Number(selectedItemElement.id)
       );
     }
-
     return selected;
   };
 
