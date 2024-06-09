@@ -8,10 +8,13 @@ import Edit from "./components/Edit/Edit";
 import DynamicTable from "./components/Samples/DynamicTable";
 import ImageRatioApp from "./components/Samples/ImageRatioApp";
 import MultiplyImage from "./components/Samples/MultiplyImage";
+import List from "./components/Samples/List";
+
+import * as utils from "./components/Edit/utils";
 
 function App() {
-  //localStorage.removeItem("userData");
-
+  //  utils.clearUserSettingsFromStorage();
+  // utils.clearImportedDataFromStorage();
   return <Edit />;
 }
 

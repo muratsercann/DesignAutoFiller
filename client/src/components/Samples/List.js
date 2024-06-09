@@ -1,9 +1,9 @@
 import PagePreview from "./PagePreview";
-
+import * as utils from "../Edit/utils"
 
 export default function List() {
-  const data = JSON.parse(localStorage.getItem("userData"));
-  const importedData = JSON.parse(localStorage.getItem("importedData"));
+  const data = JSON.parse(utils.getSettingsFromStorage());
+  const importedData = utils.getImportedDataFromStorage();
   const tagFieldRelations = JSON.parse(localStorage.getItem("tagFieldRelation"));
 
   const width = 0;

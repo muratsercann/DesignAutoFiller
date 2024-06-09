@@ -1,8 +1,6 @@
 import React from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import VerticalAlignment from "./VerticalAlignment";
 
 export default function Ribbon({ selectedItem, onItemChanged }) {
   const handleCreateTextField = (e) => {

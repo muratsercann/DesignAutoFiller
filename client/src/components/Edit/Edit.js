@@ -5,14 +5,15 @@ import "../../style/Edit.css";
 import Ribbon from "./Ribbon";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import { getPageInfo } from "./utils.js";
+import * as utils from "./utils.js";
 
 import DataTab from "./DataTab.js";
 
 export default function Edit() {
-  const [page, setPage] = useState(getPageInfo());
+  const [page, setPage] = useState(utils.getPageInfo());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [activeCustomizeTab, setActiveCustomizeTab] = useState("Data");
+  const [tagColumnMapping, setTagColumnMapping] = useState([]);
 
   const getSelectedItem = () => {
     let selected = null;
@@ -36,7 +37,7 @@ export default function Edit() {
       ),
     };
 
-    localStorage.setItem("userData", JSON.stringify(newData));
+    utils.setSettingsToStorage(newData);
     setPage(newData);
   };
 
@@ -50,9 +51,6 @@ export default function Edit() {
 
   return (
     <div className="edit">
-      <div
-        style={{ width: "100%", height: "60px", backgroundColor: "green" }}
-      ></div>
       <div style={{ height: "100%" }} className="row">
         <div className="col-5 bg-light">
           <Tabs
@@ -62,36 +60,37 @@ export default function Edit() {
             className="mb-3"
           >
             <Tab eventKey="Position" title="Position">
-              <Customize onItemChanged={onItemChanged} />
+              <Customize item={selectedItem} onItemChanged={onItemChanged} />
             </Tab>
             <Tab eventKey="Data" title="Data">
-              <DataTab />
+              <DataTab
+                page={page}
+                tagFieldMatchings={tagColumnMapping}
+                setTagFieldMatchings={setTagColumnMapping}
+              />
             </Tab>
           </Tabs>
         </div>
 
-        <div className="col-5">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-              height: "100%",
-            }}
-            onClick={handleSpaceClick}
-          >
-            <Page
-              page={page}
-              selectedItem={selectedItem}
-              selectedItemElement={selectedItemElement}
-              setSelectedItemElement={setSelectedItemElement}
-              onItemChanged={onItemChanged}
-            />
-          </div>
+        <div
+          className="pageContainer col-5"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          onClick={handleSpaceClick}
+        >
+          <Page
+            page={page}
+            selectedItem={selectedItem}
+            selectedItemElement={selectedItemElement}
+            setSelectedItemElement={setSelectedItemElement}
+            onItemChanged={onItemChanged}
+          />
         </div>
 
-        <div className="col bg-light" style={{ paddingLeft: "0" }}>
+        <div className="col bg-light" style={{}}>
           <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
         </div>
       </div>

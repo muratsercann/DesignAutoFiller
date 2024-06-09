@@ -44,6 +44,10 @@
 
 /* msercan*/
 
+img {
+  pointer-events: none;
+}
+
 .no-select {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */

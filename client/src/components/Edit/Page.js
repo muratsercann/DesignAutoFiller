@@ -102,6 +102,7 @@ export default function Page({
 
   return (
     <div
+      className="pageContent"
       style={{
         width: `${page.width}px`,
         position: "relative",
@@ -110,7 +111,7 @@ export default function Page({
     >
       <img
         src={backgroundImage}
-        className="img-fluid"
+        className="img-fluid no-select"
         alt=""
         onLoad={() => setIsImageLoaded(true)}
         onClick={handleImageClick}

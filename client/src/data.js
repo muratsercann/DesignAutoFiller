@@ -210,8 +210,8 @@ export const designs = [
 export const defaultData = {
   id: 101,
   designId: 1,
-  width: 150,
-  height: 240,
+  width: 250,
+  height: 400,
   bgColor: "red",
   bgImageUri: "https://r.resimlink.com/u-A1rvJDjhe.png",
   items: [

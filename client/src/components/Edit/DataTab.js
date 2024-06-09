@@ -3,10 +3,19 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
+import * as utils from "./utils";
+import ImportDataModal from "./ImportDataModal";
 
-export default function DataTab() {
-  const [show, setShow] = useState(false);
-  const [importedData, setImportedData] = useState(getImportedData());
+export default function DataTab({
+  page,
+  tagColumnMapping,
+  setTagColumnMapping,
+}) {
+  const [importedData, setImportedData] = useState(
+    utils.getImportedDataFromStorage() /* todo : msercan get importedData as a prop from parent (Edit) component*/
+  );
+  const [showModal, setShowModal] = useState(false);
+
   const [mappings, setMappings] = useState(() => {
     let tags = getTags();
 
@@ -17,15 +26,12 @@ export default function DataTab() {
     return map;
   });
 
-  const userData = getSettingsFromStorage();
-
   const tags = getTags();
 
   function getTags() {
-    var data = getSettingsFromStorage();
-    if (!data || data.length === 0) return [];
+    if (!page || page.items?.length === 0) return [];
 
-    const tags = data.items
+    const tags = page.items
       .filter((item) => item.tag && item.tag !== "")
       .map((item) => item.tag);
 
@@ -39,33 +45,8 @@ export default function DataTab() {
     }));
   };
 
-  function getSettingsFromStorage() {
-    return JSON.parse(localStorage.getItem("userData"));
-  }
-
-  function getImportedData() {
-    return JSON.parse(localStorage.getItem("importedData"));
-  }
-
-  const handleClose = () => setShow(false);
-  const handleSave = () => {
-    if (!importedData) {
-      return;
-    }
-
-    localStorage.setItem("importedData", JSON.stringify(importedData));
-    setShow(false);
-  };
-
   const handleImportClick = () => {
-    setShow(true);
-  };
-
-  const handleTextAriaChange = (e) => {
-    const value = e.target.value;
-
-    const rows = value.split("\n").map((row) => row.split("\t"));
-    setImportedData(rows);
+    setShowModal(true);
   };
 
   let columns = [];
@@ -74,6 +55,7 @@ export default function DataTab() {
       columns.push("Field_" + i);
     }
   }
+
   return (
     <div>
       <Button variant="link" onClick={handleImportClick}>
@@ -108,56 +90,36 @@ export default function DataTab() {
         </div>
       )}
 
-      {userData && userData.items?.length > 0 && (
-        <div>
-          {tags.map((tag) => (
-            <Form.Group key={tag} className="mb-3">
-              <Form.Label>{tag}:</Form.Label>
-              <Form.Control
-                as="select"
-                value={mappings[tag]}
-                onChange={(e) => handleMappingChange(tag, e.target.value)}
-              >
-                <option value="">Seçiniz</option>
-                {columns.map((col) => (
-                  <option key={col} value={col}>
-                    {col}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          ))}
-        </div>
-      )}
+      {importedData &&
+        importedData.length > 0 &&
+        page &&
+        page.items?.length > 0 && (
+          <div>
+            {tags.map((tag) => (
+              <Form.Group key={tag} className="mb-3">
+                <Form.Label>{tag}:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={mappings[tag]}
+                  onChange={(e) => handleMappingChange(tag, e.target.value)}
+                >
+                  <option value="">Seçiniz</option>
+                  {columns.map((col) => (
+                    <option key={col} value={col}>
+                      {col}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+            ))}
+          </div>
+        )}
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Copy&Paste Your Data</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group
-              className="mb-3"
-              controlId="imortDataModal.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={6}
-                onChange={handleTextAriaChange}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSave}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ImportDataModal
+        isOpen={showModal}
+        setShow={setShowModal}
+        setImportedData={setImportedData}
+      />
     </div>
   );
 }

@@ -73,3 +73,49 @@ export const calculateTranslateY = (
 
   return newTranslateY;
 };
+
+const userSettingsStorageKey = "userData";
+const importedDataStorageKey = "importedData";
+const tagColumnMappingStorageKey = "tagColumnMapping";
+
+export function getSettingsFromStorage() {
+  return JSON.parse(localStorage.getItem(userSettingsStorageKey));
+}
+
+export function getImportedDataFromStorage() {
+  return JSON.parse(localStorage.getItem(importedDataStorageKey));
+}
+
+export function getTagColumnMappingToStorage() {
+  return JSON.parse(localStorage.getItem(tagColumnMappingStorageKey));
+}
+
+export function setSettingsToStorage(data) {
+  localStorage.setItem(userSettingsStorageKey, JSON.stringify(data));
+}
+
+export function setImportedDataToStorage(data) {
+  localStorage.setItem(importedDataStorageKey, JSON.stringify(data));
+}
+
+export function setTagColumnMappingToStorage(data) {
+  localStorage.setItem(tagColumnMappingStorageKey, JSON.stringify(data));
+}
+
+export function clearAllDataFromStorage() {
+  clearUserSettingsFromStorage();
+  clearImportedDataFromStorage();
+  clearTagColumnMappingFromStorage();
+}
+
+export function clearUserSettingsFromStorage() {
+  localStorage.removeItem(userSettingsStorageKey);
+}
+
+export function clearImportedDataFromStorage() {
+  localStorage.removeItem(importedDataStorageKey);
+}
+
+export function clearTagColumnMappingFromStorage() {
+  localStorage.removeItem(tagColumnMappingStorageKey);
+}
