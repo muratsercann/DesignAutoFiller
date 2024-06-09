@@ -127,7 +127,7 @@ function calculateTranslateY(
   } else if (verticalAlignment === "Bottom") {
     newTranslateY =
       centerY - (Math.abs(sin * centerX) + Math.abs(cos * centerY));
-    newTranslateY += (parentHeight - element.offsetHeight);
+    newTranslateY += parentHeight - element.offsetHeight;
   } else if (verticalAlignment === "Center") {
     newTranslateY = 0;
     newTranslateY += (parentHeight - element.offsetHeight) / 2;

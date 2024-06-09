@@ -23,13 +23,18 @@ export default function Edit() {
     }
   }
 
-  let selectedItem = null;
+  const getSelectedItem = () => {
+    let selected = null;
+    if (selectedItemElement) {
+      selected = settings.items.find(
+        (item) => item.id === Number(selectedItemElement.id)
+      );
+    }
 
-  if (selectedItemElement) {
-  selectedItem = settings.items.find(
-  (item) => item.id === Number(selectedItemElement.id)
-  );
-  }
+    return selected;
+  };
+
+  const selectedItem = getSelectedItem();
 
   const onItemChanged = (newItem) => {
     const itemId = selectedItem.id;
@@ -67,7 +72,7 @@ export default function Edit() {
             className="mb-3"
           >
             <Tab eventKey="Position" title="Position">
-              <Customize item={selectedItem} onItemChanged={onItemChanged} />
+              <Customize onItemChanged={onItemChanged} />
             </Tab>
             <Tab eventKey="Data" title="Data">
               <DataTab />
