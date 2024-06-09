@@ -145,8 +145,14 @@ export default function Page({
         height: "100%",
       }}
     >
-      <div style={{ width: `${settings.width}px`, position: "relative" }}>
-        <div>
+      <div>
+        <div
+          style={{
+            width: `${settings.width}px`,
+            position: "relative",
+            display: "flex",
+          }}
+        >
           <img
             src={backgroundImage}
             className="img-fluid"

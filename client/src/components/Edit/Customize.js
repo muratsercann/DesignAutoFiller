@@ -137,7 +137,7 @@ export default function Customize({ item, onItemChanged }) {
 
           <Row className="mb-3">
             <Col>
-              <Form.Label>TranslateX</Form.Label>
+              <Form.Label>Position X</Form.Label>
 
               <Form.Control
                 type="number"
@@ -147,7 +147,7 @@ export default function Customize({ item, onItemChanged }) {
             </Col>
 
             <Col>
-              <Form.Label>TranslateY</Form.Label>
+              <Form.Label>Position Y</Form.Label>
               <Form.Control
                 type="number"
                 value={translateY}
