@@ -26,12 +26,12 @@ export default function Edit() {
   let selectedItem = null;
 
   if (selectedItemElement) {
-    selectedItem = settings.items.find(
-      (item) => item.id === Number(selectedItemElement.id)
-    );
+  selectedItem = settings.items.find(
+  (item) => item.id === Number(selectedItemElement.id)
+  );
   }
 
-  const onItemChanged = (newItem) => {
+  const onItemChanged = (newItem) => {    
     const itemId = selectedItem.id;
 
     const newData = {
@@ -51,7 +51,6 @@ export default function Edit() {
         style={{ width: "100%", height: "60px", backgroundColor: "green" }}
       ></div>
       <div style={{ height: "100%" }} className="row">
-        {/* {selectedItemElement && isEditClicked && ( */}
         <div className="col-5 bg-light">
           <Tabs
             id="controlled-tab-example"
@@ -63,26 +62,25 @@ export default function Edit() {
               <Customize item={selectedItem} onItemChanged={onItemChanged} />
             </Tab>
             <Tab eventKey="Data" title="Data">
-              <DataTab/>
+              <DataTab />
             </Tab>
           </Tabs>
         </div>
-        {/* )} */}
 
         <div className="col-5">
-          <Page
-            settings={settings}
-            selectedItem={selectedItem}
-            selectedItemElement={selectedItemElement}
-            setSelectedItem={setSelectedItemElement}
-            onItemChanged={onItemChanged}
-          />
+            <Page
+              settings={settings}
+              selectedItem={selectedItem}
+              selectedItemElement={selectedItemElement}
+              setSelectedItemElement={setSelectedItemElement}
+              onItemChanged={onItemChanged}
+            />
         </div>
 
         <div className="col bg-light" style={{ paddingLeft: "0" }}>
           <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
         </div>
+        </div>
       </div>
-    </div>
   );
 }

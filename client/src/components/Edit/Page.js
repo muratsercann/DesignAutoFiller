@@ -6,7 +6,7 @@ export default function Page({
   settings,
   selectedItem,
   selectedItemElement,
-  setSelectedItem,
+  setSelectedItemElement,
   onItemChanged,
 }) {
   const itemRef = useRef(null);
@@ -48,7 +48,7 @@ export default function Page({
   }, [isImageLoaded, settings, onItemChanged]);
 
   const handleNonSelectedClick = (e) => {
-    setSelectedItem(null);
+    setSelectedItemElement(null);
   };
 
   const handleKeyDown = (e) => {
@@ -94,7 +94,7 @@ export default function Page({
   };
 
   const handleMouseDown = (item, e) => {
-    setSelectedItem(e.target);
+    setSelectedItemElement(e.target);
     setDraggingItem({
       item,
       startX: e.clientX,
@@ -146,32 +146,32 @@ export default function Page({
       }}
     >
       <div>
-        <div
-          style={{
-            width: `${settings.width}px`,
-            position: "relative",
-            display: "flex",
-          }}
-        >
-          <img
-            src={backgroundImage}
-            className="img-fluid"
-            alt=""
-            onLoad={() => setIsImageLoaded(true)}
-            onClick={handleNonSelectedClick}
-          />
+    <div
+      style={{
+        width: `${settings.width}px`,
+        position: "relative",
+        display: "flex",
+      }}
+    >
+      <img
+        src={backgroundImage}
+        className="img-fluid"
+        alt=""
+        onLoad={() => setIsImageLoaded(true)}
+        onClick={handleNonSelectedClick}
+      />
 
-          {isImageLoaded &&
-            settings.items.map((item, index) => (
-              <ItemEdit
-                item={item}
-                selectedItemElement={selectedItemElement}
-                setSelectedItemElement={setSelectedItem}
-                key={index}
-                onItemChanged={onItemChanged}
-                onMouseDown={(e) => handleMouseDown(item, e)}
-              />
-            ))}
+      {isImageLoaded &&
+        settings.items.map((item, index) => (
+          <ItemEdit
+            item={item}
+            selectedItemElement={selectedItemElement}
+            setSelectedItemElement={setSelectedItemElement}
+            key={index}
+            onItemChanged={onItemChanged}
+            onMouseDown={(e) => handleMouseDown(item, e)}
+          />
+        ))}
         </div>
       </div>
     </div>
