@@ -9,7 +9,7 @@ import Tabs from "react-bootstrap/Tabs";
 import { defaultData } from "../../data.js";
 import DataTab from "./DataTab.js";
 export default function Edit() {
-  const [settings, setSettings] = useState(getData());
+  const [page, setPage] = useState(getData());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [activeCustomizeTab, setActiveCustomizeTab] = useState("Data");
 
@@ -26,7 +26,7 @@ export default function Edit() {
   const getSelectedItem = () => {
     let selected = null;
     if (selectedItemElement) {
-      selected = settings.items.find(
+      selected = page.items.find(
         (item) => item.id === Number(selectedItemElement.id)
       );
     }
@@ -40,14 +40,14 @@ export default function Edit() {
     const itemId = selectedItem.id;
 
     const newData = {
-      ...settings,
-      items: settings.items.map((item) =>
+      ...page,
+      items: page.items.map((item) =>
         item.id === itemId ? { ...item, ...newItem } : item
       ),
     };
 
     localStorage.setItem("userData", JSON.stringify(newData));
-    setSettings(newData);
+    setPage(newData);
   };
 
   const handleSpaceClick = (e) => {
@@ -92,7 +92,7 @@ export default function Edit() {
             onClick={handleSpaceClick}
           >
             <Page
-              settings={settings}
+              page={page}
               selectedItem={selectedItem}
               selectedItemElement={selectedItemElement}
               setSelectedItemElement={setSelectedItemElement}

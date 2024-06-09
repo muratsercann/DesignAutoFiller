@@ -119,16 +119,6 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
           </div>
         </>
       )}
-
-      <div className="row mt-3">
-        <div className="col">
-          {/* {selectedItem && (
-          <Button variant="primary" onClick={handleEditClick}>
-            <span>Edit</span>
-          </Button>
-        )} */}
-        </div>
-      </div>
     </div>
   );
 }
