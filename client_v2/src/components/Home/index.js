@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 
 export default function Home() {
   const [imageUrl, setImageUrl] = useState("");
+  const [imageSrc, setImageSrc] = useState(null);
   const [error, setError] = useState("");
-  const [imageElement, setImageElement] = useState(null);
 
   const hangleImageUrlChange = (e) => {
     checkImage(e.target.value);
@@ -16,14 +16,24 @@ export default function Home() {
   const checkImage = (url) => {
     const img = new Image();
     img.onload = () => {
-      setImageUrl(url);
       setError("");
-      setImageElement(img);
+      setImageUrl(url);
+
+      fetch(url)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const imageObjectUrl = URL.createObjectURL(blob);
+          setImageSrc(imageObjectUrl);
+        })
+        .catch(() => {
+          setError("Invalid image source!");
+          setImageSrc(null);
+        });
     };
     img.onerror = () => {
       setImageUrl("");
       setError("Invalid image source!");
-      setImageElement(null);
+      setImageSrc(null);
     };
     img.src = url;
   };
@@ -36,7 +46,12 @@ export default function Home() {
     <div className="home">
       <div className="header">
         <h1>Welcome</h1>
-        <p>Enter your image link and start</p>
+
+        <span>
+          We're excited to have you here. Let's get started on your journey with
+          us.
+        </span>
+        <p>Enter your image link and click the start</p>
       </div>
       <div className="home-content">
         <Form>
@@ -54,9 +69,8 @@ export default function Home() {
             />
           </Row>
         </Form>
-        {!error && imageElement && (
-          // <img alt="" src={imageElement.src} width={"120px"} className="image-fluid" />
-          {imageElement}
+        {!error && imageSrc && (
+          <img alt="" src={imageSrc} width={"120px"} className="image-fluid" />
         )}
 
         {error && <div className="error">{error}</div>}
