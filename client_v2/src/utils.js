@@ -114,10 +114,9 @@ export function setTagColumnMappingToStorage(data) {
 }
 
 export function clearAllDataFromStorage() {
-  clearUserSettingsFromStorage();
-  clearImportedDataFromStorage();
-  clearTagColumnMappingFromStorage();
-  clearImageSettingsFormStorage();
+  Object.values(storageKeys).forEach((key) => {
+    localStorage.removeItem(key);
+  });
 }
 
 export function clearUserSettingsFromStorage() {
