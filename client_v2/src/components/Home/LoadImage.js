@@ -6,17 +6,44 @@ import Row from "react-bootstrap/Row";
 export default function LoadImage({ onSave }) {
   const [imageUrl, setImageUrl] = useState("");
   const [imageBlobSrc, setImageSrc] = useState(null);
+  const [imageRatio, setImageRatio] = useState(null);
+  const [originalWidthCm, setOriginialWidthCm] = useState();
+  const [originalHeightCm, setOriginialHeightCm] = useState();
+
   const [error, setError] = useState("");
 
   const hangleImageUrlChange = (e) => {
-    checkImage(e.target.value);
+    checkImage(e);
   };
 
-  const checkImage = (url) => {
+  const clearImageSettings = () => {
+    setImageSrc(null);
+    setOriginialWidthCm(null);
+    setOriginialHeightCm(null);
+    setImageRatio(null);
+    setOriginialWidthCm(null);
+    setOriginialHeightCm(null);
+  };
+
+  const checkImage = (e) => {
+    const url = e.target.value;
+
     const img = new Image();
-    img.onload = () => {
+
+    img.onload = (event) => {
       setError("");
       setImageUrl(url);
+
+      const { naturalWidth, naturalHeight } = event.target;
+      const naturalwidthCm = (naturalWidth * (2.54 / 96)).toFixed(2);
+      const naturalHeightCm = (naturalHeight * (2.54 / 96)).toFixed(2);
+      const ratio = naturalWidth / naturalHeight;
+
+      setImageRatio(ratio);
+      setOriginialWidthCm(naturalwidthCm);
+      setOriginialHeightCm(naturalHeightCm);
+
+      console.log("calculated aspect ratio : " + ratio);
 
       fetch(url)
         .then((response) => response.blob())
@@ -26,20 +53,32 @@ export default function LoadImage({ onSave }) {
         })
         .catch(() => {
           setError("Invalid image source!");
-          setImageSrc(null);
+          clearImageSettings();
         });
     };
     img.onerror = () => {
       setImageUrl("");
-      setError("Invalid image source!");
-      setImageSrc(null);
+      setError("Invalid image source12!");
+      clearImageSettings();
     };
     img.src = url;
   };
 
   const handleStartClick = () => {
-    if (imageBlobSrc && imageUrl) {
-      onSave(imageUrl, imageBlobSrc);
+    if (
+      imageBlobSrc &&
+      imageUrl &&
+      imageRatio &&
+      originalWidthCm &&
+      originalHeightCm
+    ) {
+      onSave(
+        imageBlobSrc,
+        imageUrl,
+        imageRatio,
+        originalWidthCm,
+        originalHeightCm
+      );
     }
   };
 

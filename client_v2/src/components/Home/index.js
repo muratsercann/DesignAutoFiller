@@ -7,10 +7,19 @@ import LoadImage from "./LoadImage";
 export default function Home() {
   const navigate = useNavigate();
 
-  const handleImageSave = (imageBlobSrc, imageUrl) => {
+  const handleImageSave = (
+    imageBlobSrc,
+    imageUrl,
+    ratio,
+    naturalWidth,
+    naturalHeight
+  ) => {
     utils.setImageSettingsToStorage({
       blobSrc: imageBlobSrc,
       url: imageUrl,
+      ratio: ratio,
+      naturalWidthCm: naturalWidth,
+      naturalHeightCm: naturalHeight,
     });
 
     navigate("/resize");
