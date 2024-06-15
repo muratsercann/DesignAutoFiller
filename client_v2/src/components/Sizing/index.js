@@ -40,7 +40,7 @@ export default function Sizing({}) {
   };
 
   return (
-    <div className="sezing">
+    <div className="sizing">
       {blobSrc && (
         <img
           alt=""
