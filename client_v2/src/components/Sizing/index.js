@@ -1,4 +1,4 @@
-import "./Resize.css";
+import "./Sizing.css";
 import * as utils from "../../utils";
 import { useNavigate } from "react-router-dom";
 import Col from "react-bootstrap/Col";
@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { useState } from "react";
 
-export default function Resize({}) {
+export default function Sizing({}) {
   const imageSettings = utils.getImageSettingsFromStorage();
   const url = imageSettings.url;
   const blobSrc = imageSettings.blobSrc;
@@ -40,7 +40,7 @@ export default function Resize({}) {
   };
 
   return (
-    <div className="resize">
+    <div className="sezing">
       {blobSrc && (
         <img
           alt=""

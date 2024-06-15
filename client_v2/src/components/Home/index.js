@@ -22,7 +22,7 @@ export default function Home() {
       naturalHeightCm: naturalHeight,
     });
 
-    navigate("/resize");
+    navigate("/sizing");
   };
 
   return (
