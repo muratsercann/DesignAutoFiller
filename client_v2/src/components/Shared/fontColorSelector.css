@@ -23,14 +23,14 @@
   width: 25px;
   height: 6px;
   border-radius: 7px;
-  background-color: blue;
-}
-
-.custom-button {
-  scale: 1;
+  /* background-color: blue; */
 }
 
 .custom-button:hover {
   background-color: #ebecf0;
   cursor: pointer;
+}
+
+.sketch-picker {
+  z-index: 999999;
 }

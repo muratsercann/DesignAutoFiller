@@ -126,3 +126,8 @@ img {
   justify-items: center;
   align-items: center;
 }
+
+
+select {
+  cursor: pointer;
+}

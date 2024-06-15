@@ -32,7 +32,7 @@ export default function FontColorSelector({ color, onChange }) {
       <div style={{ position: "relative" }}>
         <div className="custom-button" onClick={handleClick}>
           <div className="letter">A</div>
-          <div className="color"></div>
+          <div style={{ backgroundColor: color }} className="color"></div>
         </div>
         {showColorPicker && (
           <div
@@ -41,6 +41,7 @@ export default function FontColorSelector({ color, onChange }) {
               position: "absolute",
               left: "0px",
               top: "100%",
+              zIndex:"99999"
             }}
           >
             <SketchPicker color={color} onChange={onChange} />
