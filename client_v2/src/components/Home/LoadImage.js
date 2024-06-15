@@ -35,9 +35,9 @@ export default function LoadImage({ onSave }) {
       setImageUrl(url);
 
       const { naturalWidth, naturalHeight } = event.target;
-      const naturalwidthCm = (naturalWidth * (2.54 / 96)).toFixed(2);
-      const naturalHeightCm = (naturalHeight * (2.54 / 96)).toFixed(2);
-      const ratio = naturalWidth / naturalHeight;
+      const naturalwidthCm = Number((naturalWidth * (2.54 / 96)).toFixed(2));
+      const naturalHeightCm = Number((naturalHeight * (2.54 / 96)).toFixed(2));
+      const ratio = Number((naturalWidth / naturalHeight).toFixed(2));
 
       setImageRatio(ratio);
       setOriginialWidthCm(naturalwidthCm);

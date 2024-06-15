@@ -76,7 +76,7 @@ export const calculateTranslateY = (
 
 const storageKeys = {
   imageSettings: "imageSettings",
-  userSettings: "userData",
+  userSettings: "userSettings",
   importedData: "importedData",
   tagColumnMapping: "tagColumnMapping",
 };

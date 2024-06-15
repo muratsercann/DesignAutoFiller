@@ -14,8 +14,8 @@ export default function Sizing({}) {
   const naturalWidthCm = imageSettings.naturalWidthCm;
   const naturalHeightCm = imageSettings.naturalHeightCm;
 
-  const [imgWidth, setImgWidth] = useState(naturalWidthCm);
-  const [imgHeight, setImgHeight] = useState(naturalHeightCm);
+  const [customWidthCm, setCustomImgWidthCm] = useState(naturalWidthCm);
+  const [customHeightCm, setCustomImgHeightCm] = useState(naturalHeightCm);
 
   const navigate = useNavigate();
 
@@ -27,15 +27,19 @@ export default function Sizing({}) {
   }
 
   const handleWidthChange = (e) => {
-    const width = e.target.value;
-    const height = (Number(e.target.value) / ratio).toFixed(2);
+    const width = Number(e.target.value);
+    const height = Number((e.target.value / ratio).toFixed(2));
 
-    setImgWidth(width);
-    setImgHeight(height);
+    setCustomImgWidthCm(width);
+    setCustomImgHeightCm(height);
   };
 
   const handleContinueClick = () => {
-    //handle save operations
+    utils.setImageSettingsToStorage({
+      ...imageSettings,
+      customWidthCm: customWidthCm,
+      customHeightCm: customHeightCm,
+    });
     navigate("/edit");
   };
 
@@ -58,7 +62,7 @@ export default function Sizing({}) {
               id="width"
               type="number"
               placeholder="Width (cm)"
-              value={imgWidth}
+              value={customWidthCm}
               onChange={handleWidthChange}
             />
           </Form>{" "}
@@ -72,7 +76,7 @@ export default function Sizing({}) {
             id="height"
             type="number"
             placeholder="Height (cm)"
-            value={imgHeight}
+            value={customHeightCm}
           />
         </Form>
       </Row>
