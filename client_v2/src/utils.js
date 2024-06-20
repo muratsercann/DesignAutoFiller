@@ -1,10 +1,9 @@
 import { defaultData } from "./data.js";
 
 export const getPageInfo = () => {
-  const savedData = localStorage.getItem("userData");
+  const savedData = getSettingsFromStorage();
   if (savedData && savedData !== "") {
-    const jsonData = JSON.parse(savedData);
-    return jsonData;
+    return savedData;
   } else {
     return defaultData;
   }
@@ -72,6 +71,16 @@ export const calculateTranslateY = (
   }
 
   return newTranslateY;
+};
+
+export const pixelToCm = (value) => {
+  const cm = Number((value * (2.54 / 96)).toFixed(2));
+  return cm;
+};
+
+export const cmToPixel = (value) => {
+  const px = Number((value * (96 / 2.54)).toFixed(2));
+  return px;
 };
 
 const storageKeys = {

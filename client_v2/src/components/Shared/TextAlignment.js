@@ -8,24 +8,32 @@ import {
 } from "react-icons/fa6";
 
 export default function TextAlignment({ align, setAlign }) {
-  const [selecteIndex, setNum] = useState(0);
+  const items = {
+    left: 0,
+    center: 1,
+    right: 2,
+    justify: 3,
+  };
+
+  const index = (items[align] + 1) % 4;
+  const [selecteIndex, setNum] = useState(index);
 
   const handleClick = (index) => {
     switch (index) {
-      case 0:
-        setAlign("Left");
+      case items.left:
+        setAlign("left");
         break;
 
-      case 1:
-        setAlign("Center");
+      case items.center:
+        setAlign("center");
         break;
 
-      case 2:
-        setAlign("Right");
+      case items.right:
+        setAlign("right");
         break;
 
-      case 3:
-        setAlign("Justify");
+      case items.justify:
+        setAlign("justify");
         break;
 
       default:
@@ -43,22 +51,22 @@ export default function TextAlignment({ align, setAlign }) {
         handleClick(selecteIndex);
       }}
     >
-      {selecteIndex === 0 && (
+      {selecteIndex === items.left && (
         <div className="alignLeft">
           <FaAlignLeft />
         </div>
       )}
-      {selecteIndex === 1 && (
+      {selecteIndex === items.center && (
         <div className="alignCenter">
           <FaAlignCenter />
         </div>
       )}
-      {selecteIndex === 2 && (
+      {selecteIndex === items.right && (
         <div className="alignRight">
           <FaAlignRight />
         </div>
       )}
-      {selecteIndex === 3 && (
+      {selecteIndex === items.justify && (
         <div className="alignJustify">
           <FaAlignJustify />
         </div>

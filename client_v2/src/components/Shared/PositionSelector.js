@@ -27,12 +27,10 @@ export default function PositionSelector({
   };
 
   const handleHorizontalClick = (align) => {
-    console.log("Horizontal Alignment : " + align);
     setHorizontalAlignment(align);
   };
 
   const handleVerticalClick = (align) => {
-    console.log("Vertical Alignment : " + align);
     setVerticalAlignment(align);
   };
 
