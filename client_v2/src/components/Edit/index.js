@@ -49,16 +49,14 @@ export default function Edit() {
           <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
         </div>
 
-        <div
-          className="pageContainer"
-          onClick={handleSpaceClick}
-        >
+        <div className="pageContainer" onClick={handleSpaceClick}>
           <Page
             page={page}
             selectedItem={selectedItem}
             selectedItemElement={selectedItemElement}
             setSelectedItemElement={setSelectedItemElement}
             onItemChanged={onItemChanged}
+            handleSpaceClick={handleSpaceClick}
           />
         </div>
       </div>

@@ -7,6 +7,7 @@ export default function Page({
   selectedItemElement,
   setSelectedItemElement,
   onItemChanged,
+  handleSpaceClick,
 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
@@ -14,10 +15,6 @@ export default function Page({
   const imageSettings = utils.getImageSettingsFromStorage();
 
   const imageSize = utils.cmToPixel(imageSettings.customWidthCm);
-
-  const handleImageClick = (e) => {
-    setSelectedItemElement(null);
-  };
 
   const handleKeyDown = (e) => {
     if (selectedItem) {
@@ -111,13 +108,13 @@ export default function Page({
         position: "relative",
         display: "flex",
       }}
+      onClick={handleSpaceClick}
     >
       <img
         src={imageSettings.blobSrc}
         className="img-fluid no-select"
         alt=""
         onLoad={() => setIsImageLoaded(true)}
-        onClick={handleImageClick}
       />
       <span className="img-info">{`${imageSettings.customWidthCm}cm x ${imageSettings.customHeightCm}cm`}</span>
 
