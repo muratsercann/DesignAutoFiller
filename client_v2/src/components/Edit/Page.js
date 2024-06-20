@@ -16,7 +16,8 @@ export default function Page({
 
   const imageSettings = utils.getImageSettingsFromStorage();
 
-  const imageSize = utils.cmToPixel(imageSettings.customWidthCm);
+  const imageWidth = utils.cmToPixel(imageSettings.customWidthCm);
+  const imageHeight = utils.cmToPixel(imageSettings.customHeightCm);
 
   const handleKeyDown = (e) => {
     if (selectedItem) {
@@ -110,8 +111,12 @@ export default function Page({
     const pageContentHeigt = itemRef.current.offsetHeight;
     const pageContainerHeight = itemRef.current.offsetParent.offsetHeight;
 
+    // console.log(pageContentHeigt, pageContainerHeight);
+
     if (pageContentHeigt > pageContainerHeight - 20) {
-      setScale(0.7);
+      const scale = (pageContainerHeight/pageContentHeigt).toFixed(2);
+      
+      setScale(scale - 0.05);
     }
   });
 
@@ -120,7 +125,8 @@ export default function Page({
       className="pageContent"
       ref={itemRef}
       style={{
-        width: `${imageSize}px`,
+        width: `${imageWidth}px`,
+        height: `${imageHeight}px`,
         transform: `scale(${scale})`,
       }}
       onClick={handleSpaceClick}
