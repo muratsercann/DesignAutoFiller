@@ -37,6 +37,12 @@ button.form-control {
   align-items: center;
   width: 100%;
   height: 100%;
+  position: relative;
+}
+
+.pageContent{
+  position: absolute;
+  display: flex;
 }
 
 .pageContent .img-info {

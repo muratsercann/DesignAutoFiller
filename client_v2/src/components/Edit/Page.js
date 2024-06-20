@@ -11,6 +11,8 @@ export default function Page({
 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
+  const [scale, setScale] = useState(1.0);
+  const itemRef = useRef(null);
 
   const imageSettings = utils.getImageSettingsFromStorage();
 
@@ -100,13 +102,26 @@ export default function Page({
     };
   });
 
+  useLayoutEffect(() => {
+    if (itemRef === null) {
+      return;
+    }
+
+    const pageContentHeigt = itemRef.current.offsetHeight;
+    const pageContainerHeight = itemRef.current.offsetParent.offsetHeight;
+
+    if (pageContentHeigt > pageContainerHeight - 20) {
+      setScale(0.7);
+    }
+  });
+
   return (
     <div
       className="pageContent"
+      ref={itemRef}
       style={{
         width: `${imageSize}px`,
-        position: "relative",
-        display: "flex",
+        transform: `scale(${scale})`,
       }}
       onClick={handleSpaceClick}
     >
