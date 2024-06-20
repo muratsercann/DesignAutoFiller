@@ -44,21 +44,17 @@ export default function Edit() {
 
   return (
     <div className="edit">
-      <div style={{ height: "100%" }} className="row">
-        <div className="col" style={{}}>
-          <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
-        </div>
+      <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
 
-        <div className="pageContainer" onClick={handleSpaceClick}>
-          <Page
-            page={page}
-            selectedItem={selectedItem}
-            selectedItemElement={selectedItemElement}
-            setSelectedItemElement={setSelectedItemElement}
-            onItemChanged={onItemChanged}
-            handleSpaceClick={handleSpaceClick}
-          />
-        </div>
+      <div className="pageContainer" onClick={handleSpaceClick}>
+        <Page
+          page={page}
+          selectedItem={selectedItem}
+          selectedItemElement={selectedItemElement}
+          setSelectedItemElement={setSelectedItemElement}
+          onItemChanged={onItemChanged}
+          handleSpaceClick={handleSpaceClick}
+        />
       </div>
     </div>
   );
