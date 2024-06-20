@@ -119,6 +119,7 @@ export default function Page({
         onLoad={() => setIsImageLoaded(true)}
         onClick={handleImageClick}
       />
+      <span className="img-info">{`${imageSettings.customWidthCm}cm x ${imageSettings.customHeightCm}cm`}</span>
 
       {isImageLoaded &&
         page.items.map((item, index) => (

@@ -53,7 +53,7 @@ export default function PositionSelector({
 
   return (
     <div className="positionSelector" onClick={handleClick}>
-      <div className="set-position">Select Position</div>
+      <div className="set-position">Object</div>
 
       {show && (
         <>

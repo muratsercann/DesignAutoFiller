@@ -15,6 +15,10 @@ export default function Item({
   };
 
   useLayoutEffect(() => {
+    if (selectedItemElement !== itemRef.current) {
+      return;
+    }
+
     const rotationAngle = item?.rotationAngle || 0;
     const horAlign = item?.horizontalAlignment || "";
     const verAlign = item?.verticalAlignment || "";

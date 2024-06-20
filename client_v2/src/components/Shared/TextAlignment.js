@@ -10,9 +10,9 @@ import {
 export default function TextAlignment({ align, setAlign }) {
   const items = {
     left: 0,
-    center: 1,
-    right: 2,
-    justify: 3,
+    justify: 1,
+    center: 2,
+    right: 3,
   };
 
   const index = (items[align] + 1) % 4;
