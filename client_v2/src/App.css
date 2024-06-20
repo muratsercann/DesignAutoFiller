@@ -127,7 +127,11 @@ img {
   align-items: center;
 }
 
-
 select {
   cursor: pointer;
+}
+
+.disabled {
+  background-color: #ebecf0;
+  cursor: not-allowed;
 }

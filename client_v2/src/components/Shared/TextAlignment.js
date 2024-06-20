@@ -7,7 +7,7 @@ import {
   FaAlignJustify,
 } from "react-icons/fa6";
 
-export default function TextAlignment({ align, setAlign }) {
+export default function TextAlignment({ align, setAlign, disabled }) {
   const items = {
     left: 0,
     justify: 1,
@@ -19,6 +19,10 @@ export default function TextAlignment({ align, setAlign }) {
   const [selecteIndex, setNum] = useState(index);
 
   const handleClick = (index) => {
+    if (disabled) {
+      return;
+    }
+
     switch (index) {
       case items.left:
         setAlign("left");
@@ -46,7 +50,7 @@ export default function TextAlignment({ align, setAlign }) {
 
   return (
     <div
-      className="alignment"
+      className={`alignment ${disabled ? "disabled" : ""}`}
       onClick={() => {
         handleClick(selecteIndex);
       }}

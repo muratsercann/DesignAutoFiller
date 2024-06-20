@@ -2,11 +2,14 @@ import { SketchPicker } from "react-color";
 import "./styles/fontColorSelector.css";
 import { useEffect, useRef, useState } from "react";
 
-export default function FontColorSelector({ color, onChange }) {
+export default function FontColorSelector({ color, onChange, disabled }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
   const pickerRef = useRef(null);
 
   const handleClick = () => {
+    if (disabled) {
+      return;
+    }
     setShowColorPicker(true);
   };
 
@@ -30,7 +33,10 @@ export default function FontColorSelector({ color, onChange }) {
   return (
     <>
       <div style={{ position: "relative" }}>
-        <div className="custom-button" onClick={handleClick}>
+        <div
+          className={`custom-button ${disabled ? "disabled" : ""}`}
+          onClick={handleClick}
+        >
           <div className="letter">A</div>
           <div style={{ backgroundColor: color }} className="color"></div>
         </div>
@@ -41,7 +47,7 @@ export default function FontColorSelector({ color, onChange }) {
               position: "absolute",
               left: "0px",
               top: "100%",
-              zIndex:"99999"
+              zIndex: "99999",
             }}
           >
             <SketchPicker color={color} onChange={onChange} />

@@ -7,14 +7,14 @@
   border-radius: 5px;
   position: relative;
 }
-.set-position:hover {
+.set-position:not(.disabled):hover {
   background-color: #ebecf0;
   cursor: pointer;
 }
 
 .positionSelector {
   position: relative;
-
+  border-radius: 5px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -59,7 +59,7 @@
   padding-bottom: 5px;
   cursor: pointer;
 }
-.button:hover {
+.button:not(.disabled):hover {
   background-color: rgb(226, 226, 226);
   border-radius: 5px;
 }
