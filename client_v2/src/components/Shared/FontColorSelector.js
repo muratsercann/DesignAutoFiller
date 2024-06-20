@@ -1,5 +1,5 @@
 import { SketchPicker } from "react-color";
-import "./fontColorSelector.css";
+import "./styles/fontColorSelector.css";
 import { useEffect, useRef, useState } from "react";
 
 export default function FontColorSelector({ color, onChange }) {

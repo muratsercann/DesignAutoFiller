@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./textAlignment.css";
+import "./styles/textAlignment.css";
 import {
   FaAlignLeft,
   FaAlignCenter,

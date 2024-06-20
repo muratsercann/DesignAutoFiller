@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./positionSelector.css";
+import "./styles/positionSelector.css";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import Row from "react-bootstrap/esm/Row";

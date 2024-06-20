@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 
 import TextAlignment from "../Shared/TextAlignment";
 
-export default function TextPreferences({}) {
+export default function Ribbon({}) {
   const [color, setColor] = useState("#513841");
   const [alignment, setAlignment] = useState("Left");
   const [fontSize, setFontSize] = useState(12);
