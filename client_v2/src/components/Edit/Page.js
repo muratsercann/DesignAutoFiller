@@ -3,6 +3,7 @@ import Item from "./Item";
 import * as utils from "../../utils";
 export default function Page({
   page,
+  setPage,
   selectedItem,
   selectedItemElement,
   setSelectedItemElement,
@@ -93,11 +94,45 @@ export default function Page({
   };
 
   const handleAddText = () => {
-    alert("add text field..");
+    let newId = 1;
+
+    if (page.items.length > 0) {
+      const lastId = page.items[page.items.length - 1].id;
+      newId = lastId + 1;
+    }
+    const newTextField = {
+      id: newId,
+      pageId: page.id,
+      type: "text",
+      value: "Add Something Here",
+      rotationAngle: 0,
+      translateX: 0,
+      translateY: 0,
+      fontSize: 24,
+      fontColor: "black",
+      fontFamily: "",
+      width: 150,
+      horizontalAlignment: "Center",
+      verticalAlignment: "Center",
+      textAlign: "center",
+    };
+
+    setPage((prevPage) => ({
+      ...prevPage,
+      items: [...prevPage.items, newTextField],
+    }));
   };
 
   const handleDeleteText = () => {
-    alert("delete text field..");
+    if (selectedItem === null) {
+      return;
+    }
+    setPage((prevPage) => ({
+      ...prevPage,
+      items: prevPage.items.filter((item) => item.id !== selectedItem.id),
+    }));
+
+    setSelectedItemElement(null);
   };
 
   useEffect(() => {
@@ -156,13 +191,15 @@ export default function Page({
           >
             +
           </span>
-          <span
-            title="Delete"
-            className="remove-text-button"
-            onClick={handleDeleteText}
-          >
-            x
-          </span>
+          {selectedItem !== null && (
+            <span
+              title="Delete"
+              className="remove-text-button"
+              onClick={handleDeleteText}
+            >
+              x
+            </span>
+          )}
         </div>
 
         {isImageLoaded &&

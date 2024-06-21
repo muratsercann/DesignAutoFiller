@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Page from "./Page";
 import "./Edit.css";
 import Ribbon from "./Ribbon";
@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 export default function Edit() {
   const [page, setPage] = useState(utils.getPageInfo());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
-  
+
   const getSelectedItem = () => {
     let selected = null;
     if (selectedItemElement) {
@@ -31,9 +31,12 @@ export default function Edit() {
       ),
     };
 
-    utils.setSettingsToStorage(newData);
     setPage(newData);
   };
+
+  useEffect(() => {
+    utils.setSettingsToStorage(page);
+  }, [page]);
 
   const handleSpaceClick = (e) => {
     if (e.target !== e.currentTarget) {
@@ -57,6 +60,7 @@ export default function Edit() {
           setSelectedItemElement={setSelectedItemElement}
           onItemChanged={onItemChanged}
           handleSpaceClick={handleSpaceClick}
+          setPage={setPage}
         />
       </div>
       <Button
