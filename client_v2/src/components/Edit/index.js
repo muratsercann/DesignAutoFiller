@@ -3,6 +3,7 @@ import Page from "./Page";
 import "./Edit.css";
 import Ribbon from "./Ribbon";
 import * as utils from "../../utils.js";
+import Button from "react-bootstrap/Button";
 
 export default function Edit() {
   const [page, setPage] = useState(utils.getPageInfo());
@@ -42,10 +43,12 @@ export default function Edit() {
     setSelectedItemElement(null);
   };
 
+  const handleSaveContinue = () => {
+    alert("Save and continue..");
+  };
   return (
     <div className="edit">
       <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
-
       <div className="pageContainer" onClick={handleSpaceClick}>
         <Page
           page={page}
@@ -56,6 +59,13 @@ export default function Edit() {
           handleSpaceClick={handleSpaceClick}
         />
       </div>
+      <Button
+        className="save-continue-button"
+        variant="primary"
+        onClick={handleSaveContinue}
+      >
+        Save and Continue
+      </Button>{" "}
     </div>
   );
 }

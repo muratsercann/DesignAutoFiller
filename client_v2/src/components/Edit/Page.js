@@ -92,6 +92,14 @@ export default function Page({
     setDraggingItem(null);
   };
 
+  const handleAddText = () => {
+    alert("add text field..");
+  };
+
+  const handleDeleteText = () => {
+    alert("delete text field..");
+  };
+
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
@@ -114,42 +122,61 @@ export default function Page({
     // console.log(pageContentHeigt, pageContainerHeight);
 
     if (pageContentHeigt > pageContainerHeight - 20) {
-      const scale = (pageContainerHeight/pageContentHeigt).toFixed(2);
-      
+      const scale = (pageContainerHeight / pageContentHeigt).toFixed(2);
+
       setScale(scale - 0.05);
     }
   });
 
   return (
-    <div
-      className="pageContent"
-      ref={itemRef}
-      style={{
-        width: `${imageWidth}px`,
-        height: `${imageHeight}px`,
-        transform: `scale(${scale})`,
-      }}
-      onClick={handleSpaceClick}
-    >
-      <img
-        src={imageSettings.blobSrc}
-        className="img-fluid no-select"
-        alt=""
-        onLoad={() => setIsImageLoaded(true)}
-      />
-      <span className="img-info">{`${imageSettings.customWidthCm}cm x ${imageSettings.customHeightCm}cm`}</span>
+    <>
+      <div
+        className="pageContent"
+        ref={itemRef}
+        style={{
+          width: `${imageWidth}px`,
+          height: `${imageHeight}px`,
+          transform: `scale(${scale})`,
+        }}
+        onClick={handleSpaceClick}
+      >
+        <img
+          src={imageSettings.blobSrc}
+          className="img-fluid no-select"
+          alt=""
+          onLoad={() => setIsImageLoaded(true)}
+        />
+        <span className="img-info">{`${imageSettings.customWidthCm}cm x ${imageSettings.customHeightCm}cm`}</span>
 
-      {isImageLoaded &&
-        page.items.map((item, index) => (
-          <Item
-            item={item}
-            selectedItemElement={selectedItemElement}
-            setSelectedItemElement={setSelectedItemElement}
-            key={index}
-            onItemChanged={onItemChanged}
-            onMouseDown={(e) => handleMouseDown(item, e)}
-          />
-        ))}
-    </div>
+        <div title="" className="page-buttons-container">
+          <span
+            title="Add new text"
+            className="add-text-button"
+            onClick={handleAddText}
+          >
+            +
+          </span>
+          <span
+            title="Delete"
+            className="remove-text-button"
+            onClick={handleDeleteText}
+          >
+            x
+          </span>
+        </div>
+
+        {isImageLoaded &&
+          page.items.map((item, index) => (
+            <Item
+              item={item}
+              selectedItemElement={selectedItemElement}
+              setSelectedItemElement={setSelectedItemElement}
+              key={index}
+              onItemChanged={onItemChanged}
+              onMouseDown={(e) => handleMouseDown(item, e)}
+            />
+          ))}
+      </div>
+    </>
   );
 }
