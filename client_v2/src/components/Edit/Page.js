@@ -3,7 +3,8 @@ import Item from "./Item";
 import * as utils from "../../utils";
 export default function Page({
   page,
-  setPage,
+  handleAddNewText,
+  handleDeleteSelectedText,
   selectedItem,
   selectedItemElement,
   setSelectedItemElement,
@@ -22,7 +23,7 @@ export default function Page({
 
   const handleKeyDown = (e) => {
     if (selectedItem) {
-      const step = 5;
+      const step = 1;
       let newTranslateX;
       let newTranslateY;
 
@@ -93,48 +94,6 @@ export default function Page({
     setDraggingItem(null);
   };
 
-  const handleAddText = () => {
-    let newId = 1;
-
-    if (page.items.length > 0) {
-      const lastId = page.items[page.items.length - 1].id;
-      newId = lastId + 1;
-    }
-    const newTextField = {
-      id: newId,
-      pageId: page.id,
-      type: "text",
-      value: "Add Something Here",
-      rotationAngle: 0,
-      translateX: 0,
-      translateY: 0,
-      fontSize: 24,
-      fontColor: "black",
-      fontFamily: "",
-      width: 150,
-      horizontalAlignment: "Center",
-      verticalAlignment: "Center",
-      textAlign: "center",
-    };
-
-    setPage((prevPage) => ({
-      ...prevPage,
-      items: [...prevPage.items, newTextField],
-    }));
-  };
-
-  const handleDeleteText = () => {
-    if (selectedItem === null) {
-      return;
-    }
-    setPage((prevPage) => ({
-      ...prevPage,
-      items: prevPage.items.filter((item) => item.id !== selectedItem.id),
-    }));
-
-    setSelectedItemElement(null);
-  };
-
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
@@ -187,7 +146,7 @@ export default function Page({
           <span
             title="Add new text"
             className="add-text-button"
-            onClick={handleAddText}
+            onClick={handleAddNewText}
           >
             +
           </span>
@@ -195,7 +154,7 @@ export default function Page({
             <span
               title="Delete"
               className="remove-text-button"
-              onClick={handleDeleteText}
+              onClick={handleDeleteSelectedText}
             >
               x
             </span>

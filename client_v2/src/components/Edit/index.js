@@ -39,16 +39,76 @@ export default function Edit() {
   }, [page]);
 
   const handleSpaceClick = (e) => {
-    if (e.target !== e.currentTarget) {
+    if (e.target !== e.currentTarget || selectedItem === null) {
       return;
     }
 
+    unSelect();
+  };
+
+  const unSelect = () => {
+    if (selectedItem === null) {
+      return;
+    }
+    if (selectedItem.value === "") {
+      deleteItem(selectedItem.id);
+    }
     setSelectedItemElement(null);
   };
 
   const handleSaveContinue = () => {
     alert("Save and continue..");
   };
+
+  const addNewTextField = () => {
+    let newId = 1;
+
+    if (page.items.length > 0) {
+      const lastId = page.items[page.items.length - 1].id;
+      newId = lastId + 1;
+    }
+    const newTextField = {
+      id: newId,
+      pageId: page.id,
+      type: "text",
+      value: "Add Something Here",
+      rotationAngle: 0,
+      translateX: 0,
+      translateY: 0,
+      fontSize: 24,
+      fontColor: "black",
+      fontFamily: "",
+      width: 200,
+      horizontalAlignment: "",
+      verticalAlignment: "",
+      textAlign: "right",
+    };
+
+    setPage((prevPage) => ({
+      ...prevPage,
+      items: [...prevPage.items, newTextField],
+    }));
+  };
+
+  const deleteSelectedText = () => {
+    if (selectedItem === null) {
+      return;
+    }
+    deleteItem(selectedItem.id);
+
+    unSelect();
+  };
+
+  const deleteItem = (id) => {
+    if (id === null || id === 0) {
+      return;
+    }
+    setPage((prevPage) => ({
+      ...prevPage,
+      items: prevPage.items.filter((item) => item.id !== id),
+    }));
+  };
+
   return (
     <div className="edit">
       <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
@@ -61,6 +121,8 @@ export default function Edit() {
           onItemChanged={onItemChanged}
           handleSpaceClick={handleSpaceClick}
           setPage={setPage}
+          handleAddNewText={addNewTextField}
+          handleDeleteSelectedText={deleteSelectedText}
         />
       </div>
       <Button
