@@ -181,3 +181,7 @@ button.form-control {
 .matcher > * .row {
   align-items: center;
 }
+
+.hovered {
+  outline: purple solid 2px !important;
+}

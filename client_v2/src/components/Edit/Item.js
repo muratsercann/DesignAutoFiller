@@ -54,7 +54,7 @@ export default function Item({
     <div
       id={item.id}
       ref={itemRef}
-      className="no-select"
+      className="no-select item-text"
       style={{
         position: "absolute",
         fontSize: item.fontSize + "px",
@@ -66,7 +66,7 @@ export default function Item({
         transform: `translate(${item.translateX}px, ${item.translateY}px) rotate(${item.rotationAngle}deg)`,
         outline:
           Number(selectedItemElement?.id) === item.id
-            ? "2px dotted #a686ff"
+            ? "2px solid #a686ff"
             : "none",
       }}
       onClick={handleClick}

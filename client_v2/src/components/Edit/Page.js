@@ -94,14 +94,43 @@ export default function Page({
     setDraggingItem(null);
   };
 
+  const handleMouseOver = (e) => {
+    if (e.target?.classList?.length > 0) {
+      const classlist = Array.from(e.target.classList);
+      if (
+        Array.from(classlist).some((i) =>
+          ["pageContent", "item-text"].includes(i)
+        )
+      ) {
+        e.target.classList.add("hovered");
+      }
+    }
+  };
+
+  const handleMouseOut = (e) => {
+    if (e.target?.classList?.length > 0) {
+      const classlist = Array.from(e.target.classList);
+      if (
+        Array.from(classlist).some((i) =>
+          ["pageContent", "item-text"].includes(i)
+        )
+      ) {
+        e.target.classList.remove("hovered");
+      }
+    }
+  };
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
     document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mouseover", handleMouseOver);
+    document.addEventListener("mouseout", handleMouseOut);
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
       document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mouseover", handleMouseOver);
+      document.removeEventListener("mouseout", handleMouseOut);
     };
   });
 
