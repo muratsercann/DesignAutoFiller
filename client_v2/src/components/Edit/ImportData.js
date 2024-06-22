@@ -4,7 +4,6 @@ import { Table } from "react-bootstrap";
 import TextColMatcher from "./TextColMatcher";
 export default function ImportData({}) {
   const [data, setData] = useState(utils.getImportedDataFromStorage());
-  
 
   useEffect(() => {
     const handlePaste = (e) => {
@@ -32,17 +31,6 @@ export default function ImportData({}) {
     };
   }, []);
 
-  // const getMapping = () => {
-  //   const maps = utils.getTagColumnMappingFromStorage();
-  //   if (maps !== null) {
-  //     return maps;
-  //   } else {
-  //     const result = Object.fromEntries(texts.map((key) => [key, ""]));
-  //     console.log("result : ", result);
-  //     return result;
-  //   }
-  // };
-
   return (
     <div className="data-container">
       {data !== null && data.length > 0 && (
@@ -69,7 +57,7 @@ export default function ImportData({}) {
             </tbody>
           </Table>
 
-          <TextColMatcher/>
+          <TextColMatcher />
         </>
       )}
     </div>
