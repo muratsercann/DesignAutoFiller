@@ -5,9 +5,16 @@ export default function TextColMatcher({}) {
   const columns = utils.getColNamesFromStorage();
   const texts = utils.getTextValuesFromStorage();
 
-  const [mappings, setMappings] = useState(
-    Object.fromEntries(texts.map((key) => [key, ""]))
-  );
+  const [mappings, setMappings] = useState(() => {
+    const maps = utils.getTagColumnMappingFromStorage();
+    if (maps !== null) {
+      return maps;
+    } else {
+      const result = Object.fromEntries(texts.map((key) => [key, ""]));
+      console.log("result : ", result);
+      return result;
+    }
+  });
 
   const handleChanges = (text, e) => {
     console.log(text + ":" + e.target.value);
@@ -38,11 +45,14 @@ export default function TextColMatcher({}) {
                   onChange={(e) => handleChanges(text, e)}
                 >
                   <option value={""}>none</option>
-                  {columns.map((col, index) => (
-                    <option value={col} key={index}>
-                      {col}
-                    </option>
-                  ))}
+                  {columns.map((col, index) => {
+                    const selected = mappings[text] === col;
+                    return (
+                      <option selected={selected} value={col} key={index}>
+                        {col}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>

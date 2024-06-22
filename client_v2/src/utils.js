@@ -122,7 +122,7 @@ export function getColNamesFromStorage() {
   }
 }
 
-export function getTagColumnMappingToStorage() {
+export function getTagColumnMappingFromStorage() {
   return JSON.parse(localStorage.getItem(storageKeys.tagColumnMapping));
 }
 

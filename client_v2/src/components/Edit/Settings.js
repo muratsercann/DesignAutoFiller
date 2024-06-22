@@ -3,25 +3,26 @@ import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import Edit from ".";
 import ImportData from "./ImportData";
+import Preview from "../Preview";
+import { useState } from "react";
 
 export default function Settings() {
+  const [activePage, setActivePage] = useState("edit");
+
+  const pages = {
+    edit: <Edit />,
+    data: <ImportData />,
+    preview: <Preview />,
+  };
+
   return (
     <>
-      <Tabs
-        defaultActiveKey="home"
-        id="uncontrolled-tab-example"
-        className="mb-3"
-      >
-        <Tab eventKey="home" title="Scheme">
-          <Edit />
-        </Tab>
-        <Tab eventKey="profile" title="Data">
-          <ImportData />
-        </Tab>
-        <Tab eventKey="contact" title="Preview">
-          Tab content for Contact
-        </Tab>
-      </Tabs>
+      <div className="nav">
+        <button onClick={() => setActivePage("edit")}>Edit</button>
+        <button onClick={() => setActivePage("data")}>Data</button>
+        <button onClick={() => setActivePage("preview")}>Preview</button>
+      </div>
+      {pages[activePage]}
     </>
   );
 }

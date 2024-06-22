@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import * as utils from "../../utils";
 import { Table } from "react-bootstrap";
-import TagFieldMatcher from "./TagFieldMatcher";
 import TextColMatcher from "./TextColMatcher";
 export default function ImportData({}) {
   const [data, setData] = useState(utils.getImportedDataFromStorage());
+  
 
   useEffect(() => {
     const handlePaste = (e) => {
@@ -20,17 +20,28 @@ export default function ImportData({}) {
         return formattedRow;
       });
 
-      utils.setImportedDataToStorage(data);
+      utils.setImportedDataToStorage(formattedData);
+      utils.clearTagColumnMappingFromStorage();
       setData(formattedData);
       e.preventDefault();
     };
 
     document.addEventListener("paste", handlePaste);
-
     return () => {
       document.removeEventListener("paste", handlePaste);
     };
   }, []);
+
+  // const getMapping = () => {
+  //   const maps = utils.getTagColumnMappingFromStorage();
+  //   if (maps !== null) {
+  //     return maps;
+  //   } else {
+  //     const result = Object.fromEntries(texts.map((key) => [key, ""]));
+  //     console.log("result : ", result);
+  //     return result;
+  //   }
+  // };
 
   return (
     <div className="data-container">
@@ -58,7 +69,7 @@ export default function ImportData({}) {
             </tbody>
           </Table>
 
-          <TextColMatcher />
+          <TextColMatcher/>
         </>
       )}
     </div>
