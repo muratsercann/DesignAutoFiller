@@ -115,3 +115,69 @@ button.form-control {
   bottom: 10px;
   right: 10px;
 }
+
+.paste-field {
+  width: 100%;
+  height: 150px;
+  background-color: #b6b4b4;
+  color: #fffefe;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.paste-container {
+  width: 70%;
+  height: 250px;
+  background-color: aliceblue;
+  border-radius: 5px;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+}
+.paste-container:hover {
+  background-color: rgb(98, 157, 209);
+  color: white;
+}
+
+.paste-container > span {
+  position: absolute;
+  left: calc(50% - 37px);
+  top: calc(50% - 12px);
+}
+
+.data-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.data-container > table {
+  width: 70%;
+  max-height: 300px;
+}
+
+/*TextColMatcher*/
+.matcher {
+  width: 400px !important;
+  /* background-color: gray; */
+  display: flex;
+  margin-left: 20px;
+}
+
+.matcher > * select {
+  width: 130px;
+}
+
+.matcher .container {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: fit-content;
+  padding: 20px;
+}
+
+.matcher > * .row {
+  align-items: center;
+}

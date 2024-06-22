@@ -106,7 +106,7 @@ export default function Page({
   });
 
   useLayoutEffect(() => {
-    if (itemRef === null) {
+    if (itemRef === null || itemRef.current.offsetParent === null) {
       return;
     }
 
@@ -135,7 +135,7 @@ export default function Page({
         onClick={handleSpaceClick}
       >
         <img
-          src={imageSettings.blobSrc}
+          src={imageSettings.url}
           className="img-fluid no-select"
           alt=""
           onLoad={() => setIsImageLoaded(true)}

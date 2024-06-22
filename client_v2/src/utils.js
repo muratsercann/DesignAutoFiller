@@ -98,8 +98,28 @@ export function getSettingsFromStorage() {
   return JSON.parse(localStorage.getItem(storageKeys.userSettings));
 }
 
+export function getTextValuesFromStorage() {
+  const settings = getSettingsFromStorage();
+  if (settings !== null && settings.items.length > 0) {
+    const textValues = settings.items.map((item) => item.value);
+    return textValues;
+  } else {
+    return [];
+  }
+}
+
 export function getImportedDataFromStorage() {
   return JSON.parse(localStorage.getItem(storageKeys.importedData));
+}
+
+export function getColNamesFromStorage() {
+  const data = getImportedDataFromStorage();
+  if (data !== null && data.length > 0) {
+    const cols = Object.keys(data[0]);
+    return cols;
+  } else {
+    return [];
+  }
 }
 
 export function getTagColumnMappingToStorage() {
