@@ -11,11 +11,12 @@ import MultiplyImage from "./components/Samples/MultiplyImage";
 import List from "./components/Samples/List";
 
 import * as utils from "./components/Edit/utils";
+import TextColMatcher from "./components/Samples/TextColMatcher";
 
 function App() {
   //  utils.clearUserSettingsFromStorage();
   // utils.clearImportedDataFromStorage();
-  return <Edit />;
+  return <TextColMatcher />;
 }
 
 export default App;

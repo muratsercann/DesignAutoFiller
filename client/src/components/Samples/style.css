@@ -1,0 +1,10 @@
+.matcher {
+  width: 400px !important;
+  background-color: gray;
+  padding: 20px;
+  display: flex;
+}
+
+.matcher > * select {
+  width: 130px;
+}

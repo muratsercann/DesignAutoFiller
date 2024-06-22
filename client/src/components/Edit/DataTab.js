@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Button from "react-bootstrap/esm/Button";
-import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import * as utils from "./utils";
@@ -51,9 +50,7 @@ export default function DataTab({
 
   let columns = [];
   if (importedData && importedData.length > 0) {
-    for (let i = 1; i <= importedData[0].length; i++) {
-      columns.push("Field_" + i);
-    }
+    Object.keys(importedData[0]);
   }
 
   return (
@@ -64,12 +61,17 @@ export default function DataTab({
 
       {importedData && importedData.length > 0 && (
         <div style={{ height: "250px", overflow: "auto" }}>
-          <Table striped bordered hover style={{ fontSize: "12px" }}>
+          <Table
+            striped
+            bordered
+            hover
+            style={{ height: "300px", fontSize: "12px" }}
+          >
             <thead>
               <tr>
                 <th key={0}>No</th>
-                {Array.from({ length: importedData[0].length }, (_, index) => (
-                  <th key={index}>Field_{index + 1}</th>
+                {Object.keys(importedData[0]).map((colName, index) => (
+                  <th key={index}>{colName}</th>
                 ))}
               </tr>
             </thead>
@@ -77,12 +79,10 @@ export default function DataTab({
               {importedData.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   <td>{rowIndex + 1}</td>
-                  {Array.from(
-                    { length: importedData[0].length },
-                    (_, colIndex) => (
-                      <td key={colIndex}>{row[colIndex] || ""}</td>
-                    )
-                  )}
+
+                  {Object.keys(importedData[0]).map((key, index) => (
+                    <td key={index}>{row[key] || ""}</td>
+                  ))}
                 </tr>
               ))}
             </tbody>

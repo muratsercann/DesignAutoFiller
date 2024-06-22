@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 import * as utils from "./utils";
+import { Table } from "react-bootstrap";
 export default function ImportDataModal({ isOpen, setShow, setImportedData }) {
-  const [textAreaValue, setTextAreaValue] = useState("");
+  const pasteAreaRef = useRef(null);
+  const [data, setData] = useState([]);
 
   const onSaveClick = () => {
-    if (!textAreaValue || textAreaValue === "") return;
+    if (data === null || data.length === 0) return;
 
-    const rows = textAreaValue.split("\n").map((row) => row.split("\t"));
-    utils.setImportedDataToStorage(rows);
-    setImportedData(rows);
+    utils.setImportedDataToStorage(data);
+    setImportedData(data);
     setShow(false);
   };
 
@@ -19,10 +19,35 @@ export default function ImportDataModal({ isOpen, setShow, setImportedData }) {
     setShow(false);
   };
 
-  const handleTextAriaChange = (e) => {
-    const value = e.target.value;
-    setTextAreaValue(value);
-  };
+  useEffect(() => {
+    const handlePaste = (e) => {
+      const pasteData = e.clipboardData.getData("Text");
+      const rows = pasteData.split("\n").filter((row) => row.trim() !== "");
+
+      const formattedData = rows.map((row) => {
+        const columns = row.split("\t");
+        const formattedRow = {};
+        columns.forEach((col, index) => {
+          formattedRow[`Col${index + 1}`] = col;
+        });
+        return formattedRow;
+      });
+
+      setData(formattedData);
+      e.preventDefault();
+    };
+
+    const pasteArea = pasteAreaRef.current;
+    if (pasteArea) {
+      pasteArea.addEventListener("paste", handlePaste);
+    }
+
+    return () => {
+      if (pasteArea) {
+        pasteArea.removeEventListener("paste", handlePaste);
+      }
+    };
+  });
 
   return (
     <>
@@ -30,20 +55,41 @@ export default function ImportDataModal({ isOpen, setShow, setImportedData }) {
         <Modal.Header closeButton>
           <Modal.Title>Copy&Paste Your Data</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group
-              className="mb-3"
-              controlId="imortDataModal.ControlTextarea1"
+        <Modal.Body style={{ height: "300px", overflow: "scroll" }}>
+          {data.length === 0 && (
+            <div ref={pasteAreaRef} className="paste-container">
+              {/* <span>Paste Here</span> */}
+            </div>
+          )}
+
+          {data !== null && data.length > 0 && (
+            <Table
+              striped
+              bordered
+              hover
+              style={{ height: "300px", fontSize: "12px" }}
             >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={6}
-                onChange={handleTextAriaChange}
-              />
-            </Form.Group>
-          </Form>
+              <thead>
+                <tr>
+                  <th key={0}>No</th>
+                  {Object.keys(data[0]).map((colName, index) => (
+                    <th key={index}>{colName}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    <td>{rowIndex + 1}</td>
+
+                    {Object.keys(data[0]).map((key, index) => (
+                      <td key={index}>{row[key] || ""}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
