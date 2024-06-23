@@ -1,11 +1,12 @@
 .alignment {
   border-radius: 5px;
-  width: 35px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
   display: flex;
   justify-items: center;
   justify-content: center;
   align-items: center;
+  font-size: medium;
 }
 
 
