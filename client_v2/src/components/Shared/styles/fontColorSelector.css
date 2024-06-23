@@ -1,6 +1,6 @@
 .custom-button {
-  width: 28px;
-  height: 28px;
+  width: 35px;
+  height: 35px;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -15,14 +15,15 @@
 
 .custom-button > .letter {
   color: black;
-  font-size: smaller;
+  font-size: 24px;
   font-family: sans-serif;
 }
 
 .custom-button > .color {
-  width: 17px;
-  height: 5px;
+  width: 25px;
+  height: 6px;
   border-radius: 7px;
+  /* background-color: blue; */
 }
 
 .custom-button:not(.disabled):hover {
