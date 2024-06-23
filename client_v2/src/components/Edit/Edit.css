@@ -9,12 +9,10 @@
   justify-content: start;
   align-items: center;
   flex-direction: row;
-  font-size: smaller;
 }
 
 .ribbon > * {
   margin-left: 9px;
-  font-size: smaller !important;
 }
 
 input.form-control {
