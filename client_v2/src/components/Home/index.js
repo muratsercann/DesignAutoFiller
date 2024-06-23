@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <div className="home">
-      <div className="header">
+      <div className="home-header">
         <h1>Welcome</h1>
 
         <span>

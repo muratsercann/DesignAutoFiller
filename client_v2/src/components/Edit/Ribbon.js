@@ -76,18 +76,14 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
     setRotationAngle(selectedItem.rotationAngle);
   }, [selectedItem]);
 
-  const isDisabled = selectedItem === null || selectedItem === undefined;
-
   return (
     <>
       <div className="ribbon">
-        {(
+        {selectedItem && (
           <>
             <Form.Select
               aria-label="Default select example"
               style={{ width: "150px" }}
-              className={isDisabled ? "disabled" : ""}
-              disabled={isDisabled}
             >
               <option value="1">Calibri</option>
               <option value="2">Open Sans</option>
@@ -99,8 +95,6 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
               style={{ width: "75px" }}
               value={selectedItem?.fontSize || 12}
               onChange={handleFontSizeChange}
-              disabled={isDisabled}
-              className={isDisabled ? "disabled" : ""}
             >
               {fontSizes.map((item, index) => {
                 return (
@@ -114,21 +108,17 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
             <FontColorSelector
               color={selectedItem?.fontColor || "black"}
               onChange={handleColorChange}
-              disabled={isDisabled}
             />
 
             <TextAlignment
               align={selectedItem?.textAlign || "left"}
               setAlign={handleTextAlignment}
-              disabled={isDisabled}
             />
 
             <Form.Control
               type="text"
               value={selectedItem?.value || ""}
               onChange={handleTextChange}
-              disabled={isDisabled}
-              className={isDisabled ? "disabled" : ""}
             />
             <span>Width :</span>
             <Form.Control
@@ -137,8 +127,6 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
               onChange={handleItemWidthChange}
               style={{ width: "74px" }}
               aria-label="Width(px)"
-              disabled={isDisabled}
-              className={isDisabled ? "disabled" : ""}
             />
 
             <span>Rotate :</span>
@@ -149,8 +137,6 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
               style={{ width: "74px" }}
               aria-label="rotationAngle"
               as={"input"}
-              disabled={isDisabled}
-              className={isDisabled ? "disabled" : ""}
             />
 
             <PositionSelector
@@ -158,7 +144,6 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
               horizontalAlignment={selectedItem?.horizontalAlignment || "Left"}
               setVerticalAlignment={handleVerticalAlignmentChange}
               setHorizontalAlignment={handleHorizontalAlignmentChange}
-              disabled={isDisabled}
             />
           </>
         )}

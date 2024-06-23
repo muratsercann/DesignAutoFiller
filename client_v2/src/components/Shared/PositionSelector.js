@@ -18,13 +18,11 @@ export default function PositionSelector({
   verticalAlignment,
   setVerticalAlignment,
   setHorizontalAlignment,
-  disabled,
 }) {
   const [show, setShow] = useState(false);
   const refPosition = useRef(null);
 
   const handleClick = () => {
-    if (disabled) return;
     setShow(true);
   };
 
@@ -55,10 +53,10 @@ export default function PositionSelector({
 
   return (
     <div
-      className={`positionSelector ${disabled ? "disabled" : ""}`}
+      className="positionSelector"
       onClick={handleClick}
     >
-      <div className={`set-position ${disabled ? "disabled" : ""}`}>Object</div>
+      <div className="set-position">Object</div>
 
       {show && (
         <>
