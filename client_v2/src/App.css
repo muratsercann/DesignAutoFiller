@@ -43,7 +43,7 @@
 
 /* msercan*/
 
-*{
+* {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
@@ -142,3 +142,26 @@ select {
   background-color: #ebecf0;
   cursor: not-allowed;
 }
+
+.spinner-container {
+  width: 100%;
+  height: 100%;
+  background-color: #bdbdbd6e;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body > .spinner-container {
+  position: absolute;
+}
+
+/* button {
+  cursor: pointer !important;
+}
+button:hover {
+  cursor: pointer !important;
+} */

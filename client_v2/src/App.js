@@ -13,6 +13,7 @@ import Ribbon from "./components/Edit/Ribbon";
 import Settings from "./components/Edit/Settings";
 import ImportData from "./components/Edit/ImportData";
 import Preview from "./components/Preview";
+import TextColMatcher from "./components/Edit/TextColMatcher";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
           <Route exact path="/ribbon" element={<Ribbon />} />
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/data" element={<ImportData />} />
-          <Route exact path="/preview" element={<Preview/>} />
+          <Route exact path="/match" element={<TextColMatcher />} />
+          <Route exact path="/preview" element={<Preview />} />
         </Routes>
       </BrowserRouter>
     </>

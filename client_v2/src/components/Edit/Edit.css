@@ -128,35 +128,42 @@ button.form-control {
   border-radius: 5px;
 }
 
-.paste-container {
-  width: 70%;
-  height: 250px;
-  background-color: aliceblue;
-  border-radius: 5px;
-  display: flex;
-  justify-items: center;
-  justify-content: center;
-  align-items: center;
-}
-.paste-container:hover {
-  background-color: rgb(98, 157, 209);
-  color: white;
+.paste-body {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
-.paste-container > span {
-  position: absolute;
-  left: calc(50% - 37px);
-  top: calc(50% - 12px);
+.paste-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  color: #80808063;
+  outline: 2px dashed #0000005e;
+}
+
+.paste-container:hover {
+  outline: 2px solid #80808000;
+  color: grey;
+  box-shadow: 0px 5px 12px 10px #80808040;
+  outline-style: solid;
 }
 
 .data-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
+  align-items: end;
+  padding: 20px;
+  gap: 15px;
 }
+
 .data-container > table {
-  width: 70%;
-  max-height: 300px;
+  overflow: auto;
 }
 
 /*TextColMatcher*/
