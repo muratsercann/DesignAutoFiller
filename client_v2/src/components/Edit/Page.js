@@ -152,7 +152,7 @@ export default function Page({
   });
 
   return (
-    <>
+    <div className="pageSubContainer">
       <div
         className="pageContent"
         ref={itemRef}
@@ -202,6 +202,6 @@ export default function Page({
             />
           ))}
       </div>
-    </>
+    </div>
   );
 }
