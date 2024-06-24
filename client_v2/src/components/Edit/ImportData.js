@@ -48,15 +48,15 @@ export default function ImportData({}) {
           setShow={setIsModalOpen}
         />
         <div>
-          <Button
-            className="mx-3"
-            variant="secondary"
-            onClick={handleImportClick}
-          >
+          <Button variant="secondary" onClick={handleImportClick}>
             Import
           </Button>
           {data !== null && data.length > 0 && (
-            <Button variant="success" onClick={handleSaveClick}>
+            <Button
+              className="mx-3"
+              variant="success"
+              onClick={handleSaveClick}
+            >
               Save
             </Button>
           )}
