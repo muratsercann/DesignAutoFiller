@@ -4,11 +4,12 @@ import "./Edit.css";
 import Ribbon from "./Ribbon";
 import * as utils from "../../utils.js";
 import Button from "react-bootstrap/Button";
+import Range from "../Shared/Range.js";
 
 export default function Edit() {
   const [page, setPage] = useState(utils.getPageInfo());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
-
+  const [scale, setScale] = useState(1.0);
   const getSelectedItem = () => {
     let selected = null;
     if (selectedItemElement) {
@@ -114,6 +115,8 @@ export default function Edit() {
       <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
       <div className="pageContainer" onClick={handleSpaceClick}>
         <Page
+          scale={scale}
+          setScale={setScale}
           page={page}
           selectedItem={selectedItem}
           selectedItemElement={selectedItemElement}
@@ -125,13 +128,17 @@ export default function Edit() {
           handleDeleteSelectedText={deleteSelectedText}
         />
       </div>
-      <Button
+      {/* <Button
         className="save-continue-button"
         variant="primary"
         onClick={handleSaveContinue}
       >
         Save and Continue
-      </Button>
+      </Button> */}
+
+      <div className="edit-footer">
+        <Range scale={scale} setScale={setScale} />
+      </div>
     </div>
   );
 }

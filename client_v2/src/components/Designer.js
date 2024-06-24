@@ -17,14 +17,14 @@ export default function Designer({}) {
   const children = pages[activePage];
 
   return (
-    <div class="designer-container">
-      <div class="header">
+    <div className="designer-container">
+      <div className="header">
         <h2>Designify</h2>
       </div>
-      <div class="designer-body">
-        <div class="side-menu">
+      <div className="designer-body">
+        <div className="side-menu">
           <div
-            class="menu-item"
+            className="menu-item"
             onClick={() => {
               setActivePage("home");
             }}
@@ -32,7 +32,7 @@ export default function Designer({}) {
             Home Page
           </div>
           <div
-            class="menu-item"
+            className="menu-item"
             onClick={() => {
               setActivePage("edit");
             }}
@@ -40,7 +40,7 @@ export default function Designer({}) {
             Your Templates
           </div>
           <div
-            class="menu-item"
+            className="menu-item"
             onClick={() => {
               setActivePage("data");
             }}
@@ -49,7 +49,7 @@ export default function Designer({}) {
           </div>
 
           <div
-            class="menu-item"
+            className="menu-item"
             onClick={() => {
               setActivePage("preview");
             }}
@@ -57,7 +57,7 @@ export default function Designer({}) {
             Preview
           </div>
         </div>
-        <div class="component-container">{children}</div>
+        <div className="component-container">{children}</div>
       </div>
     </div>
   );

@@ -12,11 +12,12 @@ import List from "./components/Samples/List";
 
 import * as utils from "./components/Edit/utils";
 import TextColMatcher from "./components/Samples/TextColMatcher";
+import Range from "./components/Samples/Range";
 
 function App() {
   //  utils.clearUserSettingsFromStorage();
   // utils.clearImportedDataFromStorage();
-  return <TextColMatcher />;
+  return <Range />;
 }
 
 export default App;

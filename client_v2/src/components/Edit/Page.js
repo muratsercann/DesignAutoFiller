@@ -10,10 +10,12 @@ export default function Page({
   setSelectedItemElement,
   onItemChanged,
   handleSpaceClick,
+  scale,
+  setScale,
 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
-  const [scale, setScale] = useState(1.0);
+  // const [scale, setScale] = useState(1.0);
   const itemRef = useRef(null);
 
   const imageSettings = utils.getImageSettingsFromStorage();
@@ -146,7 +148,6 @@ export default function Page({
 
     if (pageContentHeigt > pageContainerHeight - 20) {
       const scale = (pageContainerHeight / pageContentHeigt).toFixed(2);
-
       setScale(scale - 0.05);
     }
   });

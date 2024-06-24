@@ -1,5 +1,6 @@
 import "./style.css";
 export default function TextColMatcher({}) {
+    
   const columns = ["col1", "col2", "col3"];
   const texts = ["Murat", "sercan", "54165695"];
   let mappings = texts.map((text)=> {
