@@ -3,10 +3,17 @@ import FontColorSelector from "../Shared/FontColorSelector";
 import PositionSelector from "../Shared/PositionSelector";
 import "./Edit.css";
 import Form from "react-bootstrap/Form";
+import * as utils from "../../utils";
 
 import TextAlignment from "../Shared/TextAlignment";
 
-export default function Ribbon({ selectedItem, onItemChanged }) {
+export default function Ribbon({
+  selectedItemElement,
+  selectedItem,
+  onItemChanged,
+  imageSettings,
+  scale,
+}) {
   const [rotationAngle, setRotationAngle] = useState(
     selectedItem?.rotationAngle || 0
   );
@@ -20,11 +27,24 @@ export default function Ribbon({ selectedItem, onItemChanged }) {
   };
 
   const handleHorizontalAlignmentChange = (value) => {
-    onItemChanged({ horizontalAlignment: value });
+    const newTranslateX = utils.calculateTranslateX(
+      selectedItemElement,
+      selectedItem.rotationAngle,
+      value,
+      selectedItem.translateX
+    );
+    onItemChanged({ horizontalAlignment: value, translateX: newTranslateX/scale });
   };
 
   const handleVerticalAlignmentChange = (value) => {
-    onItemChanged({ verticalAlignment: value });
+    const newTranslateY = utils.calculateTranslateY(
+      selectedItemElement,
+      selectedItem.rotationAngle,
+      value,
+      selectedItem.translateY
+    );
+
+    onItemChanged({ verticalAlignment: value, translateY: newTranslateY/scale });
   };
 
   const handleTextAlignment = (value) => {

@@ -15,7 +15,7 @@ export default function Range({ scale, setScale }) {
   return (
     <>
       <div style={{ width: "450px", display: "flex", gap: "20px" }}>
-        <Form.Range min={10} max={200} value={value} onChange={handleRangeChange} />
+        <Form.Range min={10} max={500} value={value} onChange={handleRangeChange} />
         <span style={{ width: "100px", fontWeight: "bold" }}>{value} %</span>
       </div>
     </>

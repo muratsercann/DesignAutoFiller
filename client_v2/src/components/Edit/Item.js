@@ -7,48 +7,13 @@ export default function Item({
   setSelectedItemElement,
   onItemChanged,
   onMouseDown,
+  scale,
 }) {
   const itemRef = useRef(null);
 
   const handleClick = (e) => {
     setSelectedItemElement(e.target);
   };
-
-  useLayoutEffect(() => {
-    if (selectedItemElement !== itemRef.current) {
-      return;
-    }
-
-    const rotationAngle = item?.rotationAngle || 0;
-    const horAlign = item?.horizontalAlignment || "";
-    const verAlign = item?.verticalAlignment || "";
-    const translateX = item?.translateX || 0;
-    const translateY = item?.translateY || 0;
-
-    const newTranslateX = utils.calculateTranslateX(
-      itemRef.current,
-      rotationAngle,
-      horAlign,
-      translateX
-    );
-
-    const newTranslateY = utils.calculateTranslateY(
-      itemRef.current,
-      rotationAngle,
-      verAlign,
-      translateY
-    );
-
-    if (
-      newTranslateX !== item.translateX ||
-      newTranslateY !== item.translateY
-    ) {
-      onItemChanged({
-        translateX: newTranslateX,
-        translateY: newTranslateY,
-      });
-    }
-  }, [item, onItemChanged]);
 
   return (
     <div
@@ -57,13 +22,15 @@ export default function Item({
       className="no-select item-text"
       style={{
         position: "absolute",
-        fontSize: item.fontSize + "px",
-        width: item?.width + "px",
-        height: item?.height,
+        cursor: "inherit",
+        fontSize: item.fontSize * scale + "px",
+        width: item?.width * scale + "px",
+        height: item?.height * scale,
         color: item.fontColor,
         textAlign: item.textAlign,
-        cursor: "inherit",
-        transform: `translate(${item.translateX}px, ${item.translateY}px) rotate(${item.rotationAngle}deg)`,
+        transform: `translate(${item.translateX * scale}px, ${
+          item.translateY * scale
+        }px) rotate(${item.rotationAngle}deg)`,
         outline:
           Number(selectedItemElement?.id) === item.id
             ? "2px solid #a686ff"

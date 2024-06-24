@@ -12,13 +12,12 @@ export default function Page({
   handleSpaceClick,
   scale,
   setScale,
+  imageSettings,
 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
   // const [scale, setScale] = useState(1.0);
   const itemRef = useRef(null);
-
-  const imageSettings = utils.getImageSettingsFromStorage();
 
   const imageWidth = utils.cmToPixel(imageSettings.customWidthCm);
   const imageHeight = utils.cmToPixel(imageSettings.customHeightCm);
@@ -71,8 +70,8 @@ export default function Page({
       item,
       startX: e.clientX,
       startY: e.clientY,
-      initialTranslateX: item.translateX,
-      initialTranslateY: item.translateY,
+      initialTranslateX: item.translateX * scale,
+      initialTranslateY: item.translateY * scale,
     });
   };
 
@@ -85,8 +84,8 @@ export default function Page({
     const newTranslateY = initialTranslateY + (e.clientY - startY);
 
     onItemChanged({
-      translateX: newTranslateX,
-      translateY: newTranslateY,
+      translateX: newTranslateX / scale,
+      translateY: newTranslateY / scale,
       horizontalAlignment: "",
       verticalAlignment: "",
     });
@@ -147,8 +146,8 @@ export default function Page({
     // console.log(pageContentHeigt, pageContainerHeight);
 
     if (pageContentHeigt > pageContainerHeight - 20) {
-      const scale = (pageContainerHeight / pageContentHeigt).toFixed(2);
-      setScale(scale - 0.05);
+      // const scale = (pageContainerHeight / pageContentHeigt).toFixed(2);
+      // setScale(scale - 0.05);
     }
   });
 
@@ -158,9 +157,8 @@ export default function Page({
         className="pageContent"
         ref={itemRef}
         style={{
-          width: `${imageWidth}px`,
-          height: `${imageHeight}px`,
-          transform: `scale(${scale})`,
+          width: `${imageWidth * scale}px`,
+          height: `${imageHeight * scale}px`,
         }}
         onClick={handleSpaceClick}
       >
@@ -194,6 +192,7 @@ export default function Page({
         {isImageLoaded &&
           page.items.map((item, index) => (
             <Item
+              scale={scale}
               item={item}
               selectedItemElement={selectedItemElement}
               setSelectedItemElement={setSelectedItemElement}

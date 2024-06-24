@@ -19,7 +19,7 @@ export default function Edit() {
     }
     return selected;
   };
-
+  const imageSettings = utils.getImageSettingsFromStorage();
   const selectedItem = getSelectedItem();
 
   const onItemChanged = (newItem) => {
@@ -112,7 +112,13 @@ export default function Edit() {
 
   return (
     <div className="edit">
-      <Ribbon selectedItem={selectedItem} onItemChanged={onItemChanged} />
+      <Ribbon
+        selectedItemElement={selectedItemElement}
+        selectedItem={selectedItem}
+        onItemChanged={onItemChanged}
+        imageSettings={imageSettings}
+        scale={scale}
+      />
       <div className="pageContainer" onClick={handleSpaceClick}>
         <Page
           scale={scale}
@@ -126,6 +132,7 @@ export default function Edit() {
           setPage={setPage}
           handleAddNewText={addNewTextField}
           handleDeleteSelectedText={deleteSelectedText}
+          imageSettings={imageSettings}
         />
       </div>
       {/* <Button

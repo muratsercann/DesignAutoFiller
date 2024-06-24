@@ -9,7 +9,7 @@
   padding-top: 20px;
 }
 
-.pageContent {
+.preview-container > .pageContent {
   display: flex;
   position: relative !important;
 }
