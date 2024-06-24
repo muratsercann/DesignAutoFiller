@@ -5,7 +5,7 @@ export default function Item({ item, mappings, datarow }) {
 
   const column = mappings[item.value];
 
-  if (column !== "") {
+  if (column !== undefined && column !== "") {
     value = datarow[column];
   }
 

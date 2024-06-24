@@ -201,7 +201,6 @@ button:hover {
   justify-items: center;
   flex-direction: row;
   align-items: flex-start;
-  gap: 1rem;
 }
 
 .side-menu {
@@ -214,6 +213,7 @@ button:hover {
   padding: 30px;
   font-size: 15px;
   gap: 0.75rem;
+  box-shadow: 0px 20px 13px 0px #b2adad8f;
 }
 
 .menu-item {

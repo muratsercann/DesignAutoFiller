@@ -1,26 +1,23 @@
 .home {
-  /* background-color: #0177a9; */
-  /* background: linear-gradient(135deg, #7301a9, #873838); */
   width: 100%;
-  height: 100%;
   position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  align-items: center;
   flex-direction: column;
   color: #525252;
+  gap: 2rem;
 }
 
 .home-header {
   width: 100%;
-  height: 50%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   flex-direction: column;
   font-weight: 200;
   font-size: 18px;
+  margin-top: 5rem;
 }
 
 .home-header > h1 {
@@ -35,10 +32,8 @@
 
 .home .home-content {
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  margin-top: 50px;
 }

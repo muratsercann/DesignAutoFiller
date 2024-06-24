@@ -9,8 +9,6 @@
   flex-direction: row;
   gap: 0.5rem;
   background-color: #e6e6e6;
-  box-shadow: -2px 5px 8px 2px #b7b7b733;
-  border-radius: 7px;
 
 }
 
@@ -164,9 +162,6 @@ button.form-control {
   gap: 15px;
 }
 
-.data-container > table {
-  overflow: auto;
-}
 
 /*TextColMatcher*/
 .matcher {
