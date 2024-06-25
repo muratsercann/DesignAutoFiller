@@ -39,6 +39,25 @@ export default function Edit() {
     utils.setSettingsToStorage(page);
   }, [page]);
 
+  useEffect(() => {
+    const handleWheel = (event) => {
+      if (event.ctrlKey) {
+        event.preventDefault(); // Varsayılan zoom davranışını engelle
+        if (event.deltaY < 0) {
+          setScale(scale + 0.15);
+        } else {
+          setScale(scale - 0.15);
+        }
+      }
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  });
+
   const handleSpaceClick = (e) => {
     if (e.target !== e.currentTarget || selectedItem === null) {
       return;
