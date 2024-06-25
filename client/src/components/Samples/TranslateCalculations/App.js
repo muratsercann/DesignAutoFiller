@@ -41,6 +41,7 @@ export default function App() {
   const handleWidthChange = (e) => {
     console.log("e.target.value : ", e.target.value);
     setInputWidthValue(Number(e.target.value));
+    handleCalculateClick();
   };
 
   const handleCalculateClick = (e) => {
@@ -163,7 +164,7 @@ export const calculateTranslateX_ForWidthChange = (
   translateX,
   angle
 ) => {
-  const rad = (Math.abs(angle) * Math.PI) / 180;
+  const rad = (angle * Math.PI) / 180;
   const sin = Math.sin(rad);
   const cos = Math.cos(rad);
 
@@ -172,13 +173,13 @@ export const calculateTranslateX_ForWidthChange = (
   const centerY = height / 2;
 
   const c_new = cos * centerX_new + sin * centerY - centerX_new;
-
   const c_old = cos * centerX + sin * centerY - centerX;
+  let diff = Math.abs(c_new - c_old);
 
-  if (newWidth > width) return translateX + (c_new - c_old);
-  else {
-    return translateX - (c_old - c_new);
-  }
+  if (newWidth > width) diff *= -1;
+
+  let result = translateX + diff;
+  return result;
 };
 
 export const calculateTranslateY_ForWidthChange = (
@@ -188,7 +189,7 @@ export const calculateTranslateY_ForWidthChange = (
   translateY,
   angle
 ) => {
-  const rad = (Math.abs(angle) * Math.PI) / 180;
+  const rad = (angle * Math.PI) / 180;
   const sin = Math.sin(rad);
   const cos = Math.cos(rad);
 
@@ -200,14 +201,9 @@ export const calculateTranslateY_ForWidthChange = (
   const c_old = sin * centerX + cos * centerY - centerY;
   let diff = Math.abs(c_new - c_old);
 
-  let result;
-
   if (angle > 0) diff *= -1;
+  if (newWidth > width) diff *= -1;
 
-  if (newWidth > width) result = translateY - diff;
-  else {
-    result = translateY + diff;
-  }
-
+  let result = translateY + diff;
   return result;
 };
