@@ -206,14 +206,13 @@ export const calculateTranslateX_ForWidthChange = (
   const centerX = width / 2;
   const centerY = height / 2;
 
-  const c_new =
-    Math.abs(cos * centerX_new) + Math.abs(sin * centerY) - centerX_new;
+  const c_new = cos * centerX_new + sin * centerY - centerX_new;
 
-  const c_old = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
+  const c_old = cos * centerX + sin * centerY - centerX;
 
-  if (newWidth > width) return translateX - Math.abs(c_new - c_old);
+  if (newWidth > width) return translateX + (c_new - c_old);
   else {
-    return translateX + Math.abs(c_old - c_new);
+    return translateX - (c_old - c_new);
   }
 };
 
