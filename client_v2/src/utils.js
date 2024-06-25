@@ -163,3 +163,89 @@ export function clearTagColumnMappingFromStorage() {
 export function clearImageSettingsFormStorage() {
   localStorage.removeItem(storageKeys.imageSettings);
 }
+
+export const calculateTranslateXY_ForWidthChange = (
+  width,
+  height,
+  newWidth,
+  translateX,
+  translateY,
+  angle
+) => {
+  const newTranslateX = calculateTranslateX_ForWidthChange(
+    width,
+    height,
+    newWidth,
+    translateX,
+    angle
+  );
+
+  const newTranslateY = calculateTranslateY_ForWidthChange(
+    width,
+    height,
+    newWidth,
+    translateY,
+    angle
+  );
+
+  return { translateX: newTranslateX, translateY: newTranslateY };
+};
+
+export const calculateTranslateX_ForWidthChange = (
+  width,
+  height,
+  newWidth,
+  translateX,
+  angle
+) => {
+  const rad = (Math.abs(angle) * Math.PI) / 180;
+  const sin = Math.sin(rad);
+  const cos = Math.cos(rad);
+
+  const centerX_new = newWidth / 2;
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  const c_new =
+    Math.abs(cos * centerX_new) + Math.abs(sin * centerY) - centerX_new;
+
+  const c_old = Math.abs(cos * centerX) + Math.abs(sin * centerY) - centerX;
+
+  if (newWidth > width) return translateX - Math.abs(c_new - c_old);
+  else {
+    return translateX + Math.abs(c_old - c_new);
+  }
+};
+
+export const calculateTranslateY_ForWidthChange = (
+  width,
+  height,
+  newWidth,
+  translateY,
+  angle
+) => {
+  const rad = (Math.abs(angle) * Math.PI) / 180;
+  const sin = Math.sin(rad);
+  const cos = Math.cos(rad);
+
+  const centerX_new = newWidth / 2;
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  let newTranslateY = 0;
+
+  const c_new = Math.abs(sin * centerX_new) + Math.abs(cos * centerY) - centerY;
+
+  const c_old = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
+
+  if (newWidth > width) {
+    if (angle > 0) return translateY + Math.abs(c_new - c_old);
+    else return translateY - Math.abs(c_new - c_old);
+  } else {
+    if (angle > 0) {
+      return translateY - Math.abs(c_old - c_new);
+    } else {
+      return translateY + Math.abs(c_old - c_new);
+    }
+  }
+};
