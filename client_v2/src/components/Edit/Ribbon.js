@@ -33,7 +33,10 @@ export default function Ribbon({
       value,
       selectedItem.translateX
     );
-    onItemChanged({ horizontalAlignment: value, translateX: newTranslateX/scale });
+    onItemChanged({
+      horizontalAlignment: value,
+      translateX: newTranslateX / scale,
+    });
   };
 
   const handleVerticalAlignmentChange = (value) => {
@@ -44,7 +47,10 @@ export default function Ribbon({
       selectedItem.translateY
     );
 
-    onItemChanged({ verticalAlignment: value, translateY: newTranslateY/scale });
+    onItemChanged({
+      verticalAlignment: value,
+      translateY: newTranslateY / scale,
+    });
   };
 
   const handleTextAlignment = (value) => {
@@ -59,7 +65,21 @@ export default function Ribbon({
 
   const handleItemWidthChange = (e) => {
     const value = Number(e.target.value);
-    onItemChanged({ width: value });
+
+    const newTranslateXY = utils.calculateTranslateXY_ForWidthChange(
+      selectedItemElement.offsetWidth,
+      selectedItemElement.offsetHeight,
+      value,
+      selectedItem.translateX,
+      selectedItem.translateY,
+      selectedItem.rotationAngle
+    );
+
+    onItemChanged({
+      width: value,
+      translateX: newTranslateXY.translateX,
+      translateY: newTranslateXY.translateY,
+    });
   };
 
   const handleRotationChange = (e) => {

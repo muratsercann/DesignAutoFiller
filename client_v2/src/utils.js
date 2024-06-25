@@ -231,20 +231,18 @@ export const calculateTranslateY_ForWidthChange = (
   const centerX = width / 2;
   const centerY = height / 2;
 
-  let newTranslateY = 0;
+  const c_new = sin * centerX_new + cos * centerY - centerY;
+  const c_old = sin * centerX + cos * centerY - centerY;
+  let diff = Math.abs(c_new - c_old);
 
-  const c_new = Math.abs(sin * centerX_new) + Math.abs(cos * centerY) - centerY;
+  let result;
 
-  const c_old = Math.abs(sin * centerX) + Math.abs(cos * centerY) - centerY;
+  if (angle > 0) diff *= -1;
 
-  if (newWidth > width) {
-    if (angle > 0) return translateY + Math.abs(c_new - c_old);
-    else return translateY - Math.abs(c_new - c_old);
-  } else {
-    if (angle > 0) {
-      return translateY - Math.abs(c_old - c_new);
-    } else {
-      return translateY + Math.abs(c_old - c_new);
-    }
+  if (newWidth > width) result = translateY - diff;
+  else {
+    result = translateY + diff;
   }
+
+  return result;
 };
