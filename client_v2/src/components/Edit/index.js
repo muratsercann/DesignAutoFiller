@@ -44,9 +44,17 @@ export default function Edit() {
       if (event.ctrlKey) {
         event.preventDefault(); // Varsayılan zoom davranışını engelle
         if (event.deltaY < 0) {
-          setScale(scale + 0.15);
+          if (scale + 0.18 >= 5.0) {
+            setScale(5.0);
+            return;
+          }
+          setScale(scale + 0.18);
         } else {
-          setScale(scale - 0.15);
+          if (scale - 0.18 <= 0.1) {
+            setScale(0.1);
+            return;
+          }
+          setScale(scale - 0.18);
         }
       }
     };
