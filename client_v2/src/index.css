@@ -9,9 +9,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family :ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  
-  font-weight:500;
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  font-weight: 500;
 }
 
 code {
@@ -19,8 +20,28 @@ code {
     monospace;
 }
 
-#root{
+#root {
   height: 100%;
   overflow: hidden;
-  
+}
+
+@media print {
+  body {
+    overflow: auto;
+    height: fit-content;
+    display: block;
+  }
+
+  body > * {
+    overflow: hidden;
+  }
+
+  .header,
+  .side-menu {
+    display: none !important;
+  }
+
+  @page {
+    margin: 0;
+  }
 }

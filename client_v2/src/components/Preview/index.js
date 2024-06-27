@@ -22,7 +22,6 @@ export default function Preview({}) {
           datarow={row}
         />
       ))}
-      <div className="mb-5" style={{ width: "100%" }}></div>
     </div>
   );
 }

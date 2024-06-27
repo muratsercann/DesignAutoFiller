@@ -17,7 +17,7 @@ import Range from "./components/Samples/Range";
 function App() {
   //  utils.clearUserSettingsFromStorage();
   // utils.clearImportedDataFromStorage();
-  return <Edit />;
+  return <MultiplyImage />;
 }
 
 export default App;

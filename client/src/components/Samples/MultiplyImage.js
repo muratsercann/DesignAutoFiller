@@ -129,12 +129,14 @@ const MultiplyImage = () => {
           style={{ display: "flex", flexWrap: "wrap", gap: "1cm" }}
         >
           {images.map((url, index) => (
-            <img
-              key={index}
-              src={url}
-              style={{ width: `${imageWidth}cm`, height: `${imageHeight}cm` }}
-              alt=""
-            />
+            <div>
+              <img
+                key={index}
+                src={url}
+                style={{ width: `${imageWidth}cm`, height: `${imageHeight}cm` }}
+                alt=""
+              />
+            </div>
           ))}
         </div>
       </div>
