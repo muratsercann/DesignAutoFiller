@@ -7,6 +7,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   padding-top: 20px;
+  margin-bottom: 20px;
 }
 
 .preview-container > .pageContent {
