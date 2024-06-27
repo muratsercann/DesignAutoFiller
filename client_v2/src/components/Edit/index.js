@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Page from "./Page";
 import "./Edit.css";
 import Ribbon from "./Ribbon";
@@ -10,6 +10,7 @@ export default function Edit() {
   const [page, setPage] = useState(utils.getPageInfo());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [scale, setScale] = useState(1.0);
+  const pageContainerRef = useRef(null);
   const getSelectedItem = () => {
     let selected = null;
     if (selectedItemElement) {
@@ -42,7 +43,8 @@ export default function Edit() {
   useEffect(() => {
     const handleWheel = (event) => {
       if (event.ctrlKey) {
-        event.preventDefault(); // Varsayılan zoom davranışını engelle
+        event.preventDefault();
+
         if (event.deltaY < 0) {
           if (scale + 0.18 >= 5.0) {
             setScale(5.0);
@@ -59,10 +61,11 @@ export default function Edit() {
       }
     };
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
+    const container = pageContainerRef.current;
+    container.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => {
-      window.removeEventListener("wheel", handleWheel);
+      container.removeEventListener("wheel", handleWheel);
     };
   });
 
@@ -146,7 +149,11 @@ export default function Edit() {
         imageSettings={imageSettings}
         scale={scale}
       />
-      <div className="pageContainer" onClick={handleSpaceClick}>
+      <div
+        className="pageContainer"
+        ref={pageContainerRef}
+        onClick={handleSpaceClick}
+      >
         <Page
           scale={scale}
           setScale={setScale}
