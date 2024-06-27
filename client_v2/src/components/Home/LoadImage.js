@@ -2,7 +2,7 @@ import { useState } from "react";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-
+import { BiLinkAlt } from "react-icons/bi";
 export default function LoadImage({ onSave }) {
   const [imageUrl, setImageUrl] = useState("");
   const [imageBlobSrc, setImageSrc] = useState(null);
@@ -86,10 +86,16 @@ export default function LoadImage({ onSave }) {
     <>
       <Form>
         <Row className="mb-3">
-          <Form.Control
-            placeholder="http://example.com/image.png"
-            onChange={hangleImageUrlChange}
-          />
+          <div class="input-container">
+            <Form.Control
+              placeholder="http://example.com/image.png"
+              onChange={hangleImageUrlChange}
+              type="url"
+            />
+            <span class="icon d-flex">
+              <BiLinkAlt />
+            </span>
+          </div>
         </Row>
         <Row className="mb-3 red">
           <Form.Control

@@ -3,6 +3,9 @@ import Home from "./Home";
 import Edit from "./Edit";
 import ImportData from "./Edit/ImportData";
 import Preview from "./Preview";
+import { BsCollection, BsDatabase, BsEye, BsHouseDoor } from "react-icons/bs";
+
+import { FaImages } from "react-icons/fa6";
 
 export default function Designer({}) {
   const [activePage, setActivePage] = useState("home");
@@ -16,10 +19,16 @@ export default function Designer({}) {
 
   const children = pages[activePage];
 
+  const iconSize = 20;
   return (
     <div className="designer-container">
       <div className="header">
-        <h2>Designify</h2>
+        <div className="d-flex">
+          <FaImages size={24} color="rgb(45 101 142)" />
+        </div>
+        <div>
+          <h2>Designify</h2>
+        </div>
       </div>
       <div className="designer-body">
         <div className="side-menu">
@@ -29,7 +38,11 @@ export default function Designer({}) {
               setActivePage("home");
             }}
           >
-            Home Page
+            <div>
+              <BsHouseDoor size={iconSize} />
+            </div>
+
+            <span>Home page</span>
           </div>
           <div
             className="menu-item"
@@ -37,7 +50,10 @@ export default function Designer({}) {
               setActivePage("edit");
             }}
           >
-            Your Templates
+            <div>
+              <BsCollection size={iconSize} />
+            </div>
+            <span>Your Templates</span>
           </div>
           <div
             className="menu-item"
@@ -45,7 +61,10 @@ export default function Designer({}) {
               setActivePage("data");
             }}
           >
-            Data Set
+            <div>
+              <BsDatabase size={iconSize} />
+            </div>
+            <span>Data Set</span>
           </div>
 
           <div
@@ -54,7 +73,10 @@ export default function Designer({}) {
               setActivePage("preview");
             }}
           >
-            Preview
+            <div>
+              <BsEye size={iconSize} />
+            </div>
+            <span>Preview</span>
           </div>
         </div>
         <div className="component-container">{children}</div>
