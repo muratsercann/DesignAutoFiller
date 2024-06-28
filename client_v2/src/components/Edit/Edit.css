@@ -177,14 +177,15 @@
 
 /*TextColMatcher*/
 .matcher {
-  width: 400px !important;
-  /* background-color: gray; */
+  width: 100%;
   display: flex;
-  margin-left: 20px;
+  margin-top: 2rem;
+  justify-items: center;
+  align-items: center;
 }
 
 .matcher > * select {
-  width: 130px;
+  /* width: 130px; */
 }
 
 .matcher .container {
@@ -192,6 +193,13 @@
   border-radius: 5px;
   height: fit-content;
   padding: 20px;
+  width: 57%;
+}
+
+.matcher .container > * .col-5 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .matcher > * .row {
