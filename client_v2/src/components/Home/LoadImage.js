@@ -35,30 +35,34 @@ export default function LoadImage({ onSave }) {
       setImageUrl(url);
 
       const { naturalWidth, naturalHeight } = event.target;
-      const naturalwidthCm = Number((naturalWidth * (2.54 / 96)).toFixed(2));
+      const naturalWidthCm = Number((naturalWidth * (2.54 / 96)).toFixed(2));
       const naturalHeightCm = Number((naturalHeight * (2.54 / 96)).toFixed(2));
       const ratio = Number((naturalWidth / naturalHeight).toFixed(2));
 
       setImageRatio(ratio);
-      setOriginialWidthCm(naturalwidthCm);
+      setOriginialWidthCm(naturalWidthCm);
       setOriginialHeightCm(naturalHeightCm);
 
       console.log("calculated aspect ratio : " + ratio);
 
-      fetch(url)
-        .then((response) => response.blob())
-        .then((blob) => {
-          const imageObjectUrl = URL.createObjectURL(blob);
-          setImageSrc(imageObjectUrl);
-        })
-        .catch(() => {
-          setError("Invalid image source!");
-          clearImageSettings();
-        });
+      // if (url.startsWith("data:image")) {
+      setImageSrc(url);
+      // } else {
+      //   fetch(url)
+      //     .then((response) => response.blob())
+      //     .then((blob) => {
+      //       const imageObjectUrl = URL.createObjectURL(blob);
+      //       setImageSrc(imageObjectUrl);
+      //     })
+      //     .catch(() => {
+      //       setError("Invalid image source!");
+      //       clearImageSettings();
+      //     });
+      // }
     };
     img.onerror = () => {
       setImageUrl("");
-      setError("Invalid image source12!");
+      setError("Invalid image source!");
       clearImageSettings();
     };
     img.src = url;
