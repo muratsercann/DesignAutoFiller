@@ -4,8 +4,9 @@ import Edit from "./Edit";
 import ImportData from "./Edit/ImportData";
 import Preview from "./Preview";
 import { BsCollection, BsDatabase, BsEye, BsHouseDoor } from "react-icons/bs";
-
+import { TbCirclesRelation } from "react-icons/tb";
 import { FaImages } from "react-icons/fa6";
+import TextColMatcher from "./Edit/TextColMatcher";
 
 export default function Designer({}) {
   const [activePage, setActivePage] = useState("home");
@@ -15,6 +16,7 @@ export default function Designer({}) {
     edit: <Edit />,
     data: <ImportData />,
     preview: <Preview />,
+    match: <TextColMatcher />,
   };
 
   const children = pages[activePage];
@@ -65,6 +67,18 @@ export default function Designer({}) {
               <BsDatabase size={iconSize} />
             </div>
             <span>Data Set</span>
+          </div>
+
+          <div
+            className="menu-item"
+            onClick={() => {
+              setActivePage("match");
+            }}
+          >
+            <div>
+              <TbCirclesRelation size={iconSize} />
+            </div>
+            <span>Bind Data Columns</span>
           </div>
 
           <div
