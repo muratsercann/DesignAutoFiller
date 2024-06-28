@@ -21,7 +21,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Designer />} />
           <Route exact path="/sizing" element={<Sizing />} />
           <Route exact path="/edit" element={<Edit />} />
           <Route exact path="/ribbon" element={<Ribbon />} />
