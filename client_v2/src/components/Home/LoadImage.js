@@ -44,21 +44,7 @@ export default function LoadImage({ onSave }) {
       setOriginialHeightCm(naturalHeightCm);
 
       console.log("calculated aspect ratio : " + ratio);
-
-      // if (url.startsWith("data:image")) {
       setImageSrc(url);
-      // } else {
-      //   fetch(url)
-      //     .then((response) => response.blob())
-      //     .then((blob) => {
-      //       const imageObjectUrl = URL.createObjectURL(blob);
-      //       setImageSrc(imageObjectUrl);
-      //     })
-      //     .catch(() => {
-      //       setError("Invalid image source!");
-      //       clearImageSettings();
-      //     });
-      // }
     };
     img.onerror = () => {
       setImageUrl("");
@@ -90,13 +76,13 @@ export default function LoadImage({ onSave }) {
     <>
       <Form>
         <Row className="mb-3">
-          <div class="input-container">
+          <div className="input-container">
             <Form.Control
               placeholder="http://example.com/image.png"
               onChange={hangleImageUrlChange}
               type="url"
             />
-            <span class="icon d-flex">
+            <span className="icon d-flex">
               <BiLinkAlt />
             </span>
           </div>
