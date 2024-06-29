@@ -11,6 +11,7 @@ export default function Edit() {
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [scale, setScale] = useState(1.0);
   const pageContainerRef = useRef(null);
+
   const getSelectedItem = () => {
     let selected = null;
     if (selectedItemElement) {
@@ -20,6 +21,7 @@ export default function Edit() {
     }
     return selected;
   };
+
   const imageSettings = utils.getImageSettingsFromStorage();
   const selectedItem = getSelectedItem();
 
@@ -37,8 +39,10 @@ export default function Edit() {
   };
 
   useEffect(() => {
-    utils.setSettingsToStorage(page);
-  }, [page]);
+    if (imageSettings) {
+      utils.setSettingsToStorage(page);
+    }
+  }, [page, imageSettings]);
 
   useEffect(() => {
     const handleWheel = (event) => {
@@ -61,11 +65,15 @@ export default function Edit() {
       }
     };
 
-    const container = pageContainerRef.current;
-    container.addEventListener("wheel", handleWheel, { passive: false });
-
+    if (pageContainerRef && pageContainerRef.current) {
+      pageContainerRef.current.addEventListener("wheel", handleWheel, {
+        passive: false,
+      });
+    }
     return () => {
-      container.removeEventListener("wheel", handleWheel);
+      if (pageContainerRef && pageContainerRef.current) {
+        pageContainerRef.current.removeEventListener("wheel", handleWheel);
+      }
     };
   });
 
@@ -141,35 +149,37 @@ export default function Edit() {
   };
 
   return (
-    <div className="edit">
-      <Ribbon
-        selectedItemElement={selectedItemElement}
-        selectedItem={selectedItem}
-        onItemChanged={onItemChanged}
-        imageSettings={imageSettings}
-        scale={scale}
-      />
-      <div
-        className="pageContainer"
-        ref={pageContainerRef}
-        onClick={handleSpaceClick}
-      >
-        <Page
-          scale={scale}
-          setScale={setScale}
-          page={page}
-          selectedItem={selectedItem}
-          selectedItemElement={selectedItemElement}
-          setSelectedItemElement={setSelectedItemElement}
-          onItemChanged={onItemChanged}
-          handleSpaceClick={handleSpaceClick}
-          setPage={setPage}
-          handleAddNewText={addNewTextField}
-          handleDeleteSelectedText={deleteSelectedText}
-          imageSettings={imageSettings}
-        />
-      </div>
-      {/* <Button
+    <>
+      {imageSettings ? (
+        <div className="edit">
+          <Ribbon
+            selectedItemElement={selectedItemElement}
+            selectedItem={selectedItem}
+            onItemChanged={onItemChanged}
+            imageSettings={imageSettings}
+            scale={scale}
+          />
+          <div
+            className="pageContainer"
+            ref={pageContainerRef}
+            onClick={handleSpaceClick}
+          >
+            <Page
+              scale={scale}
+              setScale={setScale}
+              page={page}
+              selectedItem={selectedItem}
+              selectedItemElement={selectedItemElement}
+              setSelectedItemElement={setSelectedItemElement}
+              onItemChanged={onItemChanged}
+              handleSpaceClick={handleSpaceClick}
+              setPage={setPage}
+              handleAddNewText={addNewTextField}
+              handleDeleteSelectedText={deleteSelectedText}
+              imageSettings={imageSettings}
+            />
+          </div>
+          {/* <Button
         className="save-continue-button"
         variant="primary"
         onClick={handleSaveContinue}
@@ -177,9 +187,13 @@ export default function Edit() {
         Save and Continue
       </Button> */}
 
-      <div className="edit-footer">
-        <Range scale={scale} setScale={setScale} />
-      </div>
-    </div>
+          <div className="edit-footer">
+            <Range scale={scale} setScale={setScale} />
+          </div>
+        </div>
+      ) : (
+        <div>Not uploaded image</div>
+      )}
+    </>
   );
 }

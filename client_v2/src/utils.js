@@ -2,11 +2,12 @@ import { defaultData } from "./data.js";
 
 export const getPageInfo = () => {
   const savedData = getSettingsFromStorage();
-  if (savedData && savedData !== "") {
-    return savedData;
-  } else {
-    return defaultData;
-  }
+
+  if (savedData) return savedData;
+  else
+    return {
+      items: [],
+    };
 };
 
 export const calculateTranslateX = (
@@ -96,6 +97,11 @@ export function getImageSettingsFromStorage() {
 
 export function getSettingsFromStorage() {
   return JSON.parse(localStorage.getItem(storageKeys.userSettings));
+}
+
+export function getItemsFromStorage() {
+  const settings = getSettingsFromStorage();
+  if (settings && settings.items) return settings.items;
 }
 
 export function getTextValuesFromStorage() {
