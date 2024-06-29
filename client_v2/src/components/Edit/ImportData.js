@@ -13,26 +13,26 @@ export default function ImportData({}) {
     setIsModalOpen(true);
   };
 
-  const handleSaveClick = () => {
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const handleSaveClick = async () => {
+    if (!(data && data.length > 0)) return;
+
     setIsLoading(true);
+
+    await (async () => {
+      await wait(800);
+      utils.setImportedDataToStorage(data);
+    })();
+
+    setIsLoading(false);
   };
 
-  useEffect(() => {
-    if (isLoading && error !== null) {
-      setError(null);
-      return;
-    }
-    if (isLoading) {
-      const timeout = setTimeout(() => {
-        utils.setImportedDataToStorage(data);
-        setIsLoading(false);
-      }, 800);
-
-      // useEffect temizleme fonksiyonu, component unmount olduğunda zamanlayıcıyı temizler
-      return () => clearTimeout(timeout);
-    }
-  }, [isLoading]);
-
+  const handleContinue = async () => {
+    setIsLoading(true);
+    await wait(800);
+    setIsLoading(false);
+  };
   return (
     <>
       {isLoading && (
@@ -42,11 +42,14 @@ export default function ImportData({}) {
       )}
 
       <div className="data-container">
-        <ImportModal
-          isOpen={isModalOpen}
-          setImportedData={setData}
-          setShow={setIsModalOpen}
-        />
+        {
+          <ImportModal
+            isOpen={isModalOpen}
+            setImportedData={setData}
+            setShow={setIsModalOpen}
+            onContinue={handleContinue}
+          />
+        }
         <div>
           <Button variant="secondary" onClick={handleImportClick}>
             Import

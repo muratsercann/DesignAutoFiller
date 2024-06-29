@@ -42,7 +42,6 @@ export default function LoadImage({ onSave }) {
       setImageRatio(ratio);
       setOriginialWidthCm(naturalWidthCm);
       setOriginialHeightCm(naturalHeightCm);
-
       console.log("calculated aspect ratio : " + ratio);
       setImageSrc(url);
     };
