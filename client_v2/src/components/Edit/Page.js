@@ -143,8 +143,6 @@ export default function Page({
     const pageContentHeigt = itemRef.current.offsetHeight;
     const pageContainerHeight = itemRef.current.offsetParent.offsetHeight;
 
-    // console.log(pageContentHeigt, pageContainerHeight);
-
     if (pageContentHeigt > pageContainerHeight - 20) {
       // const scale = (pageContainerHeight / pageContentHeigt).toFixed(2);
       // setScale(scale - 0.05);

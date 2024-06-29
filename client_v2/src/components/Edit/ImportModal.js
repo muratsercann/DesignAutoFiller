@@ -49,20 +49,15 @@ export default function ImportModal({
 
   const parseCSV = (contents) => {
     const { data } = Papa.parse(contents, { header: true });
-    console.log("csv data : ");
-    console.log(data);
     return data;
   };
 
   const parseJSON = (contents) => {
-    console.log("raw json content : ", contents);
     const jsonData = JSON.parse(contents);
     return jsonData;
   };
 
   const parseText = (contents) => {
-    console.log("text contents : ", contents);
-
     return new Promise((resolve, reject) => {
       Papa.parse(contents, {
         header: true,

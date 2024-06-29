@@ -25,7 +25,6 @@ export default function Item({
         cursor: "inherit",
         fontSize: item.fontSize * scale + "px",
         width: item?.width * scale + "px",
-        height: item?.height * scale,
         color: item.fontColor,
         textAlign: item.textAlign,
         transform: `translate(${item.translateX * scale}px, ${

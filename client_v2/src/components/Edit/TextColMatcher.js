@@ -3,7 +3,9 @@ import * as utils from "../../utils";
 import "./Edit.css";
 export default function TextColMatcher({}) {
   const columns = utils.getColNamesFromStorage();
-  const settings = utils.getSettingsFromStorage();
+
+  const [settings, setSettings] = useState(utils.getSettingsFromStorage());
+  const [isSomethingChanged, setIsChanged] = useState(false);
   const dataset = utils.getImportedDataFromStorage();
 
   const handleChanges = (item, e) => {
@@ -17,8 +19,16 @@ export default function TextColMatcher({}) {
         } else return i;
       }),
     };
-    utils.setSettingsToStorage(newSettings);
+
+    setSettings(newSettings);
+    setIsChanged(true);
   };
+
+  useEffect(() => {
+    if (isSomethingChanged) {
+      utils.setSettingsToStorage(settings);
+    }
+  }, [settings, isSomethingChanged]);
 
   return (
     <>
@@ -35,14 +45,14 @@ export default function TextColMatcher({}) {
                 <span className="col-1">=</span>
                 <div className="col">
                   <select
+                    value={item.dataColumn}
                     className="form-select"
                     onChange={(e) => handleChanges(item, e)}
                   >
                     <option value={""}>none</option>
                     {columns.map((col, index) => {
-                      const selected = item.dataColumn === col;
                       return (
-                        <option selected={selected} value={col} key={index}>
+                        <option value={col} key={index}>
                           {col}
                         </option>
                       );

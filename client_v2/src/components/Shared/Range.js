@@ -4,9 +4,6 @@ export default function Range({ scale, setScale }) {
   // const [value, setValue] = useState(24);
 
   const value = Math.ceil(scale * 100);
-  console.log("scale :", scale);
-  console.log("value :", value);
-
   const handleRangeChange = (e) => {
     const val = e.target.value;
     setScale(Number(val / 100));
@@ -15,7 +12,12 @@ export default function Range({ scale, setScale }) {
   return (
     <>
       <div style={{ width: "450px", display: "flex", gap: "20px" }}>
-        <Form.Range min={10} max={500} value={value} onChange={handleRangeChange} />
+        <Form.Range
+          min={10}
+          max={500}
+          value={value}
+          onChange={handleRangeChange}
+        />
         <span style={{ width: "100px", fontWeight: "bold" }}>{value} %</span>
       </div>
     </>
