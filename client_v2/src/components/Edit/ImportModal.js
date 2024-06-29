@@ -1,19 +1,27 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
 import "./Edit.css";
-import { BsCloudUpload } from "react-icons/bs";
-import { Form, Spinner, Table } from "react-bootstrap";
+import { IoCloudUploadSharp } from "react-icons/io5";
 
-export default function ImportModal({ isOpen, setShow, setImportedData }) {
+import { Spinner } from "react-bootstrap";
+
+export default function ImportModal({
+  isOpen,
+  setShow,
+  setImportedData,
+  onContinue,
+}) {
   const pasteAreaRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
-  const [fileType, setFileType] = useState("");
+  const [fileType, setFileType] = useState(null);
   const [error, setError] = useState(null);
   const [fileName, setFileName] = useState(null);
+
+  const inputRef = useRef(null);
 
   const parseExcel = (contents) => {
     const workbook = XLSX.read(contents, { type: "array" });
@@ -34,7 +42,7 @@ export default function ImportModal({ isOpen, setShow, setImportedData }) {
       case "txt":
         return parseText(contents);
       default:
-        alert("Desteklenmeyen dosya türü.");
+        setError("This file is not in valid format !");
         break;
     }
   };
@@ -47,13 +55,9 @@ export default function ImportModal({ isOpen, setShow, setImportedData }) {
   };
 
   const parseJSON = (contents) => {
-    try {
-      console.log("raw json content : ", contents);
-      const jsonData = JSON.parse(contents);
-      return jsonData;
-    } catch (error) {
-      alert("Geçersiz JSON dosyası." + error);
-    }
+    console.log("raw json content : ", contents);
+    const jsonData = JSON.parse(contents);
+    return jsonData;
   };
 
   const parseText = (contents) => {
@@ -75,6 +79,7 @@ export default function ImportModal({ isOpen, setShow, setImportedData }) {
   };
 
   const handleFileUpload = async (e) => {
+    setError(null);
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -82,14 +87,10 @@ export default function ImportModal({ isOpen, setShow, setImportedData }) {
       const contents = e.target.result;
       const extension = file.name.split(".").pop().toLowerCase();
 
-      setFileName(file.name);
-
-      setIsLoading(true);
       const parsedData = await parseData(extension, contents);
-      await wait(800);
-      setIsLoading(false);
-      setImportedData(parsedData);
-      setShow(false);
+
+      setFileName(file.name);
+      setData(parsedData);
     };
 
     if (file) {
@@ -103,8 +104,32 @@ export default function ImportModal({ isOpen, setShow, setImportedData }) {
 
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const handleClose = () => {
+  const onClose = () => {
+    setData(null);
+    setFileType(null);
+    setError(null);
+    setFileName(null);
+    setIsLoading(false);
     setShow(false);
+  };
+  const handleClose = () => {
+    onClose();
+  };
+
+  const handleContinue = () => {
+    if (error !== null) {
+      return;
+    }
+    setIsLoading(false);
+    setImportedData(data);
+    onClose();
+    onContinue();
+  };
+
+  const handleBrowseClick = () => {
+    if (inputRef !== null) {
+      inputRef.current.click();
+    }
   };
 
   return (
@@ -113,23 +138,57 @@ export default function ImportModal({ isOpen, setShow, setImportedData }) {
         <Modal.Header closeButton>
           {/* <Modal.Title>Upload File</Modal.Title> */}
         </Modal.Header>
-        <Modal.Body style={{ height: "300px", overflow: "auto" }}>
+        <Modal.Body style={{ overflow: "auto" }}>
           <div ref={pasteAreaRef} className="upload-file-body">
             <div className="upload-container">
               <div className="mb-3">
-                <BsCloudUpload size={52} color="#7a859091" />
+                <IoCloudUploadSharp size={65} color="#7a859091" />
               </div>
+              <div className="file-input-wrapper mb-3">
+                <button
+                  className="file-input-button"
+                  onClick={handleBrowseClick}
+                >
+                  Browse
+                </button>
+                <input
+                  ref={inputRef}
+                  onChange={handleFileUpload}
+                  id="my-file-input"
+                  type="file"
+                  accept=".xlsx, .csv, .json, .txt"
+                />
+              </div>
+
+              {fileName && (
+                <>
+                  <div style={{ fontSize: "13px", fontWeight: "bold" }}>
+                    Selected File Name :{" "}
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "",
+                      color: "#4d4d4d",
+                    }}
+                  >
+                    <span>{fileName}</span>
+                  </div>
+                </>
+              )}
+
               <div
-                className="file-input-wrapper mb-3"
-                onChange={handleFileUpload}
+                className="upload-error"
+                style={{ color: "firebrick", fontSize: "smaller" }}
               >
-                <button className="file-input-button">Browse</button>
-                <input type="file" accept=".xlsx, .csv, .json, .txt" />
-              </div>
-              <div>
-                <span>{fileName || ""}</span>
+                <span>{error || ""}</span>
               </div>
             </div>
+          </div>
+
+          <div className="mt-3" style={{ fontSize: "14px", fontWeight: "500" }}>
+            <span>Supported File Formats :</span>
+            <span className="mx-1">XLSX, CSV, JSON, TXT</span>
           </div>
           {isLoading && (
             <div className="spinner-container">
@@ -138,8 +197,12 @@ export default function ImportModal({ isOpen, setShow, setImportedData }) {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cancel
+          <Button
+            variant="secondary"
+            onClick={handleContinue}
+            disabled={error !== null || data === null}
+          >
+            Continue
           </Button>
         </Modal.Footer>
       </Modal>

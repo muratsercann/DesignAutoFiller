@@ -28,6 +28,11 @@ export default function ImportData({}) {
     setIsLoading(false);
   };
 
+  const handleContinue = async () => {
+    setIsLoading(true);
+    await wait(800);
+    setIsLoading(false);
+  };
   return (
     <>
       {isLoading && (
@@ -37,13 +42,14 @@ export default function ImportData({}) {
       )}
 
       <div className="data-container">
-        {isModalOpen && (
+        {
           <ImportModal
             isOpen={isModalOpen}
             setImportedData={setData}
             setShow={setIsModalOpen}
+            onContinue={handleContinue}
           />
-        )}
+        }
         <div>
           <Button variant="secondary" onClick={handleImportClick}>
             Import
