@@ -3,62 +3,59 @@ import * as utils from "../../utils";
 import "./Edit.css";
 export default function TextColMatcher({}) {
   const columns = utils.getColNamesFromStorage();
-  const texts = utils.getTextValuesFromStorage();
+  const settings = utils.getSettingsFromStorage();
+  const dataset = utils.getImportedDataFromStorage();
 
-  const [mappings, setMappings] = useState(() => {
-    const maps = utils.getTagColumnMappingFromStorage();
-    if (maps !== null) {
-      return maps;
-    } else {
-      const result = Object.fromEntries(texts.map((key) => [key, ""]));
-      console.log("result : ", result);
-      return result;
-    }
-  });
-
-  const handleChanges = (text, e) => {
-    console.log(text + ":" + e.target.value);
+  const handleChanges = (item, e) => {
     const value = e.target.value === "none" ? "" : e.target.value;
-    setMappings({ ...mappings, [text]: value });
-  };
 
-  useEffect(() => {
-    console.log("mappings changed : ", mappings);
-    utils.setTagColumnMappingToStorage(mappings);
-  }, [mappings]);
+    const newSettings = {
+      ...settings,
+      items: settings.items.map((i) => {
+        if (i.id === item.id) {
+          return { ...i, dataColumn: value };
+        } else return i;
+      }),
+    };
+    utils.setSettingsToStorage(newSettings);
+  };
 
   return (
     <>
-      <div className="matcher">
-        <div className="container">
-          <div className="row mb-3 text-center">
-            <h6>Match Text - Column</h6>
-            <hr></hr>
-          </div>
-          {texts.map((text, index) => (
-            <div key={index} className="row mb-3">
-              <div className="col-5">{text}</div>
-              <span className="col-1">=</span>
-              <div className="col">
-                <select
-                  className="form-select"
-                  onChange={(e) => handleChanges(text, e)}
-                >
-                  <option value={""}>none</option>
-                  {columns.map((col, index) => {
-                    const selected = mappings[text] === col;
-                    return (
-                      <option selected={selected} value={col} key={index}>
-                        {col}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
+      {dataset && settings ? (
+        <div className="matcher">
+          <div className="container">
+            <div className="row mb-3 text-center">
+              <h6>Match Text - Column</h6>
+              <hr></hr>
             </div>
-          ))}
+            {settings.items.map((item, index) => (
+              <div key={index} className="row mb-3">
+                <div className="col-5">{item.value}</div>
+                <span className="col-1">=</span>
+                <div className="col">
+                  <select
+                    className="form-select"
+                    onChange={(e) => handleChanges(item, e)}
+                  >
+                    <option value={""}>none</option>
+                    {columns.map((col, index) => {
+                      const selected = item.dataColumn === col;
+                      return (
+                        <option selected={selected} value={col} key={index}>
+                          {col}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div></div>
+      )}
     </>
   );
 }

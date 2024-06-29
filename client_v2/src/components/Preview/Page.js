@@ -27,16 +27,9 @@ export default function Page({
           onLoad={() => setIsImageLoaded(true)}
         />
 
-        
-
         {isImageLoaded &&
           page.items.map((item, index) => (
-            <Item
-              key={index}
-              item={item}
-              mappings={mappings}
-              datarow={datarow}
-            />
+            <Item key={index} item={item} datarow={datarow} />
           ))}
       </div>
     </>

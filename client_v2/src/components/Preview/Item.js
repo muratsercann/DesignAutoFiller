@@ -3,7 +3,7 @@ import React from "react";
 export default function Item({ item, mappings, datarow }) {
   let value = item.value;
 
-  const column = mappings[item.value];
+  const column = item.dataColumn;
 
   if (column !== undefined && column !== "") {
     value = datarow[column];
