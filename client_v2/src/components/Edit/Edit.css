@@ -229,7 +229,6 @@ input.form-range {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  cursor: pointer;
 }
 
 .file-input-wrapper input[type="file"] {
@@ -244,6 +243,7 @@ input.form-range {
   border: none;
   border-radius: 4px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .file-input-button:hover {

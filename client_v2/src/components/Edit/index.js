@@ -47,7 +47,21 @@ export default function Edit() {
   useEffect(() => {
     const handleWheel = (event) => {
       if (event.ctrlKey) {
+        // console.log(`event.elientXY (${event.clientX},${event.clientY})`);
+
         event.preventDefault();
+
+        // let container = document.getElementById("pageContainer");
+        // let page = document.getElementById("pageContent");
+        // const scrollHeight = container.scrollHeight;
+        // const scrollWidth = container.scrollWidth;
+
+        // const diff = (container.offsetWidth - page.offsetWidth) / 2;
+
+        // const scrollX = event.clientX + diff - 10;
+        // container.scrollLeft = scrollX;
+        // console.log("scroll left : ", scrollX);
+        // container.scrollTop = event.clientY;
 
         if (event.deltaY < 0) {
           if (scale + 0.18 >= 5.0) {
@@ -160,6 +174,7 @@ export default function Edit() {
             scale={scale}
           />
           <div
+            id="pageContainer"
             className="pageContainer"
             ref={pageContainerRef}
             onClick={handleSpaceClick}
