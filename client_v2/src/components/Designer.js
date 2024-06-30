@@ -7,6 +7,8 @@ import { BsCollection, BsDatabase, BsEye, BsHouseDoor } from "react-icons/bs";
 import { TbCirclesRelation } from "react-icons/tb";
 import { FaImages } from "react-icons/fa6";
 import TextColMatcher from "./Edit/TextColMatcher";
+import { IoCloudUploadSharp } from "react-icons/io5";
+import Upload from "./Edit/Upload";
 
 export default function Designer({}) {
   const [activePage, setActivePage] = useState("home");
@@ -17,6 +19,7 @@ export default function Designer({}) {
     data: <ImportData />,
     preview: <Preview />,
     match: <TextColMatcher />,
+    uploadImage: <Upload />,
   };
 
   const children = pages[activePage];
@@ -91,6 +94,18 @@ export default function Designer({}) {
               <BsEye size={iconSize} />
             </div>
             <span>Preview</span>
+          </div>
+
+          <div
+            className="menu-item"
+            onClick={() => {
+              setActivePage("uploadImage");
+            }}
+          >
+            <div>
+              <IoCloudUploadSharp size={iconSize} color="#7a859091" />
+            </div>
+            <span>Upload Image</span>
           </div>
         </div>
         <div className="component-container">{children}</div>
