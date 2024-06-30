@@ -85,7 +85,7 @@ export const cmToPixel = (value) => {
 };
 
 const storageKeys = {
-  imageSettings: "imageSettings",
+  imageSettings: "imageDetails",
   userSettings: "userSettings",
   importedData: "importedData",
   tagColumnMapping: "tagColumnMapping",

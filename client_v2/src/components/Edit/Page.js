@@ -200,7 +200,7 @@ export default function Page({
         onClick={handleSpaceClick}
       >
         <img
-          src={imageSettings.url}
+          src={imageSettings.src}
           className="img-fluid no-select"
           alt=""
           onLoad={() => setIsImageLoaded(true)}
