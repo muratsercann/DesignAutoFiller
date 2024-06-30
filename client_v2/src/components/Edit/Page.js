@@ -140,18 +140,57 @@ export default function Page({
       return;
     }
 
+    const pageContentWidth = itemRef.current.offsetWidth;
     const pageContentHeigt = itemRef.current.offsetHeight;
-    const pageContainerHeight = itemRef.current.offsetParent.offsetHeight;
+    const pageContainerWidth =
+      document.getElementById("pageContainer").offsetWidth;
+    const pageContainerHeight =
+      document.getElementById("pageContainer").offsetHeight;
 
-    if (pageContentHeigt > pageContainerHeight - 20) {
-      // const scale = (pageContainerHeight / pageContentHeigt).toFixed(2);
-      // setScale(scale - 0.05);
+    console.log(
+      `page container size : (${pageContainerWidth} x ${pageContainerHeight}) `
+    );
+    console.log(
+      `page content size : (${pageContentWidth} x ${pageContentHeigt}) `
+    );
+
+    let ratio;
+    if (pageContainerWidth > pageContainerHeight) {
+      ratio = (pageContainerWidth / pageContentWidth).toFixed(2);
+    } else {
+      ratio = (pageContainerHeight / pageContentHeigt).toFixed(2);
+    }
+
+    console.log("ratio : ", ratio);
+
+    if (ratio > 2) {
+      let newScale = scale * (ratio / 2);
+      if (newScale > 5) setScale(5);
+      else {
+        setScale(newScale);
+      }
+    } else if (ratio < 1) {
+      setScale(ratio - 0.3);
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const pageContentWidth = itemRef.current.offsetWidth;
+    const pageContainerWidth =
+      document.getElementById("pageContainer").offsetWidth;
+
+    if (pageContentWidth >= pageContainerWidth) {
+      document.getElementById("pageContainer").style.justifyContent =
+        "flex-start";
+    } else {
+      document.getElementById("pageContainer").style.justifyContent = "center";
     }
   });
 
   return (
     <div className="pageSubContainer">
       <div
+        id="pageContent"
         className="pageContent"
         ref={itemRef}
         style={{
