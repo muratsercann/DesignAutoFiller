@@ -18,7 +18,7 @@ export default function Upload() {
   };
 
   return (
-    <>
+    <div className="upload-image-page-container">
       <Button variant="success" onClick={handleUploadClick}>
         Upload
       </Button>
@@ -34,6 +34,6 @@ export default function Upload() {
           <img alt="" src={imageDetails.src}></img>
         </div>
       )}
-    </>
+    </div>
   );
 }

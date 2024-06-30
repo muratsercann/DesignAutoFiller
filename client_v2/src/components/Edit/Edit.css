@@ -298,3 +298,14 @@ input.form-range {
   background-color: rgba(52, 52, 52, 0.247);
 }
 /*scroll-bar*/
+
+.upload-image-page-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
