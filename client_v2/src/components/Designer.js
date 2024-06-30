@@ -55,7 +55,7 @@ export default function Designer({}) {
             <div>
               <BsCollection size={iconSize} />
             </div>
-            <span>Your Templates</span>
+            <span>Design</span>
           </div>
           <div
             className="menu-item"
