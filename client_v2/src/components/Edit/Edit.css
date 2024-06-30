@@ -42,6 +42,7 @@
   justify-content: center;
   align-items: flex-start;
   position: relative;
+  scroll-behavior: smooth;
 }
 
 .pageSubContainer {
@@ -267,3 +268,33 @@ input.form-range {
   border-radius: 8px;
   font-weight: 500;
 }
+
+/*scroll-bar*/
+/* Scrollbar'ın genel stilini ayarlamak */
+.pageContainer::-webkit-scrollbar {
+  background-color: transparent;
+  width: 9px;
+  height: 9px;
+  margin-right: 10px !important;
+}
+
+/* Scrollbar'ın "thumb" kısmını ayarlamak */
+.pageContainer::-webkit-scrollbar-thumb {
+  background-color: rgb(150, 150, 200);
+  border-radius: 10px;
+}
+
+/* Scrollbar'ın "thumb" kısmının hover durumunu ayarlamak */
+.pageContainer::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(79, 79, 173);
+}
+
+/* Scrollbar'ın "track" kısmını ayarlamak */
+.pageContainer::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.pageContainer::-webkit-scrollbar-track:hover {
+  background-color: rgba(52, 52, 52, 0.247);
+}
+/*scroll-bar*/
