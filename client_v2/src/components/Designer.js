@@ -11,7 +11,7 @@ import { IoCloudUploadSharp } from "react-icons/io5";
 import Upload from "./Edit/Upload";
 
 export default function Designer({}) {
-  const [activePage, setActivePage] = useState("home");
+  const [activePage, setActivePage] = useState("edit");
 
   const pages = {
     home: <Home />,
@@ -29,7 +29,7 @@ export default function Designer({}) {
     <div className="designer-container">
       <div className="header">
         <div className="d-flex">
-          <FaImages size={24} color="rgb(45 101 142)" />
+          <FaImages size={24} />
         </div>
         <div>
           <h2>Designify</h2>

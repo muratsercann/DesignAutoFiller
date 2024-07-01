@@ -7,14 +7,20 @@
   align-items: center;
   align-content: center;
   flex-direction: row;
-  gap: 0.5rem;
-  background-color: #e6e6e6;
-  /* overflow-x: auto;
-  overflow-y: hidden; */
+  gap: 8px;
+  background-color: white;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-left: 1px solid var(--bs-gray-200);
+  border-bottom: 1px solid var(--bs-gray-200);
+  border-right: 1px solid var(--bs-gray-200);
 }
 
-.ribbon > * {
-  margin-left: 9px;
+.ribbon,
+.ribbon input,
+.ribbon select {
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .edit input.form-control {
@@ -43,6 +49,7 @@
   align-items: flex-start;
   position: relative;
   scroll-behavior: smooth;
+  background-color: var(--bs-light);
 }
 
 .pageSubContainer {

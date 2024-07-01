@@ -51,12 +51,10 @@ export default function PositionSelector({
     };
   }, [show]);
 
+  const iconsize = 20;
   return (
-    <div
-      className="positionSelector"
-      onClick={handleClick}
-    >
-      <div className="set-position">Object</div>
+    <div className="positionSelector" onClick={handleClick}>
+      <div className="set-position">Position</div>
 
       {show && (
         <>
@@ -73,7 +71,7 @@ export default function PositionSelector({
                     }}
                   >
                     <Col>
-                      <CiAlignTop size={"30px"} />
+                      <CiAlignTop size={iconsize} />
                       <span>Top</span>
                     </Col>
                   </Row>
@@ -86,7 +84,7 @@ export default function PositionSelector({
                     }}
                   >
                     <Col>
-                      <CiAlignCenterV size={"30px"} />
+                      <CiAlignCenterV size={iconsize} />
                       <span>Center</span>
                     </Col>
                   </Row>
@@ -99,7 +97,7 @@ export default function PositionSelector({
                     }}
                   >
                     <Col>
-                      <CiAlignBottom size={"30px"} />
+                      <CiAlignBottom size={iconsize} />
                       <span>Bottom</span>
                     </Col>
                   </Row>
@@ -114,7 +112,7 @@ export default function PositionSelector({
                     }}
                   >
                     <Col>
-                      <CiAlignLeft size={"30px"} />
+                      <CiAlignLeft size={iconsize} />
                       <span>Left</span>
                     </Col>
                   </Row>
@@ -127,7 +125,7 @@ export default function PositionSelector({
                     }}
                   >
                     <Col>
-                      <CiAlignCenterH size={"30px"} />
+                      <CiAlignCenterH size={iconsize} />
                       <span>Center</span>
                     </Col>
                   </Row>
@@ -140,7 +138,7 @@ export default function PositionSelector({
                     }}
                   >
                     <Col>
-                      <CiAlignRight size={"30px"} />
+                      <CiAlignRight size={iconsize} />
                       <span>Right</span>
                     </Col>
                   </Row>

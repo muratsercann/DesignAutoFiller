@@ -191,6 +191,8 @@ button:hover {
   gap: 1rem;
   min-height: var(--header-height);
   max-height: var(--header-height);
+  background-color: var(--bs-indigo);
+  color: var(--bs-light);
 }
 
 .header > h2 {

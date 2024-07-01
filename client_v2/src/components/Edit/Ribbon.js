@@ -160,18 +160,19 @@ export default function Ribbon({
               value={selectedItem?.value || ""}
               onChange={handleTextChange}
             />
-            <span>Width :</span>
+
             <Form.Control
               type="number"
+              title="Width"
               value={selectedItem?.width || 0}
               onChange={handleItemWidthChange}
               style={{ width: "74px" }}
               aria-label="Width(px)"
             />
 
-            <span>Rotate :</span>
             <Form.Control
               type="number"
+              title="Rotation Angle (deg)"
               value={rotationAngle}
               onChange={handleRotationChange}
               style={{ width: "74px" }}

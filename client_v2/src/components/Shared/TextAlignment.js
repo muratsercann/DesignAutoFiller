@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 import "./styles/textAlignment.css";
 import {
   FaAlignLeft,
@@ -48,6 +49,7 @@ export default function TextAlignment({ align, setAlign, disabled }) {
     setNum(n);
   };
 
+  const iconSize = "18";
   return (
     <div
       className={`alignment ${disabled ? "disabled" : ""}`}
@@ -57,22 +59,22 @@ export default function TextAlignment({ align, setAlign, disabled }) {
     >
       {selecteIndex === items.left && (
         <div className="alignLeft">
-          <FaAlignLeft />
+          <FaAlignLeft size={iconSize} />
         </div>
       )}
       {selecteIndex === items.center && (
         <div className="alignCenter">
-          <FaAlignCenter />
+          <FaAlignCenter size={iconSize} />
         </div>
       )}
       {selecteIndex === items.right && (
         <div className="alignRight">
-          <FaAlignRight />
+          <FaAlignRight size={iconSize} />
         </div>
       )}
       {selecteIndex === items.justify && (
         <div className="alignJustify">
-          <FaAlignJustify />
+          <FaAlignJustify size={iconSize} />
         </div>
       )}
     </div>
