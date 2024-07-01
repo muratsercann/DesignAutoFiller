@@ -5,12 +5,14 @@ import Ribbon from "./Ribbon";
 import * as utils from "../../utils.js";
 import Button from "react-bootstrap/Button";
 import Range from "../Shared/Range.js";
+import Upload from "./Upload.js";
 
 export default function Edit() {
   const [page, setPage] = useState(utils.getPageInfo());
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [scale, setScale] = useState(1.0);
   const pageContainerRef = useRef(null);
+  const [refresh, setRefresh] = useState(null);
 
   const getSelectedItem = () => {
     let selected = null;
@@ -207,7 +209,7 @@ export default function Edit() {
           </div>
         </div>
       ) : (
-        <div>Not uploaded image</div>
+        <Upload onSuccess={setRefresh} />
       )}
     </>
   );
