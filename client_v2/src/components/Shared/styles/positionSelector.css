@@ -24,8 +24,8 @@
 .align {
   position: absolute;
   width: 210px;
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   color: var(--bs-dark);
   background-color: var(--bs-light);
   border-radius: 5px;

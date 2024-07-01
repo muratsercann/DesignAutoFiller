@@ -51,7 +51,7 @@ export default function PositionSelector({
     };
   }, [show]);
 
-  const iconsize = 20;
+  const iconsize = 24;
   return (
     <div className="positionSelector" onClick={handleClick}>
       <div className="set-position">Position</div>
