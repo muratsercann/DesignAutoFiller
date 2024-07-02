@@ -330,5 +330,6 @@ input.form-range {
 }
 
 .custom-icon-button:hover {
-  background-color: #ffffff1d;
+  color: #34ffd9;
+  background-color: #474747;
 }

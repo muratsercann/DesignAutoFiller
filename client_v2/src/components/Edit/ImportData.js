@@ -4,7 +4,7 @@ import { Button, Spinner, Table } from "react-bootstrap";
 import TextColMatcher from "./TextColMatcher";
 import ImportModal from "./ImportModal";
 import { memo } from "react";
-import { BiCloudUpload } from "react-icons/bi";
+import { BiPlusCircle, BiCloudUpload } from "react-icons/bi";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export const ImportData = memo(function ImportData({ dataset, setDataset }) {
@@ -45,16 +45,10 @@ export const ImportData = memo(function ImportData({ dataset, setDataset }) {
           />
         }
         <div>
-          <OverlayTrigger
-            placement="bottom"
-            overlay={<Tooltip id="tooltip-select">Upload</Tooltip>}
-            variant="light"
-          >
-            <div className="custom-icon-button" onClick={handleImportClick}>
-              <BiCloudUpload size={24} />
-              <span>Upload</span>
-            </div>
-          </OverlayTrigger>
+          <div className="custom-icon-button" onClick={handleImportClick}>
+            <BiPlusCircle size={24} />
+            <span>Add</span>
+          </div>
         </div>
         {dataset !== null && dataset.length > 0 && (
           <>
