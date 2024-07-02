@@ -128,6 +128,15 @@ export function getColNamesFromStorage() {
   }
 }
 
+export function getColNamesFromDataset(data) {
+  if (data !== null && data.length > 0) {
+    const cols = Object.keys(data[0]);
+    return cols;
+  } else {
+    return [];
+  }
+}
+
 export function getTagColumnMappingFromStorage() {
   return JSON.parse(localStorage.getItem(storageKeys.tagColumnMapping));
 }

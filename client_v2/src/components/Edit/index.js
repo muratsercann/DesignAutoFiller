@@ -7,8 +7,13 @@ import Button from "react-bootstrap/Button";
 import Range from "../Shared/Range.js";
 import Upload from "./Upload.js";
 
-export default function Edit() {
-  const [page, setPage] = useState(utils.getPageInfo());
+export default function Edit({
+  page,
+  setPage,
+  imageSettings,
+  setImageSettings,
+  dataset,
+}) {
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [scale, setScale] = useState(1.0);
   const pageContainerRef = useRef(null);
@@ -24,7 +29,6 @@ export default function Edit() {
     return selected;
   };
 
-  const imageSettings = utils.getImageSettingsFromStorage();
   const selectedItem = getSelectedItem();
 
   const onItemChanged = (newItem) => {
@@ -39,12 +43,6 @@ export default function Edit() {
 
     setPage(newData);
   };
-
-  useEffect(() => {
-    if (imageSettings) {
-      utils.setSettingsToStorage(page);
-    }
-  }, [page, imageSettings]);
 
   useEffect(() => {
     const handleWheel = (event) => {
@@ -122,6 +120,7 @@ export default function Edit() {
       const lastId = page.items[page.items.length - 1].id;
       newId = lastId + 1;
     }
+
     const newTextField = {
       id: newId,
       pageId: page.id,
@@ -130,13 +129,13 @@ export default function Edit() {
       rotationAngle: 0,
       translateX: 0,
       translateY: 0,
-      fontSize: 24,
-      fontColor: "black",
+      fontSize: 13,
+      fontColor: "grey",
       fontFamily: "",
-      width: 200,
+      width: 130,
       horizontalAlignment: "",
       verticalAlignment: "",
-      textAlign: "right",
+      textAlign: "left",
     };
 
     setPage((prevPage) => ({
@@ -209,7 +208,7 @@ export default function Edit() {
           </div>
         </div>
       ) : (
-        <Upload onSuccess={setRefresh} />
+        <Upload setImageDetails={setImageSettings} onSuccess={setRefresh} />
       )}
     </>
   );

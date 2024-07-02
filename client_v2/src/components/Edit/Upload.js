@@ -3,9 +3,8 @@ import { Button, Modal } from "react-bootstrap";
 import UploadImage from "./UploadImage";
 import UploadImageModal from "./UploadImageModal";
 
-export default function Upload({ onSuccess }) {
+export default function Upload({ setImageDetails, onSuccess }) {
   const [showModal, setShowModal] = useState(false);
-  const [imageDetails, setImageDetails] = useState(null);
 
   const handleUploadClick = () => {
     setShowModal(true);
@@ -15,7 +14,10 @@ export default function Upload({ onSuccess }) {
     setShowModal(false);
     setImageDetails(imageDetails);
     localStorage.setItem("imageDetails", JSON.stringify(imageDetails));
-    onSuccess(true);
+
+    if (onSuccess) {
+      onSuccess();
+    }
   };
 
   return (

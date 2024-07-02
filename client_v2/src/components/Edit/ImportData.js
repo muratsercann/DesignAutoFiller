@@ -3,8 +3,11 @@ import * as utils from "../../utils";
 import { Button, Spinner, Table } from "react-bootstrap";
 import TextColMatcher from "./TextColMatcher";
 import ImportModal from "./ImportModal";
-export default function ImportData({}) {
-  const [data, setData] = useState(utils.getImportedDataFromStorage());
+import { memo } from "react";
+import { BiCloudUpload } from "react-icons/bi";
+import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+
+export const ImportData = memo(function ImportData({ dataset, setDataset }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,24 +18,15 @@ export default function ImportData({}) {
 
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const handleSaveClick = async () => {
-    if (!(data && data.length > 0)) return;
-
-    setIsLoading(true);
-
-    await (async () => {
-      await wait(800);
-      utils.setImportedDataToStorage(data);
-    })();
-
-    setIsLoading(false);
-  };
-
   const handleContinue = async () => {
-    setIsLoading(true);
-    await wait(800);
-    setIsLoading(false);
+    if (dataset != null) {
+      setIsLoading(true);
+      await wait(800);
+      utils.setImportedDataToStorage(dataset);
+      setIsLoading(false);
+    }
   };
+
   return (
     <>
       {isLoading && (
@@ -45,47 +39,43 @@ export default function ImportData({}) {
         {
           <ImportModal
             isOpen={isModalOpen}
-            setImportedData={setData}
+            setImportedData={setDataset}
             setShow={setIsModalOpen}
             onContinue={handleContinue}
           />
         }
         <div>
-          <Button variant="secondary" onClick={handleImportClick}>
-            Import
-          </Button>
-          {data !== null && data.length > 0 && (
-            <Button
-              className="mx-3"
-              variant="success"
-              onClick={handleSaveClick}
-            >
-              Save
-            </Button>
-          )}
+          <OverlayTrigger
+            placement="bottom"
+            overlay={<Tooltip id="tooltip-select">Upload</Tooltip>}
+            variant="light"
+          >
+            <div className="custom-icon-button" onClick={handleImportClick}>
+              <BiCloudUpload size={24} />
+              <span>Upload</span>
+            </div>
+          </OverlayTrigger>
         </div>
-        {data !== null && data.length > 0 && (
+        {dataset !== null && dataset.length > 0 && (
           <>
             <Table
               striped
               bordered
               hover
               style={{ fontSize: "12px", height: "500px", overflow: "auto" }}
+              variant="dark"
             >
               <thead>
                 <tr>
-                  <th key={0}>No</th>
-                  {Object.keys(data[0]).map((colName, index) => (
+                  {Object.keys(dataset[0]).map((colName, index) => (
                     <th key={index}>{colName}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {data.map((row, rowIndex) => (
+                {dataset.map((row, rowIndex) => (
                   <tr key={rowIndex}>
-                    <td>{rowIndex + 1}</td>
-
-                    {Object.keys(data[0]).map((key, index) => (
+                    {Object.keys(dataset[0]).map((key, index) => (
                       <td key={index}>{row[key] || ""}</td>
                     ))}
                   </tr>
@@ -97,4 +87,5 @@ export default function ImportData({}) {
       </div>
     </>
   );
-}
+});
+export default ImportData;

@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import * as utils from "../../utils";
 import "./Edit.css";
-export default function TextColMatcher({}) {
-  const columns = utils.getColNamesFromStorage();
-
-  const [settings, setSettings] = useState(utils.getSettingsFromStorage());
-  const [isSomethingChanged, setIsChanged] = useState(false);
-  const dataset = utils.getImportedDataFromStorage();
+export default function TextColMatcher({ settings, setSettings, dataset }) {
+  const dataColumns = utils.getColNamesFromDataset(dataset);
 
   const handleChanges = (item, e) => {
     const value = e.target.value === "none" ? "" : e.target.value;
@@ -21,14 +17,7 @@ export default function TextColMatcher({}) {
     };
 
     setSettings(newSettings);
-    setIsChanged(true);
   };
-
-  useEffect(() => {
-    if (isSomethingChanged) {
-      utils.setSettingsToStorage(settings);
-    }
-  }, [settings, isSomethingChanged]);
 
   return (
     <>
@@ -50,7 +39,7 @@ export default function TextColMatcher({}) {
                     onChange={(e) => handleChanges(item, e)}
                   >
                     <option value={""}>none</option>
-                    {columns.map((col, index) => {
+                    {dataColumns.map((col, index) => {
                       return (
                         <option value={col} key={index}>
                           {col}

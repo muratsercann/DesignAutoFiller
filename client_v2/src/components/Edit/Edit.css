@@ -190,6 +190,8 @@
   margin-top: 2rem;
   justify-items: center;
   align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .matcher > * select {
@@ -201,7 +203,6 @@
   border-radius: 5px;
   height: fit-content;
   padding: 20px;
-  width: 57%;
 }
 
 .matcher .container > * .col-5 {
@@ -315,4 +316,19 @@ input.form-range {
   justify-content: center;
   box-sizing: border-box;
   border-radius: 10px;
+}
+
+.custom-icon-button {
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 8px;
+  line-height: 0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background-color: #ffffff1d;
+}
+
+.custom-icon-button:hover {
+  background-color: #ffffff1d;
 }
