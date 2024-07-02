@@ -209,12 +209,12 @@ button:hover {
 
 .header .create-new-button {
   background-color: #d3227a;
-  padding: 8px 8px 8px 8px;
+  padding: 8px 15px 8px 15px;
   border-radius: 8px;
   color: white;
   cursor: pointer;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 13px;
 }
 .header .create-new-button:hover {
   background-color: var(--bs-pink);
