@@ -187,8 +187,9 @@ button:hover {
   gap: 1rem;
   min-height: var(--header-height);
   max-height: var(--header-height);
-  background-color: var(--bs-indigo);
+  background-color: var(--bs-dark);
   color: var(--bs-light);
+  border-bottom: 1px solid #f8f9fa0a;
 }
 
 .header > h2 {
@@ -208,16 +209,16 @@ button:hover {
 }
 
 .header .create-new-button {
-  background-color: #d3227a;
+  background-color: #0177a9;
   padding: 8px 15px 8px 15px;
-  border-radius: 8px;
+  border-radius: 18px;
   color: white;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 12px;
 }
 .header .create-new-button:hover {
-  background-color: var(--bs-pink);
+  background-color: #118ac3;
 }
 
 .designer-body {
@@ -251,7 +252,7 @@ button:hover {
 .side-container {
   max-width: 360px;
   background-color: var(--bs-dark);
-  border-left: 1px solid #f8f9fa42;
+  border-left: 1px solid #f8f9fa0a;
   animation: expandWidth 0.5s forwards;
   color: var(--bs-light);
   overflow: auto;
@@ -294,8 +295,8 @@ button:hover {
   justify-items: flex-start;
   justify-content: center;
   align-items: center;
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 10px;
+  font-weight: 600;
   transition: background-color 0.3s ease;
   overflow: hidden;
 }
