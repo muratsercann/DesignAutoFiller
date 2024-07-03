@@ -257,6 +257,19 @@ button:hover {
   color: var(--bs-light);
   overflow: auto;
   position: relative;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.side-container > * input,
+.side-container > * select {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.side-container > * h6 {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 @keyframes expandWidth {
