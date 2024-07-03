@@ -172,7 +172,7 @@ export default function Page({
     } else if (ratio < 1) {
       setScale(ratio - 0.3);
     }
-  }, []);
+  }, [imageSettings]);
 
   useLayoutEffect(() => {
     const pageContentWidth = itemRef.current.offsetWidth;

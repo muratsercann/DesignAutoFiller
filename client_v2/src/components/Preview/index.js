@@ -9,6 +9,8 @@ export default function Preview({ settings, imageSettings, dataset }) {
     ? utils.cmToPixel(imageSettings.customHeightCm)
     : 0;
 
+  const scale = imageWidth > 150 ? 150 / imageWidth : 1;
+
   return (
     <div className="preview-container">
       {imageSettings &&
@@ -22,6 +24,7 @@ export default function Preview({ settings, imageSettings, dataset }) {
             imageWidth={imageWidth}
             imageHeight={imageHeight}
             datarow={row}
+            scale={scale}
           />
         ))}
     </div>

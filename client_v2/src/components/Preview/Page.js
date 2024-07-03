@@ -6,8 +6,8 @@ export default function Page({
   imageSettings,
   imageWidth,
   imageHeight,
-  mappings,
   datarow,
+  scale = 1,
 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
@@ -16,8 +16,8 @@ export default function Page({
       <div
         className="pageContent"
         style={{
-          width: `${imageWidth}px`,
-          height: `${imageHeight}px`,
+          width: `${imageWidth * scale}px`,
+          height: `${imageHeight * scale}px`,
         }}
       >
         <img
@@ -29,7 +29,7 @@ export default function Page({
 
         {isImageLoaded &&
           page.items.map((item, index) => (
-            <Item key={index} item={item} datarow={datarow} />
+            <Item key={index} item={item} datarow={datarow} scale={scale} />
           ))}
       </div>
     </>

@@ -11,13 +11,15 @@ import { IoCloudUploadSharp } from "react-icons/io5";
 import Upload from "./Edit/Upload";
 import { Button } from "react-bootstrap";
 import * as utils from "../utils";
+import UploadImageModal from "./Edit/UploadImageModal";
+import CreateNew from "./CreateNew";
 export default function Designer({}) {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
   const [dataset, setDataset] = useState(null);
   const [imageSettings, setImageSettings] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const [refresh, setRefresh] = useState(null);
   useEffect(() => {
     setLoading(true);
     const p = utils.getPageInfo();
@@ -28,7 +30,7 @@ export default function Designer({}) {
     setDataset(ds);
     setImageSettings(imgSt);
     setLoading(false);
-  }, []);
+  }, [refresh]);
 
   useEffect(() => {
     if (
@@ -93,9 +95,13 @@ export default function Designer({}) {
           <h2>Designify</h2>
         </div>
         <div className="header-right">
-          <div className="create-new-button" onClick={handleCreateNew}>
+          {/* <div className="create-new-button" onClick={handleCreateNew}>
             Create New
-          </div>
+          </div> */}
+          <CreateNew
+            setImageDetails={setImageSettings}
+            onSuccess={setRefresh}
+          />
         </div>
       </div>
       <div className="designer-body">

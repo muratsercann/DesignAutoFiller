@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Item({ item, mappings, datarow }) {
+export default function Item({ item, datarow, scale }) {
   let value = item.value;
 
   const column = item.dataColumn;
@@ -15,13 +15,14 @@ export default function Item({ item, mappings, datarow }) {
       className="no-select"
       style={{
         position: "absolute",
-        fontSize: item.fontSize + "px",
-        width: item?.width + "px",
-        height: item?.height,
+        fontSize: item.fontSize * scale + "px",
+        width: item?.width * scale + "px",
         color: item.fontColor,
         textAlign: item.textAlign,
         cursor: "inherit",
-        transform: `translate(${item.translateX}px, ${item.translateY}px) rotate(${item.rotationAngle}deg)`,
+        transform: `translate(${item.translateX * scale}px, ${
+          item.translateY * scale
+        }px) rotate(${item.rotationAngle}deg)`,
       }}
     >
       {value}

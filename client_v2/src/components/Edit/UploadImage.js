@@ -29,6 +29,8 @@ export default function UploadImage({ setImageDetails }) {
         ratio: Number((img.width / img.height).toFixed(2)),
         naturalWidthCm: utils.pixelToCm(img.width),
         naturalHeightCm: utils.pixelToCm(img.height),
+        customWidthCm: utils.pixelToCm(img.width),
+        customHeightCm: utils.pixelToCm(img.height),
       };
 
       setImageDetails(imageDetails);
