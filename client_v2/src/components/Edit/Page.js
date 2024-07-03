@@ -121,17 +121,21 @@ export default function Page({
     }
   };
   useEffect(() => {
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-    document.addEventListener("keydown", handleKeyDown);
-    document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("mouseout", handleMouseOut);
+    if (itemRef != null && itemRef.current != null) {
+      itemRef.current.addEventListener("mousemove", handleMouseMove);
+      itemRef.current.addEventListener("mouseup", handleMouseUp);
+      itemRef.current.addEventListener("keydown", handleKeyDown);
+      itemRef.current.addEventListener("mouseover", handleMouseOver);
+      itemRef.current.addEventListener("mouseout", handleMouseOut);
+    }
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-      document.removeEventListener("keydown", handleKeyDown);
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
+      if (itemRef != null && itemRef.current != null) {
+        itemRef.current.removeEventListener("mousemove", handleMouseMove);
+        itemRef.current.removeEventListener("mouseup", handleMouseUp);
+        itemRef.current.removeEventListener("keydown", handleKeyDown);
+        itemRef.current.removeEventListener("mouseover", handleMouseOver);
+        itemRef.current.removeEventListener("mouseout", handleMouseOut);
+      }
     };
   });
 
