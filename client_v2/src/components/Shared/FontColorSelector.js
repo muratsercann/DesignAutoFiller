@@ -4,6 +4,27 @@ import { useEffect, useRef, useState } from "react";
 
 export default function FontColorSelector({ color, onChange, disabled }) {
   const [showColorPicker, setShowColorPicker] = useState(false);
+
+  function convertcolor(colorStr) {
+    var rgba = colorStr
+      .replace("rgb(", "")
+      .replace(")", "")
+      .split(",")
+      .map((i) => Number(i));
+    return {
+      r: rgba[0],
+      g: rgba[1],
+      b: rgba[2],
+      a: rgba[3],
+    };
+  }
+
+  const handleChange = (color) => {
+    onChange(
+      `rgb(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`
+    );
+  };
+
   const pickerRef = useRef(null);
 
   const handleClick = () => {
@@ -50,7 +71,11 @@ export default function FontColorSelector({ color, onChange, disabled }) {
               zIndex: "99999",
             }}
           >
-            <SketchPicker color={color} onChange={onChange} />
+            <SketchPicker
+              color={convertcolor(color)}
+              onChange={handleChange}
+              onChangeComplete={handleChange}
+            />
           </div>
         )}
       </div>

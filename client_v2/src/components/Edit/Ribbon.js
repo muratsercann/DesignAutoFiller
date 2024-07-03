@@ -19,7 +19,9 @@ export default function Ribbon({
   );
 
   const handleColorChange = (color) => {
-    onItemChanged({ fontColor: color.hex });
+    onItemChanged({
+      fontColor: color,
+    });
   };
 
   const handleFontSizeChange = (e) => {
