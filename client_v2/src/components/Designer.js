@@ -160,20 +160,6 @@ export default function Designer({}) {
               </div>
               <div className="label">Preview</div>
             </div>
-            <div
-              title="Upload Image"
-              className={`menu-item ${
-                activePage === "uploadImage" ? "selected" : ""
-              }`}
-              onClick={() => {
-                setActivePage("uploadImage");
-              }}
-            >
-              <div className="icon">
-                <IoCloudUploadSharp size={iconSize} color="#7a859091" />
-              </div>
-              <div className="label">Upload Image</div>
-            </div>
           </div>
 
           {activePage !== "edit" && (
