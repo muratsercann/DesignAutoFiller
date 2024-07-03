@@ -16,7 +16,7 @@ import CreateNew from "./CreateNew";
 export default function Designer({}) {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
-  const [dataset, setDataset] = useState(null);
+  const [dataSource, setDatasource] = useState(null);
   const [imageSettings, setImageSettings] = useState(null);
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(null);
@@ -27,7 +27,7 @@ export default function Designer({}) {
     const imgSt = utils.getImageSettingsFromStorage();
 
     setPage(p);
-    setDataset(ds);
+    setDatasource(ds);
     setImageSettings(imgSt);
     setLoading(false);
   }, [refresh]);
@@ -44,9 +44,9 @@ export default function Designer({}) {
   }, [page]);
 
   useEffect(() => {
-    if (dataset !== undefined && dataset !== null)
-      utils.setImportedDataToStorage(dataset);
-  }, [dataset]);
+    if (dataSource !== undefined && dataSource !== null)
+      utils.setImportedDataToStorage(dataSource);
+  }, [dataSource]);
 
   useEffect(() => {
     if (imageSettings !== undefined && imageSettings !== null)
@@ -60,19 +60,23 @@ export default function Designer({}) {
         setPage={setPage}
         imageSettings={imageSettings}
         setImageSettings={setImageSettings}
-        dataset={dataset}
+        dataset={dataSource?.dataset}
       />
     ),
-    data: <ImportData dataset={dataset} setDataset={setDataset} />,
+    data: <ImportData dataSource={dataSource} setDataset={setDatasource} />,
     preview: (
       <Preview
-        dataset={dataset}
+        dataset={dataSource?.dataset}
         imageSettings={imageSettings}
         settings={page}
       />
     ),
     match: (
-      <TextColMatcher settings={page} setSettings={setPage} dataset={dataset} />
+      <TextColMatcher
+        settings={page}
+        setSettings={setPage}
+        dataset={dataSource?.dataset}
+      />
     ),
     uploadImage: <Upload setImageDetails={setImageSettings} />,
   };
@@ -168,7 +172,7 @@ export default function Designer({}) {
 
               {activePage === "preview" && (
                 <Preview
-                  dataset={dataset}
+                  dataset={dataSource?.dataset}
                   imageSettings={imageSettings}
                   settings={page}
                 />
@@ -178,7 +182,7 @@ export default function Designer({}) {
                 <TextColMatcher
                   settings={page}
                   setSettings={setPage}
-                  dataset={dataset}
+                  dataset={dataSource?.dataset}
                 />
               )}
             </div>
@@ -190,7 +194,7 @@ export default function Designer({}) {
             setPage={setPage}
             imageSettings={imageSettings}
             setImageSettings={setImageSettings}
-            dataset={dataset}
+            dataset={dataSource}
           />
         </div>
       </div>
