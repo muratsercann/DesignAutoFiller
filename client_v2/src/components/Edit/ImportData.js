@@ -1,13 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import * as utils from "../../utils";
-import { Button, Spinner, Table } from "react-bootstrap";
+import { Button, Modal, Spinner, Table } from "react-bootstrap";
 import TextColMatcher from "./TextColMatcher";
 import ImportModal from "./ImportModal";
-export default function ImportData({}) {
-  const [data, setData] = useState(utils.getImportedDataFromStorage());
+import { memo } from "react";
+import { BiPlusCircle, BiCloudUpload } from "react-icons/bi";
+import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+
+export const ImportData = memo(function ImportData({ dataSource, setDataset }) {
+  const dataset = dataSource?.dataset;
+  const filename = dataSource?.filename || "Endefined File";
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showData, setShowData] = useState(false);
 
   const handleImportClick = (e) => {
     setIsModalOpen(true);
@@ -15,24 +22,15 @@ export default function ImportData({}) {
 
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  const handleSaveClick = async () => {
-    if (!(data && data.length > 0)) return;
+  // const handleContinue = async () => {
+  //   if (dataset != null) {
+  //     setIsLoading(true);
+  //     await wait(800);
+  //     utils.setImportedDataToStorage(dataset);
+  //     setIsLoading(false);
+  //   }
+  // };
 
-    setIsLoading(true);
-
-    await (async () => {
-      await wait(800);
-      utils.setImportedDataToStorage(data);
-    })();
-
-    setIsLoading(false);
-  };
-
-  const handleContinue = async () => {
-    setIsLoading(true);
-    await wait(800);
-    setIsLoading(false);
-  };
   return (
     <>
       {isLoading && (
@@ -45,56 +43,75 @@ export default function ImportData({}) {
         {
           <ImportModal
             isOpen={isModalOpen}
-            setImportedData={setData}
+            setImportedData={setDataset}
             setShow={setIsModalOpen}
-            onContinue={handleContinue}
           />
         }
         <div>
-          <Button variant="secondary" onClick={handleImportClick}>
-            Import
-          </Button>
-          {data !== null && data.length > 0 && (
-            <Button
-              className="mx-3"
-              variant="success"
-              onClick={handleSaveClick}
-            >
-              Save
-            </Button>
-          )}
+          <div className="custom-icon-button" onClick={handleImportClick}>
+            <BiPlusCircle size={24} />
+            <span>Add</span>
+          </div>
         </div>
-        {data !== null && data.length > 0 && (
-          <>
-            <Table
-              striped
-              bordered
-              hover
-              style={{ fontSize: "12px", height: "500px", overflow: "auto" }}
-            >
-              <thead>
-                <tr>
-                  <th key={0}>No</th>
-                  {Object.keys(data[0]).map((colName, index) => (
-                    <th key={index}>{colName}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((row, rowIndex) => (
-                  <tr key={rowIndex}>
-                    <td>{rowIndex + 1}</td>
 
-                    {Object.keys(data[0]).map((key, index) => (
-                      <td key={index}>{row[key] || ""}</td>
+        {dataset != null && dataset.length > 0 && (
+          <>
+            <Modal
+              style={{ overflow: "auto", maxHeight: "80%" }}
+              size="lg"
+              show={showData}
+              fullscreen={true}
+              onHide={() => {
+                setShowData(false);
+              }}
+              aria-labelledby="example-modal-sizes-title-lg"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-lg">
+                  Datasource : {filename}
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Table
+                  striped
+                  bordered
+                  hover
+                  style={{
+                    fontSize: "12px",
+                    height: "500px",
+                    overflow: "auto",
+                  }}
+                  variant="dark"
+                >
+                  <thead>
+                    <tr>
+                      {Object.keys(dataset[0]).map((colName, index) => (
+                        <th key={index}>{colName}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dataset.map((row, rowIndex) => (
+                      <tr key={rowIndex}>
+                        {Object.keys(dataset[0]).map((key, index) => (
+                          <td key={index}>{row[key] || ""}</td>
+                        ))}
+                      </tr>
                     ))}
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+                  </tbody>
+                </Table>
+              </Modal.Body>
+            </Modal>
+            <div
+              className="app-custom-button"
+              onClick={() => setShowData(true)}
+            >
+              {filename}
+            </div>
           </>
         )}
       </div>
     </>
   );
-}
+});
+export default ImportData;

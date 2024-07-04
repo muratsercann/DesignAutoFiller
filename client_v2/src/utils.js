@@ -85,7 +85,7 @@ export const cmToPixel = (value) => {
 };
 
 const storageKeys = {
-  imageSettings: "imageSettings",
+  imageSettings: "imageDetails",
   userSettings: "userSettings",
   importedData: "importedData",
   tagColumnMapping: "tagColumnMapping",
@@ -120,6 +120,15 @@ export function getImportedDataFromStorage() {
 
 export function getColNamesFromStorage() {
   const data = getImportedDataFromStorage();
+  if (data !== null && data.length > 0) {
+    const cols = Object.keys(data[0]);
+    return cols;
+  } else {
+    return [];
+  }
+}
+
+export function getColNamesFromDataset(data) {
   if (data !== null && data.length > 0) {
     const cols = Object.keys(data[0]);
     return cols;

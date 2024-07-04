@@ -116,9 +116,14 @@ export default function ImportModal({
       return;
     }
     setIsLoading(false);
-    setImportedData(data);
+    setImportedData({
+      filename: fileName,
+      dataset: data,
+    });
     onClose();
-    onContinue();
+    if (onContinue) {
+      onContinue();
+    }
   };
 
   const handleBrowseClick = () => {

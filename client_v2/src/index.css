@@ -41,6 +41,21 @@ code {
     display: none !important;
   }
 
+  .component-container {
+    display: none !important;
+  }
+
+  .preview-container {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .side-left,
+  .side-container {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+  }
+
   @page {
     margin: 0;
   }

@@ -6,7 +6,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  line-height: 1;
+  line-height: 20px;
+  padding-top: 4px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -15,13 +16,13 @@
 
 .custom-button > .letter {
   color: black;
-  font-size: 24px;
+  font-size: 18px;
   font-family: sans-serif;
 }
 
 .custom-button > .color {
-  width: 25px;
-  height: 6px;
+  width: 20px;
+  height: 3px;
   border-radius: 7px;
   /* background-color: blue; */
 }
