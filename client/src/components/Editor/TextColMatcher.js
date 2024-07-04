@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import * as utils from "../../utils";
-import "./Edit.css";
+import "./editor.css";
 export default function TextColMatcher({ settings, setSettings, dataset }) {
   const dataColumns = utils.getColNamesFromDataset(dataset);
 

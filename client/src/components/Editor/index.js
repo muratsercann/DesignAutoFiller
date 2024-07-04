@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import Page from "./Page";
-import "./Edit.css";
+import "./editor.css";
 import Ribbon from "./Ribbon";
 import * as utils from "../../utils.js";
 import Button from "react-bootstrap/Button";
 import Range from "../Shared/Range.js";
 import Upload from "./Upload.js";
 
-export default function Edit({
+export default function Editor({
   page,
   setPage,
-  imageSettings,
-  setImageSettings,
+  imageDetails,
+  setImageDetails,
   dataset,
 }) {
   const [selectedItemElement, setSelectedItemElement] = useState(null);
@@ -165,13 +165,13 @@ export default function Edit({
 
   return (
     <>
-      {imageSettings ? (
+      {imageDetails ? (
         <div className="edit">
           <Ribbon
             selectedItemElement={selectedItemElement}
             selectedItem={selectedItem}
             onItemChanged={onItemChanged}
-            imageSettings={imageSettings}
+            imageDetails={imageDetails}
             scale={scale}
           />
           <div
@@ -192,23 +192,15 @@ export default function Edit({
               setPage={setPage}
               handleAddNewText={addNewTextField}
               handleDeleteSelectedText={deleteSelectedText}
-              imageSettings={imageSettings}
+              imageDetails={imageDetails}
             />
           </div>
-          {/* <Button
-        className="save-continue-button"
-        variant="primary"
-        onClick={handleSaveContinue}
-      >
-        Save and Continue
-      </Button> */}
-
           <div className="edit-footer">
             <Range scale={scale} setScale={setScale} />
           </div>
         </div>
       ) : (
-        <Upload setImageDetails={setImageSettings} onSuccess={setRefresh} />
+        <Upload setImageDetails={setImageDetails} onSuccess={setRefresh} />
       )}
     </>
   );

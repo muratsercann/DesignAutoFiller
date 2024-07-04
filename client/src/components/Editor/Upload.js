@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import UploadImage from "./UploadImage";
 import UploadImageModal from "./UploadImageModal";
-
+import * as utils from "../../utils";
 export default function Upload({ setImageDetails, onSuccess }) {
   const [showModal, setShowModal] = useState(false);
 
@@ -13,7 +12,7 @@ export default function Upload({ setImageDetails, onSuccess }) {
   const handleContinue = (imageDetails) => {
     setShowModal(false);
     setImageDetails(imageDetails);
-    localStorage.setItem("imageDetails", JSON.stringify(imageDetails));
+    utils.setImageDetailsToStorage(imageDetails);
 
     if (onSuccess) {
       onSuccess();

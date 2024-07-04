@@ -1,14 +1,6 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Item from "./Item";
-import * as utils from "../../utils";
-export default function Page({
-  page,
-  imageSettings,
-  imageWidth,
-  imageHeight,
-  datarow,
-  scale = 1,
-}) {
+export default function Page({ page, imageDetails, datarow, scale = 1 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   return (
@@ -16,12 +8,12 @@ export default function Page({
       <div
         className="pageContent"
         style={{
-          width: `${imageWidth * scale}px`,
-          height: `${imageHeight * scale}px`,
+          width: `${imageDetails.customWidth * scale}px`,
+          height: `${imageDetails.customHeight * scale}px`,
         }}
       >
         <img
-          src={imageSettings.src}
+          src={imageDetails.src}
           className="img-fluid no-select"
           alt=""
           onLoad={() => setIsImageLoaded(true)}

@@ -85,14 +85,13 @@ export const cmToPixel = (value) => {
 };
 
 const storageKeys = {
-  imageSettings: "imageDetails",
+  imageDetails: "imageDetails",
   userSettings: "userSettings",
   importedData: "importedData",
-  tagColumnMapping: "tagColumnMapping",
 };
 
-export function getImageSettingsFromStorage() {
-  return JSON.parse(localStorage.getItem(storageKeys.imageSettings));
+export function getImageDetailsFromStorage() {
+  return JSON.parse(localStorage.getItem(storageKeys.imageDetails));
 }
 
 export function getSettingsFromStorage() {
@@ -137,12 +136,8 @@ export function getColNamesFromDataset(data) {
   }
 }
 
-export function getTagColumnMappingFromStorage() {
-  return JSON.parse(localStorage.getItem(storageKeys.tagColumnMapping));
-}
-
-export function setImageSettingsToStorage(data) {
-  localStorage.setItem(storageKeys.imageSettings, JSON.stringify(data));
+export function setImageDetailsToStorage(data) {
+  localStorage.setItem(storageKeys.imageDetails, JSON.stringify(data));
 }
 
 export function setSettingsToStorage(data) {
@@ -151,10 +146,6 @@ export function setSettingsToStorage(data) {
 
 export function setImportedDataToStorage(data) {
   localStorage.setItem(storageKeys.importedData, JSON.stringify(data));
-}
-
-export function setTagColumnMappingToStorage(data) {
-  localStorage.setItem(storageKeys.tagColumnMapping, JSON.stringify(data));
 }
 
 export function clearAllDataFromStorage() {
@@ -171,12 +162,8 @@ export function clearImportedDataFromStorage() {
   localStorage.removeItem(storageKeys.importedData);
 }
 
-export function clearTagColumnMappingFromStorage() {
-  localStorage.removeItem(storageKeys.tagColumnMapping);
-}
-
-export function clearImageSettingsFormStorage() {
-  localStorage.removeItem(storageKeys.imageSettings);
+export function clearImageDetailsFromStorage() {
+  localStorage.removeItem(storageKeys.imageDetails);
 }
 
 export const calculateTranslateXY_ForWidthChange = (

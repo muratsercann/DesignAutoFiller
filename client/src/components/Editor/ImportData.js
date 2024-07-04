@@ -22,15 +22,6 @@ export const ImportData = memo(function ImportData({ dataSource, setDataset }) {
 
   const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  // const handleContinue = async () => {
-  //   if (dataset != null) {
-  //     setIsLoading(true);
-  //     await wait(800);
-  //     utils.setImportedDataToStorage(dataset);
-  //     setIsLoading(false);
-  //   }
-  // };
-
   return (
     <>
       {isLoading && (

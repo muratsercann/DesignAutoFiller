@@ -12,15 +12,12 @@ export default function Page({
   handleSpaceClick,
   scale,
   setScale,
-  imageSettings,
+  imageDetails,
 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
   // const [scale, setScale] = useState(1.0);
   const itemRef = useRef(null);
-
-  const imageWidth = utils.cmToPixel(imageSettings.customWidthCm);
-  const imageHeight = utils.cmToPixel(imageSettings.customHeightCm);
 
   const handleKeyDown = (e) => {
     if (selectedItem) {
@@ -176,7 +173,7 @@ export default function Page({
     } else if (ratio < 1) {
       setScale(ratio - 0.3);
     }
-  }, [imageSettings]);
+  }, [imageDetails]);
 
   useLayoutEffect(() => {
     const pageContentWidth = itemRef.current.offsetWidth;
@@ -198,18 +195,20 @@ export default function Page({
         className="pageContent"
         ref={itemRef}
         style={{
-          width: `${imageWidth * scale}px`,
-          height: `${imageHeight * scale}px`,
+          width: `${imageDetails.customWidth * scale}px`,
+          height: `${imageDetails.customHeight * scale}px`,
         }}
         onClick={handleSpaceClick}
       >
         <img
-          src={imageSettings.src}
+          src={imageDetails.src}
           className="img-fluid no-select"
           alt=""
           onLoad={() => setIsImageLoaded(true)}
         />
-        <span className="img-info">{`${imageSettings.customWidthCm}cm x ${imageSettings.customHeightCm}cm`}</span>
+        <span className="img-info">{`${utils.pixelToCm(
+          imageDetails.customWidth
+        )}cm x ${utils.pixelToCm(imageDetails.customHeight)}cm`}</span>
 
         <div title="" className="page-buttons-container">
           <span

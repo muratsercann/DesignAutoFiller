@@ -1,41 +1,37 @@
 import { useEffect, useState } from "react";
-import Home from "./Home";
-import Edit from "./Edit";
-import ImportData from "./Edit/ImportData";
+import Editor from "./Editor";
+import ImportData from "./Editor/ImportData";
 import Preview from "./Preview";
-import { BsCollection, BsDatabase, BsEye, BsHouseDoor } from "react-icons/bs";
+import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
 import { TbCirclesRelation } from "react-icons/tb";
 import { FaImages } from "react-icons/fa6";
-import TextColMatcher from "./Edit/TextColMatcher";
-import { IoCloudUploadSharp } from "react-icons/io5";
-import Upload from "./Edit/Upload";
-import { Button } from "react-bootstrap";
+import TextColMatcher from "./Editor/TextColMatcher";
+import Upload from "./Editor/Upload";
 import * as utils from "../utils";
-import UploadImageModal from "./Edit/UploadImageModal";
 import CreateNew from "./CreateNew";
 export default function Designer({}) {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
   const [dataSource, setDatasource] = useState(null);
-  const [imageSettings, setImageSettings] = useState(null);
+  const [imageDetails, setImageDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(null);
   useEffect(() => {
     setLoading(true);
     const p = utils.getPageInfo();
     const ds = utils.getImportedDataFromStorage();
-    const imgSt = utils.getImageSettingsFromStorage();
+    const imgSt = utils.getImageDetailsFromStorage();
 
     setPage(p);
     setDatasource(ds);
-    setImageSettings(imgSt);
+    setImageDetails(imgSt);
     setLoading(false);
   }, [refresh]);
 
   useEffect(() => {
     if (
-      imageSettings !== null &&
-      imageSettings !== undefined &&
+      imageDetails !== null &&
+      imageDetails !== undefined &&
       page !== null &&
       page !== undefined
     ) {
@@ -49,17 +45,17 @@ export default function Designer({}) {
   }, [dataSource]);
 
   useEffect(() => {
-    if (imageSettings !== undefined && imageSettings !== null)
-      utils.setImageSettingsToStorage(imageSettings);
-  }, [imageSettings]);
+    if (imageDetails !== undefined && imageDetails !== null)
+      utils.setImageDetailsToStorage(imageDetails);
+  }, [imageDetails]);
 
   const pages = {
     edit: (
-      <Edit
+      <Editor
         page={page}
         setPage={setPage}
-        imageSettings={imageSettings}
-        setImageSettings={setImageSettings}
+        imageDetails={imageDetails}
+        setImageDetails={setImageDetails}
         dataset={dataSource?.dataset}
       />
     ),
@@ -67,7 +63,7 @@ export default function Designer({}) {
     preview: (
       <Preview
         dataset={dataSource?.dataset}
-        imageSettings={imageSettings}
+        imageDetails={imageDetails}
         settings={page}
       />
     ),
@@ -78,12 +74,8 @@ export default function Designer({}) {
         dataset={dataSource?.dataset}
       />
     ),
-    uploadImage: <Upload setImageDetails={setImageSettings} />,
+    uploadImage: <Upload setImageDetails={setImageDetails} />,
   };
-
-  const children = pages[activePage];
-
-  const handleCreateNew = () => {};
 
   const iconSize = 24;
 
@@ -99,13 +91,7 @@ export default function Designer({}) {
           <h2>Designify</h2>
         </div>
         <div className="header-right">
-          {/* <div className="create-new-button" onClick={handleCreateNew}>
-            Create New
-          </div> */}
-          <CreateNew
-            setImageDetails={setImageSettings}
-            onSuccess={setRefresh}
-          />
+          <CreateNew setImageDetails={setImageDetails} onSuccess={setRefresh} />
         </div>
       </div>
       <div className="designer-body">
@@ -168,12 +154,17 @@ export default function Designer({}) {
 
           {activePage !== "edit" && (
             <div className="side-container">
-              {activePage === "data" && pages.data}
+              {activePage === "data" && (
+                <ImportData
+                  dataSource={dataSource}
+                  setDataset={setDatasource}
+                />
+              )}
 
               {activePage === "preview" && (
                 <Preview
                   dataset={dataSource?.dataset}
-                  imageSettings={imageSettings}
+                  imageDetails={imageDetails}
                   settings={page}
                 />
               )}
@@ -189,11 +180,11 @@ export default function Designer({}) {
           )}
         </div>
         <div className="component-container">
-          <Edit
+          <Editor
             page={page}
             setPage={setPage}
-            imageSettings={imageSettings}
-            setImageSettings={setImageSettings}
+            imageDetails={imageDetails}
+            setImageDetails={setImageDetails}
             dataset={dataSource}
           />
         </div>

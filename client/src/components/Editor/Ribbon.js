@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FontColorSelector from "../Shared/FontColorSelector";
 import PositionSelector from "../Shared/PositionSelector";
-import "./Edit.css";
+import "./editor.css";
 import Form from "react-bootstrap/Form";
 import * as utils from "../../utils";
 
@@ -11,7 +11,7 @@ export default function Ribbon({
   selectedItemElement,
   selectedItem,
   onItemChanged,
-  imageSettings,
+  imageDetails,
   scale,
 }) {
   const [rotationAngle, setRotationAngle] = useState(

@@ -3,7 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
-import "./Edit.css";
+import "./editor.css";
 import { IoCloudUploadSharp } from "react-icons/io5";
 import { Spinner } from "react-bootstrap";
 import * as utils from "../../utils";
@@ -26,11 +26,11 @@ export default function UploadImage({ setImageDetails }) {
     img.onload = function () {
       const imageDetails = {
         src: dataUrl,
-        ratio: Number((img.width / img.height).toFixed(2)),
-        naturalWidthCm: utils.pixelToCm(img.width),
-        naturalHeightCm: utils.pixelToCm(img.height),
-        customWidthCm: utils.pixelToCm(img.width),
-        customHeightCm: utils.pixelToCm(img.height),
+        ratio: Number(img.width / img.height),
+        naturalWidth: img.width,
+        naturalHeight: img.height,
+        customWidth: img.width,
+        customHeight: img.height,
       };
 
       setImageDetails(imageDetails);

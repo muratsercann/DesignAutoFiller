@@ -9,22 +9,20 @@ export default function Sizing({ imageDetails, setImageDetails }) {
   const thisRef = useRef(null);
   const src = imageDetails.src;
   const ratio = imageDetails.ratio;
-  const naturalWidthCm = imageDetails.naturalWidthCm;
-  const naturalHeightCm = imageDetails.naturalHeightCm;
 
-  let imgPreviewWidthPx = utils.cmToPixel(naturalWidthCm);
+  let imgPreviewWidth = imageDetails.naturalWidth;
 
-  if (imgPreviewWidthPx > 150) imgPreviewWidthPx = 150;
-  if (ratio < 1) imgPreviewWidthPx = 150 * ratio;
+  if (imgPreviewWidth > 150) imgPreviewWidth = 150;
+  if (ratio < 1) imgPreviewWidth = 150 * ratio;
 
   const handleWidthChange = (e) => {
-    const width = Number(e.target.value);
-    const height = Number((e.target.value / ratio).toFixed(2));
+    const width = utils.cmToPixel(Number(e.target.value));
+    const height = Number((width / ratio).toFixed(2));
 
     setImageDetails({
       ...imageDetails,
-      customWidthCm: width,
-      customHeightCm: height,
+      customWidth: width,
+      customHeight: height,
     });
   };
 
@@ -34,7 +32,7 @@ export default function Sizing({ imageDetails, setImageDetails }) {
         <img
           alt=""
           src={src}
-          width={`${imgPreviewWidthPx}px`}
+          width={`${imgPreviewWidth}px`}
           className="image-fluid"
         />
       )}
@@ -56,7 +54,10 @@ export default function Sizing({ imageDetails, setImageDetails }) {
             style={{ width: "120px" }}
             type="number"
             placeholder="Width (cm)"
-            value={imageDetails?.customWidthCm ?? imageDetails.naturalWidthCm}
+            value={
+              utils.pixelToCm(imageDetails?.customWidth) ??
+              utils.pixelToCm(imageDetails.naturalWidth)
+            }
             onChange={handleWidthChange}
           />
           <div>cm</div>
@@ -79,7 +80,10 @@ export default function Sizing({ imageDetails, setImageDetails }) {
             id="height"
             type="number"
             placeholder="Height (cm)"
-            value={imageDetails?.customHeightCm ?? imageDetails.naturalHeightCm}
+            value={
+              utils.pixelToCm(imageDetails?.customHeight) ??
+              utils.pixelToCm(imageDetails.naturalHeight)
+            }
           />
 
           <div>cm</div>

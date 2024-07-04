@@ -1,28 +1,20 @@
-import "./styles/preview.css";
+import "./preview.css";
 import * as utils from "../../utils";
 import Page from "./Page";
-export default function Preview({ settings, imageSettings, dataset }) {
-  const imageWidth = imageSettings
-    ? utils.cmToPixel(imageSettings.customWidthCm)
-    : 0;
-  const imageHeight = imageSettings
-    ? utils.cmToPixel(imageSettings.customHeightCm)
-    : 0;
-
-  const scale = imageWidth > 150 ? 150 / imageWidth : 1;
+export default function Preview({ settings, imageDetails, dataset }) {
+  const scale =
+    imageDetails.customWidth > 150 ? 150 / imageDetails.customWidth : 1;
 
   return (
     <div className="preview-container">
-      {imageSettings &&
+      {imageDetails &&
         dataset &&
         settings &&
         dataset.map((row, index) => (
           <Page
             key={index}
             page={settings}
-            imageSettings={imageSettings}
-            imageWidth={imageWidth}
-            imageHeight={imageHeight}
+            imageDetails={imageDetails}
             datarow={row}
             scale={scale}
           />

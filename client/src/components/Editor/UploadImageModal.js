@@ -2,7 +2,6 @@ import { Button, Modal } from "react-bootstrap";
 import UploadImage from "./UploadImage";
 import { useState } from "react";
 import Sizing from "./Sizing";
-import Upload from "./Upload";
 
 export default function UploadImageModal({ show, setShow, onContinue }) {
   const pages = {
