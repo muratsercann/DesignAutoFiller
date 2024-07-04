@@ -1,0 +1,16 @@
+.preview-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.preview-container > .pageContent {
+  display: flex;
+  position: relative !important;
+}
