@@ -11,7 +11,7 @@ import { Spinner } from "react-bootstrap";
 export default function ImportModal({
   isOpen,
   setShow,
-  setImportedData,
+  setDataSource,
   onContinue,
 }) {
   const pasteAreaRef = useRef(null);
@@ -116,7 +116,7 @@ export default function ImportModal({
       return;
     }
     setIsLoading(false);
-    setImportedData({
+    setDataSource({
       filename: fileName,
       dataset: data,
     });

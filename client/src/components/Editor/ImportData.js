@@ -7,7 +7,12 @@ import { memo } from "react";
 import { BiPlusCircle, BiCloudUpload } from "react-icons/bi";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 
-export const ImportData = memo(function ImportData({ dataSource, setDataset }) {
+export const ImportData = memo(function ImportData({
+  page,
+  setPage,
+  dataSource,
+  setDataSource,
+}) {
   const dataset = dataSource?.dataset;
   const filename = dataSource?.filename || "Endefined File";
 
@@ -34,7 +39,7 @@ export const ImportData = memo(function ImportData({ dataSource, setDataset }) {
         {
           <ImportModal
             isOpen={isModalOpen}
-            setImportedData={setDataset}
+            setDataSource={setDataSource}
             setShow={setIsModalOpen}
           />
         }
@@ -99,6 +104,12 @@ export const ImportData = memo(function ImportData({ dataSource, setDataset }) {
             >
               {filename}
             </div>
+
+            <TextColMatcher
+              settings={page}
+              setSettings={setPage}
+              dataset={dataSource?.dataset}
+            />
           </>
         )}
       </div>

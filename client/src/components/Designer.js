@@ -62,7 +62,12 @@ export default function Designer() {
           <h2>Designify</h2>
         </div>
         <div className="header-right">
-          <CreateNew setImageDetails={setImageDetails} onSuccess={setRefresh} />
+          <CreateNew
+            page={page}
+            setPage={setPage}
+            setImageDetails={setImageDetails}
+            onSuccess={setRefresh}
+          />
         </div>
       </div>
       <div className="designer-body">
@@ -93,7 +98,7 @@ export default function Designer() {
               <div className="label">Data Source</div>
             </div>
 
-            <div
+            {/* <div
               title="Bind Data Columns"
               className={`menu-item ${
                 activePage === "match" ? "selected" : ""
@@ -106,7 +111,7 @@ export default function Designer() {
                 <TbCirclesRelation size={iconSize} />
               </div>
               <div className="label">Bind Data</div>
-            </div>
+            </div> */}
             <div
               title="Preview"
               className={`menu-item ${
@@ -128,7 +133,9 @@ export default function Designer() {
               {activePage === "data" && (
                 <ImportData
                   dataSource={dataSource}
-                  setDataset={setDatasource}
+                  setDataSource={setDatasource}
+                  page={page}
+                  setPage={setPage}
                 />
               )}
 

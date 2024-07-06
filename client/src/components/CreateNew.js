@@ -1,7 +1,12 @@
 import { useState } from "react";
 import UploadImageModal from "./Editor/UploadImageModal";
 import * as utils from "../utils";
-export default function CreateNew({ setImageDetails, onSuccess }) {
+export default function CreateNew({
+  page,
+  setPage,
+  setImageDetails,
+  onSuccess,
+}) {
   const [showModal, setShowModal] = useState(false);
 
   const handleUploadClick = () => {
@@ -11,8 +16,9 @@ export default function CreateNew({ setImageDetails, onSuccess }) {
   const handleContinue = (imageDetails) => {
     setShowModal(false);
     setImageDetails(imageDetails);
+    setPage({ ...page, items: [] });
+
     utils.setImageDetailsToStorage(imageDetails);
-    utils.clearUserSettingsFromStorage();
 
     if (onSuccess) {
       onSuccess(true);
