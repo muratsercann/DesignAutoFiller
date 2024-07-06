@@ -99,9 +99,10 @@ export default function Editor({
   };
 
   const unSelect = () => {
-    if (selectedItem === null) {
+    if (!selectedItem) {
       return;
     }
+
     if (selectedItem.value === "") {
       deleteItem(selectedItem.id);
     }
@@ -140,7 +141,7 @@ export default function Editor({
   };
 
   const deleteSelectedText = () => {
-    if (selectedItem === null) {
+    if (!selectedItem) {
       return;
     }
     deleteItem(selectedItem.id);
@@ -149,7 +150,7 @@ export default function Editor({
   };
 
   const deleteItem = (id) => {
-    if (id === null || id === 0) {
+    if (!id || id === 0) {
       return;
     }
     setPage((prevPage) => ({

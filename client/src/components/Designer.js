@@ -14,7 +14,7 @@ export default function Designer() {
   const [dataSource, setDatasource] = useState(null);
   const [imageDetails, setImageDetails] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [refresh, setRefresh] = useState(null);
+  const [refresh, setRefresh] = useState(0);
   useEffect(() => {
     setLoading(true);
     const p = utils.getPageInfo();
@@ -52,6 +52,10 @@ export default function Designer() {
 
   if (loading) return <>loading</>;
 
+  const refreshPage = () => {
+    setRefresh((prev) => prev + 1);
+  };
+
   return (
     <div className="designer-container">
       <div className="header">
@@ -66,7 +70,7 @@ export default function Designer() {
             page={page}
             setPage={setPage}
             setImageDetails={setImageDetails}
-            onSuccess={setRefresh}
+            onSuccess={refreshPage}
           />
         </div>
       </div>

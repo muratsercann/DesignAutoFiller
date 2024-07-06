@@ -210,7 +210,7 @@ export default function Page({
             >
               +
             </span>
-            {selectedItem !== null && (
+            {selectedItem && (
               <span
                 title="Delete"
                 className="remove-text-button"

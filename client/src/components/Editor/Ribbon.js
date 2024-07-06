@@ -114,7 +114,7 @@ export default function Ribbon({
   };
 
   useEffect(() => {
-    if (selectedItem === null) {
+    if (!selectedItem) {
       return;
     }
     setRotationAngle(selectedItem.rotationAngle);

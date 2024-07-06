@@ -17,11 +17,11 @@ export default function CreateNew({
     setShowModal(false);
     setImageDetails(imageDetails);
     setPage({ ...page, items: [] });
-
+    utils.clearUserSettingsFromStorage();
     utils.setImageDetailsToStorage(imageDetails);
 
     if (onSuccess) {
-      onSuccess(true);
+      onSuccess();
     }
   };
 
