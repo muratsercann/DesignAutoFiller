@@ -8,9 +8,10 @@
   align-items: center;
 }
 
-
+.alignment:not(.disabled) {
+  cursor: pointer;
+}
 
 .alignment:not(.disabled):hover {
   background-color: #ebecf0;
-  cursor: pointer;
 }

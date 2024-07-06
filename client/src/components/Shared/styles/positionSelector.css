@@ -7,9 +7,11 @@
   border-radius: 5px;
   position: relative;
 }
+.set-position:not(.disabled) {
+  cursor: pointer;
+}
 .set-position:not(.disabled):hover {
   background-color: #ebecf0;
-  cursor: pointer;
 }
 
 .positionSelector {
