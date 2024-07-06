@@ -148,21 +148,12 @@ export default function Page({
     const pageContainerHeight =
       document.getElementById("pageContainer").offsetHeight;
 
-    console.log(
-      `page container size : (${pageContainerWidth} x ${pageContainerHeight}) `
-    );
-    console.log(
-      `page content size : (${pageContentWidth} x ${pageContentHeigt}) `
-    );
-
     let ratio;
     if (pageContainerWidth > pageContainerHeight) {
       ratio = (pageContainerWidth / pageContentWidth).toFixed(2);
     } else {
       ratio = (pageContainerHeight / pageContentHeigt).toFixed(2);
     }
-
-    console.log("ratio : ", ratio);
 
     if (ratio > 2) {
       let newScale = scale * (ratio / 2);
@@ -190,57 +181,59 @@ export default function Page({
 
   return (
     <div className="pageSubContainer">
-      <div
-        id="pageContent"
-        className="pageContent"
-        ref={itemRef}
-        style={{
-          width: `${imageDetails.customWidth * scale}px`,
-          height: `${imageDetails.customHeight * scale}px`,
-        }}
-        // onClick={handleSpaceClick}
-      >
-        <img
-          src={imageDetails.src}
-          className="img-fluid no-select"
-          alt=""
-          onLoad={() => setIsImageLoaded(true)}
-        />
-        <span className="img-info">{`${utils.pixelToCm(
-          imageDetails.customWidth
-        )}cm x ${utils.pixelToCm(imageDetails.customHeight)}cm`}</span>
+      <div className="pageContentParent">
+        <div
+          id="pageContent"
+          className="pageContent"
+          ref={itemRef}
+          style={{
+            width: `${imageDetails.customWidth * scale}px`,
+            height: `${imageDetails.customHeight * scale}px`,
+          }}
+          // onClick={handleSpaceClick}
+        >
+          <img
+            src={imageDetails.src}
+            className="img-fluid no-select"
+            alt=""
+            onLoad={() => setIsImageLoaded(true)}
+          />
+          <span className="img-info">{`${utils.pixelToCm(
+            imageDetails.customWidth
+          )}cm x ${utils.pixelToCm(imageDetails.customHeight)}cm`}</span>
 
-        <div title="" className="page-buttons-container">
-          <span
-            title="Add new text"
-            className="add-text-button"
-            onClick={handleAddNewText}
-          >
-            +
-          </span>
-          {selectedItem !== null && (
+          <div title="" className="page-buttons-container">
             <span
-              title="Delete"
-              className="remove-text-button"
-              onClick={handleDeleteSelectedText}
+              title="Add new text"
+              className="add-text-button"
+              onClick={handleAddNewText}
             >
-              x
+              +
             </span>
-          )}
-        </div>
+            {selectedItem !== null && (
+              <span
+                title="Delete"
+                className="remove-text-button"
+                onClick={handleDeleteSelectedText}
+              >
+                x
+              </span>
+            )}
+          </div>
 
-        {isImageLoaded &&
-          page.items.map((item, index) => (
-            <Item
-              scale={scale}
-              item={item}
-              selectedItemElement={selectedItemElement}
-              setSelectedItemElement={setSelectedItemElement}
-              key={index}
-              onItemChanged={onItemChanged}
-              onMouseDown={(e) => handleMouseDown(item, e)}
-            />
-          ))}
+          {isImageLoaded &&
+            page.items.map((item, index) => (
+              <Item
+                scale={scale}
+                item={item}
+                selectedItemElement={selectedItemElement}
+                setSelectedItemElement={setSelectedItemElement}
+                key={index}
+                onItemChanged={onItemChanged}
+                onMouseDown={(e) => handleMouseDown(item, e)}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
