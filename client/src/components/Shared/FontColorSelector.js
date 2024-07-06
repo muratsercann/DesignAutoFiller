@@ -2,8 +2,13 @@ import { SketchPicker } from "react-color";
 import "./styles/fontColorSelector.css";
 import { useEffect, useRef, useState } from "react";
 
-export default function FontColorSelector({ color, onChange, disabled }) {
-  const [showColorPicker, setShowColorPicker] = useState(false);
+export default function FontColorSelector({
+  color,
+  onChange,
+  disabled,
+  setIsRibbonItemOpen,
+}) {
+  const [show, setShow] = useState(false);
 
   function convertcolor(colorStr) {
     var rgba = colorStr
@@ -26,22 +31,29 @@ export default function FontColorSelector({ color, onChange, disabled }) {
   };
 
   const pickerRef = useRef(null);
+  const pickerButtonRef = useRef(null);
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     if (disabled) {
       return;
     }
-    setShowColorPicker(true);
-  };
 
-  const handleClickOutside = (event) => {
-    if (pickerRef.current && !pickerRef.current.contains(event.target)) {
-      setShowColorPicker(false);
-    }
+    setShow(!show);
   };
 
   useEffect(() => {
-    if (showColorPicker) {
+    const handleClickOutside = (event) => {
+      if (
+        pickerRef.current &&
+        !pickerRef.current.contains(event.target) &&
+        !pickerButtonRef.current.contains(event.target)
+      ) {
+        setShow(false);
+        setIsRibbonItemOpen(show);
+      }
+    };
+
+    if (show) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -49,7 +61,7 @@ export default function FontColorSelector({ color, onChange, disabled }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showColorPicker]);
+  });
 
   return (
     <>
@@ -57,11 +69,12 @@ export default function FontColorSelector({ color, onChange, disabled }) {
         <div
           className={`custom-button ${disabled ? "disabled" : ""}`}
           onClick={handleClick}
+          ref={pickerButtonRef}
         >
           <div className="letter">A</div>
           <div style={{ backgroundColor: color }} className="color"></div>
         </div>
-        {showColorPicker && (
+        {show && (
           <div
             ref={pickerRef}
             style={{

@@ -13,6 +13,8 @@ export default function Ribbon({
   onItemChanged,
   imageDetails,
   scale,
+  isRibbonItemOpen,
+  setIsRibbonItemOpen,
 }) {
   const [rotationAngle, setRotationAngle] = useState(
     selectedItem?.rotationAngle || 0
@@ -150,6 +152,7 @@ export default function Ribbon({
             <FontColorSelector
               color={selectedItem?.fontColor || "black"}
               onChange={handleColorChange}
+              setIsRibbonItemOpen={setIsRibbonItemOpen}
             />
 
             <TextAlignment
@@ -187,6 +190,7 @@ export default function Ribbon({
               horizontalAlignment={selectedItem?.horizontalAlignment || "Left"}
               setVerticalAlignment={handleVerticalAlignmentChange}
               setHorizontalAlignment={handleHorizontalAlignmentChange}
+              setIsRibbonItemOpen={setIsRibbonItemOpen}
             />
           </>
         )}

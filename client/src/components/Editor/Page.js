@@ -74,7 +74,6 @@ export default function Page({
 
   const handleMouseMove = (e) => {
     if (!draggingItem) return;
-
     const { startX, startY, initialTranslateX, initialTranslateY } =
       draggingItem;
     const newTranslateX = initialTranslateX + (e.clientX - startX);
@@ -88,7 +87,7 @@ export default function Page({
     });
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e) => {
     setDraggingItem(null);
   };
 
@@ -118,20 +117,21 @@ export default function Page({
     }
   };
   useEffect(() => {
-    if (itemRef != null && itemRef.current != null) {
-      itemRef.current.addEventListener("mousemove", handleMouseMove);
-      itemRef.current.addEventListener("mouseup", handleMouseUp);
-      itemRef.current.addEventListener("keydown", handleKeyDown);
-      itemRef.current.addEventListener("mouseover", handleMouseOver);
-      itemRef.current.addEventListener("mouseout", handleMouseOut);
+    const currentPage = itemRef?.current;
+    if (currentPage) {
+      currentPage.addEventListener("mousemove", handleMouseMove);
+      currentPage.addEventListener("mouseup", handleMouseUp);
+      currentPage.addEventListener("keydown", handleKeyDown);
+      currentPage.addEventListener("mouseover", handleMouseOver);
+      currentPage.addEventListener("mouseout", handleMouseOut);
     }
     return () => {
-      if (itemRef != null && itemRef.current != null) {
-        itemRef.current.removeEventListener("mousemove", handleMouseMove);
-        itemRef.current.removeEventListener("mouseup", handleMouseUp);
-        itemRef.current.removeEventListener("keydown", handleKeyDown);
-        itemRef.current.removeEventListener("mouseover", handleMouseOver);
-        itemRef.current.removeEventListener("mouseout", handleMouseOut);
+      if (currentPage) {
+        currentPage.removeEventListener("mousemove", handleMouseMove);
+        currentPage.removeEventListener("mouseup", handleMouseUp);
+        currentPage.removeEventListener("keydown", handleKeyDown);
+        currentPage.removeEventListener("mouseover", handleMouseOver);
+        currentPage.removeEventListener("mouseout", handleMouseOut);
       }
     };
   });
@@ -198,7 +198,7 @@ export default function Page({
           width: `${imageDetails.customWidth * scale}px`,
           height: `${imageDetails.customHeight * scale}px`,
         }}
-        onClick={handleSpaceClick}
+        // onClick={handleSpaceClick}
       >
         <img
           src={imageDetails.src}

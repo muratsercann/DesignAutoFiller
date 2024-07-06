@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import Page from "./Page";
 import "./editor.css";
 import Ribbon from "./Ribbon";
-import * as utils from "../../utils.js";
-import Button from "react-bootstrap/Button";
 import Range from "../Shared/Range.js";
 import Upload from "./Upload.js";
 
@@ -18,6 +16,7 @@ export default function Editor({
   const [scale, setScale] = useState(1.0);
   const pageContainerRef = useRef(null);
   const [refresh, setRefresh] = useState(null);
+  const [isRibbonItemOpen, setIsRibbonItemOpen] = useState(false);
 
   const getSelectedItem = () => {
     let selected = null;
@@ -44,59 +43,59 @@ export default function Editor({
     setPage(newData);
   };
 
-  useEffect(() => {
-    const handleWheel = (event) => {
-      if (event.ctrlKey) {
-        // console.log(`event.elientXY (${event.clientX},${event.clientY})`);
+  const handleWheel = (event) => {
+    if (event.ctrlKey) {
+      // console.log(`event.elientXY (${event.clientX},${event.clientY})`);
 
-        event.preventDefault();
+      event.preventDefault();
 
-        // let container = document.getElementById("pageContainer");
-        // let page = document.getElementById("pageContent");
-        // const scrollHeight = container.scrollHeight;
-        // const scrollWidth = container.scrollWidth;
+      // let container = document.getElementById("pageContainer");
+      // let page = document.getElementById("pageContent");
+      // const scrollHeight = container.scrollHeight;
+      // const scrollWidth = container.scrollWidth;
 
-        // const diff = (container.offsetWidth - page.offsetWidth) / 2;
+      // const diff = (container.offsetWidth - page.offsetWidth) / 2;
 
-        // const scrollX = event.clientX + diff - 10;
-        // container.scrollLeft = scrollX;
-        // console.log("scroll left : ", scrollX);
-        // container.scrollTop = event.clientY;
+      // const scrollX = event.clientX + diff - 10;
+      // container.scrollLeft = scrollX;
+      // console.log("scroll left : ", scrollX);
+      // container.scrollTop = event.clientY;
 
-        if (event.deltaY < 0) {
-          if (scale + 0.18 >= 5.0) {
-            setScale(5.0);
-            return;
-          }
-          setScale(scale + 0.18);
-        } else {
-          if (scale - 0.18 <= 0.1) {
-            setScale(0.1);
-            return;
-          }
-          setScale(scale - 0.18);
+      if (event.deltaY < 0) {
+        if (scale + 0.18 >= 5.0) {
+          setScale(5.0);
+          return;
         }
+        setScale(scale + 0.18);
+      } else {
+        if (scale - 0.18 <= 0.1) {
+          setScale(0.1);
+          return;
+        }
+        setScale(scale - 0.18);
       }
-    };
-
-    if (pageContainerRef && pageContainerRef.current) {
-      pageContainerRef.current.addEventListener("wheel", handleWheel, {
+    }
+  };
+  useEffect(() => {
+    const currentPage = pageContainerRef?.current;
+    if (currentPage) {
+      currentPage.addEventListener("wheel", handleWheel, {
         passive: false,
       });
     }
     return () => {
-      if (pageContainerRef && pageContainerRef.current) {
-        pageContainerRef.current.removeEventListener("wheel", handleWheel);
+      if (currentPage) {
+        currentPage.removeEventListener("wheel", handleWheel);
       }
     };
   });
 
   const handleSpaceClick = (e) => {
-    if (e.target !== e.currentTarget || selectedItem === null) {
-      return;
+    if (!isRibbonItemOpen) {
+      unSelect();
+    } else {
+      setIsRibbonItemOpen(false);
     }
-
-    unSelect();
   };
 
   const unSelect = () => {
@@ -107,10 +106,6 @@ export default function Editor({
       deleteItem(selectedItem.id);
     }
     setSelectedItemElement(null);
-  };
-
-  const handleSaveContinue = () => {
-    alert("Save and continue..");
   };
 
   const addNewTextField = () => {
@@ -173,6 +168,8 @@ export default function Editor({
             onItemChanged={onItemChanged}
             imageDetails={imageDetails}
             scale={scale}
+            isRibbonItemOpen={isRibbonItemOpen}
+            setIsRibbonItemOpen={setIsRibbonItemOpen}
           />
           <div
             id="pageContainer"

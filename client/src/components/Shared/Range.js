@@ -1,9 +1,7 @@
 import Form from "react-bootstrap/Form";
-import React, { useState } from "react";
 export default function Range({ scale, setScale }) {
-  // const [value, setValue] = useState(24);
-
   const value = Math.ceil(scale * 100);
+
   const handleRangeChange = (e) => {
     const val = e.target.value;
     setScale(Number(val / 100));

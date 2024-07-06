@@ -6,10 +6,9 @@ import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
 import { TbCirclesRelation } from "react-icons/tb";
 import { FaImages } from "react-icons/fa6";
 import TextColMatcher from "./Editor/TextColMatcher";
-import Upload from "./Editor/Upload";
 import * as utils from "../utils";
 import CreateNew from "./CreateNew";
-export default function Designer({}) {
+export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
   const [dataSource, setDatasource] = useState(null);
@@ -37,7 +36,7 @@ export default function Designer({}) {
     ) {
       utils.setSettingsToStorage(page);
     }
-  }, [page]);
+  }, [page, imageDetails]);
 
   useEffect(() => {
     if (dataSource !== undefined && dataSource !== null)
@@ -48,34 +47,6 @@ export default function Designer({}) {
     if (imageDetails !== undefined && imageDetails !== null)
       utils.setImageDetailsToStorage(imageDetails);
   }, [imageDetails]);
-
-  const pages = {
-    edit: (
-      <Editor
-        page={page}
-        setPage={setPage}
-        imageDetails={imageDetails}
-        setImageDetails={setImageDetails}
-        dataset={dataSource?.dataset}
-      />
-    ),
-    data: <ImportData dataSource={dataSource} setDataset={setDatasource} />,
-    preview: (
-      <Preview
-        dataset={dataSource?.dataset}
-        imageDetails={imageDetails}
-        settings={page}
-      />
-    ),
-    match: (
-      <TextColMatcher
-        settings={page}
-        setSettings={setPage}
-        dataset={dataSource?.dataset}
-      />
-    ),
-    uploadImage: <Upload setImageDetails={setImageDetails} />,
-  };
 
   const iconSize = 24;
 

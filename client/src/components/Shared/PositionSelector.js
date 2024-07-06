@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import "./styles/positionSelector.css";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import {
@@ -18,12 +16,14 @@ export default function PositionSelector({
   verticalAlignment,
   setVerticalAlignment,
   setHorizontalAlignment,
+  setIsRibbonItemOpen,
 }) {
   const [show, setShow] = useState(false);
   const refPosition = useRef(null);
+  const refPositionButton = useRef(null);
 
   const handleClick = () => {
-    setShow(true);
+    setShow(!show);
   };
 
   const handleHorizontalClick = (align) => {
@@ -34,13 +34,18 @@ export default function PositionSelector({
     setVerticalAlignment(align);
   };
 
-  const handleClickOutside = (event) => {
-    if (refPosition.current && !refPosition.current.contains(event.target)) {
-      setShow(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        refPosition.current &&
+        !refPosition.current.contains(event.target) &&
+        !refPositionButton.current.contains(event.target)
+      ) {
+        setShow(false);
+        setIsRibbonItemOpen(true);
+      }
+    };
+
     if (show) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
@@ -49,12 +54,18 @@ export default function PositionSelector({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [show]);
+  });
 
   const iconsize = 24;
   return (
-    <div className="positionSelector" onClick={handleClick}>
-      <div className="set-position">Position</div>
+    <div className="positionSelector">
+      <div
+        ref={refPositionButton}
+        onClick={handleClick}
+        className="set-position"
+      >
+        Position
+      </div>
 
       {show && (
         <>
@@ -66,7 +77,7 @@ export default function PositionSelector({
                     className={`button mb-3 ${
                       verticalAlignment === "Top" ? "selected" : ""
                     }`}
-                    onClick={() => {
+                    onClick={(e) => {
                       handleVerticalClick("Top");
                     }}
                   >

@@ -1,5 +1,4 @@
-import React, { useLayoutEffect, useRef } from "react";
-import * as utils from "../../utils";
+import React, { useRef } from "react";
 
 export default function Item({
   item,
@@ -12,6 +11,7 @@ export default function Item({
   const itemRef = useRef(null);
 
   const handleClick = (e) => {
+    e.stopPropagation();
     setSelectedItemElement(e.target);
   };
 
