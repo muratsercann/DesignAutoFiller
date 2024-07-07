@@ -31,6 +31,7 @@ export default function Editor({
   const selectedItem = getSelectedItem();
 
   const onItemChanged = (newItem) => {
+    if (!selectedItem) return;
     const itemId = selectedItem.id;
 
     const newData = {

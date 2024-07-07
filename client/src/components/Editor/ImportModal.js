@@ -112,7 +112,7 @@ export default function ImportModal({
   };
 
   const handleContinue = () => {
-    if (error !== null) {
+    if (error != null) {
       return;
     }
     setIsLoading(false);
@@ -127,7 +127,7 @@ export default function ImportModal({
   };
 
   const handleBrowseClick = () => {
-    if (inputRef !== null) {
+    if (inputRef != null) {
       inputRef.current.click();
     }
   };
@@ -200,7 +200,7 @@ export default function ImportModal({
           <Button
             variant="secondary"
             onClick={handleContinue}
-            disabled={error !== null || data === null}
+            disabled={error != null || data === null}
           >
             Continue
           </Button>

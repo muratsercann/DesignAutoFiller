@@ -105,7 +105,7 @@ export function getItemsFromStorage() {
 
 export function getTextValuesFromStorage() {
   const settings = getSettingsFromStorage();
-  if (settings !== null && settings.items.length > 0) {
+  if (settings != null && settings.items.length > 0) {
     const textValues = settings.items.map((item) => item.value);
     return textValues;
   } else {
@@ -119,7 +119,7 @@ export function getImportedDataFromStorage() {
 
 export function getColNamesFromStorage() {
   const data = getImportedDataFromStorage();
-  if (data !== null && data.length > 0) {
+  if (data != null && data.length > 0) {
     const cols = Object.keys(data[0]);
     return cols;
   } else {
@@ -128,7 +128,7 @@ export function getColNamesFromStorage() {
 }
 
 export function getColNamesFromDataset(data) {
-  if (data !== null && data.length > 0) {
+  if (data != null && data.length > 0) {
     const cols = Object.keys(data[0]);
     return cols;
   } else {

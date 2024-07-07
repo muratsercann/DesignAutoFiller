@@ -28,19 +28,13 @@ export default function Designer() {
   }, [refresh]);
 
   useEffect(() => {
-    if (
-      imageDetails !== null &&
-      imageDetails !== undefined &&
-      page !== null &&
-      page !== undefined
-    ) {
+    if (imageDetails != null && page != null) {
       utils.setSettingsToStorage(page);
     }
   }, [page, imageDetails]);
 
   useEffect(() => {
-    if (dataSource !== undefined && dataSource !== null)
-      utils.setImportedDataToStorage(dataSource);
+    if (dataSource != null) utils.setImportedDataToStorage(dataSource);
 
     //todo if data source changes, reset databindings.
 
@@ -57,8 +51,7 @@ export default function Designer() {
   }, [dataSource]);
 
   useEffect(() => {
-    if (imageDetails !== undefined && imageDetails !== null)
-      utils.setImageDetailsToStorage(imageDetails);
+    if (imageDetails != null) utils.setImageDetailsToStorage(imageDetails);
   }, [imageDetails]);
 
   const iconSize = 24;
