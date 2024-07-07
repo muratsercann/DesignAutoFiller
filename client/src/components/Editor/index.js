@@ -125,7 +125,7 @@ export default function Editor({
       rotationAngle: 0,
       translateX: 0,
       translateY: 0,
-      fontSize: 13,
+      fontSize: 12,
       fontColor: "grey",
       fontFamily: "",
       width: 130,
