@@ -71,7 +71,7 @@ export default function Ribbon({
     const value = Number(e.target.value);
 
     const newTranslateXY = utils.calculateTranslateXY_ForWidthChange(
-      selectedItemElement.offsetWidth,
+      selectedItemElement.offsetWidth / scale,
       selectedItemElement.offsetHeight,
       value,
       selectedItem.translateX,
