@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UploadImageModal from "./Editor/UploadImageModal";
+import UploadImageModal from "./UploadImageModal";
 import * as utils from "../utils";
 export default function CreateNew({
   page,

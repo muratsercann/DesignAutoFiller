@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import FontColorSelector from "../Shared/FontColorSelector";
-import PositionSelector from "../Shared/PositionSelector";
-import "./editor.css";
+import FontColorSelector from "./FontColorSelector";
+import PositionSelector from "./PositionSelector";
+import "../editor.css";
 import Form from "react-bootstrap/Form";
-import * as utils from "../../utils";
-
-import TextAlignment from "../Shared/TextAlignment";
+import * as utils from "../../../utils";
+import "./styles/ribbon.css";
+import TextAlignment from "./TextAlignment";
 
 export default function Ribbon({
   selectedItemElement,

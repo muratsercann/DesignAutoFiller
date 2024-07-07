@@ -1,20 +1,24 @@
 import "./preview.css";
 import Page from "./Page";
 import { useMemo, useRef, useState } from "react";
-export default function Preview({ settings, imageDetails, dataset }) {
+export default function Preview({
+  settings,
+  imageDetails,
+  dataset,
+  width = 300,
+}) {
   const refContainer = useRef(null);
   const [itemCount, setItemCount] = useState(100);
 
-  const maxWidth = 300;
+  const maxWidth = width;
   let scale = 1;
-
-  console.log("scale :", scale);
 
   if (imageDetails.customWidth > maxWidth) {
     scale = maxWidth / imageDetails.customWidth;
   }
 
   const pages = useMemo(() => {
+    if (!dataset || dataset.length === 0) return [];
     return dataset
       .slice(0, itemCount)
       .map((row, index) => (

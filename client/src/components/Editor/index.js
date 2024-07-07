@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import Page from "./Page";
 import "./editor.css";
-import Ribbon from "./Ribbon";
-import Range from "../Shared/Range.js";
-import Upload from "./Upload.js";
+import Ribbon from "./Ribbon/index.js";
+import Range from "./Ribbon/Range.js";
+import Upload from "../Upload.js";
 
 export default function Editor({
   page,
@@ -162,45 +162,41 @@ export default function Editor({
 
   return (
     <>
-      {imageDetails ? (
-        <div className="edit">
-          <Ribbon
-            selectedItemElement={selectedItemElement}
-            selectedItem={selectedItem}
-            onItemChanged={onItemChanged}
-            imageDetails={imageDetails}
+      <div className="edit">
+        <Ribbon
+          selectedItemElement={selectedItemElement}
+          selectedItem={selectedItem}
+          onItemChanged={onItemChanged}
+          imageDetails={imageDetails}
+          scale={scale}
+          isRibbonItemOpen={isRibbonItemOpen}
+          setIsRibbonItemOpen={setIsRibbonItemOpen}
+        />
+        <div
+          id="pageContainer"
+          className="pageContainer"
+          ref={pageContainerRef}
+          onClick={handleSpaceClick}
+        >
+          <Page
             scale={scale}
-            isRibbonItemOpen={isRibbonItemOpen}
-            setIsRibbonItemOpen={setIsRibbonItemOpen}
+            setScale={setScale}
+            page={page}
+            selectedItem={selectedItem}
+            selectedItemElement={selectedItemElement}
+            setSelectedItemElement={setSelectedItemElement}
+            onItemChanged={onItemChanged}
+            handleSpaceClick={handleSpaceClick}
+            setPage={setPage}
+            handleAddNewText={addNewTextField}
+            handleDeleteSelectedText={deleteSelectedText}
+            imageDetails={imageDetails}
           />
-          <div
-            id="pageContainer"
-            className="pageContainer"
-            ref={pageContainerRef}
-            onClick={handleSpaceClick}
-          >
-            <Page
-              scale={scale}
-              setScale={setScale}
-              page={page}
-              selectedItem={selectedItem}
-              selectedItemElement={selectedItemElement}
-              setSelectedItemElement={setSelectedItemElement}
-              onItemChanged={onItemChanged}
-              handleSpaceClick={handleSpaceClick}
-              setPage={setPage}
-              handleAddNewText={addNewTextField}
-              handleDeleteSelectedText={deleteSelectedText}
-              imageDetails={imageDetails}
-            />
-          </div>
-          <div className="edit-footer">
-            <Range scale={scale} setScale={setScale} />
-          </div>
         </div>
-      ) : (
-        <Upload setImageDetails={setImageDetails} onSuccess={setRefresh} />
-      )}
+        <div className="edit-footer">
+          <Range scale={scale} setScale={setScale} />
+        </div>
+      </div>
     </>
   );
 }

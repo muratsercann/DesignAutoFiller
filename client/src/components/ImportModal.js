@@ -3,7 +3,6 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
-import "./editor.css";
 import { IoCloudUploadSharp } from "react-icons/io5";
 
 import { Spinner } from "react-bootstrap";

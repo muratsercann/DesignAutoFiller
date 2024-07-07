@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import Editor from "./Editor";
-import ImportData from "./Editor/ImportData";
+import ImportData from "./ImportData";
 import Preview from "./Preview";
 import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
-import { TbCirclesRelation } from "react-icons/tb";
 import { FaImages } from "react-icons/fa6";
-import TextColMatcher from "./Editor/TextColMatcher";
 import * as utils from "../utils";
 import CreateNew from "./CreateNew";
+import Upload from "./Upload";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
@@ -108,20 +107,6 @@ export default function Designer() {
               <div className="label">Data Source</div>
             </div>
 
-            {/* <div
-              title="Bind Data Columns"
-              className={`menu-item ${
-                activePage === "match" ? "selected" : ""
-              }`}
-              onClick={() => {
-                setActivePage("match");
-              }}
-            >
-              <div className="icon">
-                <TbCirclesRelation size={iconSize} />
-              </div>
-              <div className="label">Bind Data</div>
-            </div> */}
             <div
               title="Preview"
               className={`menu-item ${
@@ -156,25 +141,21 @@ export default function Designer() {
                   settings={page}
                 />
               )}
-
-              {activePage === "match" && (
-                <TextColMatcher
-                  settings={page}
-                  setSettings={setPage}
-                  dataset={dataSource?.dataset}
-                />
-              )}
             </div>
           )}
         </div>
         <div className="component-container">
-          <Editor
-            page={page}
-            setPage={setPage}
-            imageDetails={imageDetails}
-            setImageDetails={setImageDetails}
-            dataset={dataSource}
-          />
+          {imageDetails ? (
+            <Editor
+              page={page}
+              setPage={setPage}
+              imageDetails={imageDetails}
+              setImageDetails={setImageDetails}
+              dataset={dataSource}
+            />
+          ) : (
+            <Upload setImageDetails={setImageDetails} onSuccess={setRefresh} />
+          )}
         </div>
       </div>
     </div>

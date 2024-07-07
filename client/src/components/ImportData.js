@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import * as utils from "../../utils";
+import * as utils from "../utils";
 import { Button, Modal, Spinner, Table } from "react-bootstrap";
 import TextColMatcher from "./TextColMatcher";
 import ImportModal from "./ImportModal";
