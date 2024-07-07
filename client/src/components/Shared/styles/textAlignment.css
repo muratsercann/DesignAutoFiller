@@ -1,0 +1,17 @@
+.alignment {
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.alignment:not(.disabled) {
+  cursor: pointer;
+}
+
+.alignment:not(.disabled):hover {
+  background-color: #ebecf0;
+}
