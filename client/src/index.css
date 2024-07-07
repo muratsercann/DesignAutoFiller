@@ -50,10 +50,12 @@ code {
     height: 100% !important;
   }
   .side-left,
-  .side-container {
+  .side-container,
+  .preview-container {
     width: 100% !important;
     height: 100% !important;
     min-width: 100% !important;
+    background-color: transparent !important;
   }
 
   @page {
