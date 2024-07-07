@@ -45,7 +45,7 @@ export default function UploadImage({ setImageDetails }) {
   };
 
   const handleBrowseClick = () => {
-    if (inputRef !== null) {
+    if (inputRef != null) {
       inputRef.current.click();
     }
   };
