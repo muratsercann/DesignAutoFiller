@@ -5,7 +5,7 @@ export default function Item({ item, datarow, scale }) {
 
   const column = item.dataColumn;
 
-  if (column !== undefined && column !== "") {
+  if (column != null && column !== "") {
     value = datarow[column];
   }
 

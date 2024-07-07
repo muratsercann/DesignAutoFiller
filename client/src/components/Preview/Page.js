@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Item from "./Item";
 export default function Page({ page, imageDetails, datarow, scale = 1 }) {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
-
   return (
     <>
       <div
@@ -12,17 +10,11 @@ export default function Page({ page, imageDetails, datarow, scale = 1 }) {
           height: `${imageDetails.customHeight * scale}px`,
         }}
       >
-        <img
-          src={imageDetails.src}
-          className="img-fluid no-select"
-          alt=""
-          onLoad={() => setIsImageLoaded(true)}
-        />
+        <img src={imageDetails.src} className="img-fluid no-select" alt="" />
 
-        {isImageLoaded &&
-          page.items.map((item, index) => (
-            <Item key={index} item={item} datarow={datarow} scale={scale} />
-          ))}
+        {page.items.map((item, index) => (
+          <Item key={index} item={item} datarow={datarow} scale={scale} />
+        ))}
       </div>
     </>
   );
