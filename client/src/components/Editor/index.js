@@ -17,6 +17,18 @@ export default function Editor({
   const pageContainerRef = useRef(null);
   const [refresh, setRefresh] = useState(null);
   const [isRibbonItemOpen, setIsRibbonItemOpen] = useState(false);
+  const [changeLog, setChangeLog] = useState([]);
+  const [activeChangeIndex, setActiveChangeIndex] = useState(-1);
+
+  const [oldSelectedItem, setOldSelectedItem] = useState({});
+
+  useEffect(() => {
+    if (!selectedItem) {
+      return;
+    }
+    setOldSelectedItem(selectedItem);
+    console.log("Selected Item Old Color : ", selectedItem.fontColor);
+  }, [selectedItemElement]);
 
   const getSelectedItem = () => {
     let selected = null;
@@ -30,9 +42,9 @@ export default function Editor({
 
   const selectedItem = getSelectedItem();
 
-  const onItemChanged = (newItem) => {
-    if (!selectedItem) return;
-    const itemId = selectedItem.id;
+  const onItemChanged = (newItem, id) => {
+    if (!selectedItem && !id) return;
+    const itemId = id ?? selectedItem.id;
 
     const newData = {
       ...page,
@@ -160,6 +172,53 @@ export default function Editor({
     }));
   };
 
+  const undo = () => {
+    if (activeChangeIndex < 0) {
+      return;
+    }
+    const change = changeLog[activeChangeIndex];
+
+    if (change.operation === "update") {
+      const newItem = {
+        [change.field]: change.oldValue,
+      };
+
+      onItemChanged(newItem, change.itemId);
+
+      setActiveChangeIndex((prev) => prev - 1);
+    }
+  };
+
+  const redo = () => {
+    // if (activeChangeIndex >= changeLog.length) {
+    //   return;
+    // }
+    // const change = changeLog[activeChangeIndex];
+    // if (change.operation === "update") {
+    //   const newItem = {
+    //     [change.field]: change.oldValue,
+    //   };
+    //   onItemChanged(newItem, change.itemId);
+    //   setActiveChangeIndex((prev) => prev - 1);
+    // }
+  };
+
+  const addToChangeLog = (change) => {
+    console.log("selected item id :", selectedItem.id);
+    if (change.operation === "update") {
+      setChangeLog((prev) => [
+        ...prev,
+        {
+          ...change,
+          oldValue: oldSelectedItem[change.field],
+          itemId: selectedItem.id,
+        },
+      ]);
+    }
+
+    setActiveChangeIndex(changeLog.length);
+  };
+
   return (
     <>
       {imageDetails ? (
@@ -172,6 +231,11 @@ export default function Editor({
             scale={scale}
             isRibbonItemOpen={isRibbonItemOpen}
             setIsRibbonItemOpen={setIsRibbonItemOpen}
+            activeChangeIndex={activeChangeIndex}
+            setActiveChangeIndex={setActiveChangeIndex}
+            changeLog={changeLog}
+            setChangeLog={setChangeLog}
+            addToChangeLog={addToChangeLog}
           />
           <div
             id="pageContainer"
@@ -192,6 +256,8 @@ export default function Editor({
               handleAddNewText={addNewTextField}
               handleDeleteSelectedText={deleteSelectedText}
               imageDetails={imageDetails}
+              undo={undo}
+              redo={redo}
             />
           </div>
           <div className="edit-footer">

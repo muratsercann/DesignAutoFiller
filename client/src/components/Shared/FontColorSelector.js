@@ -7,8 +7,15 @@ export default function FontColorSelector({
   onChange,
   disabled,
   setIsRibbonItemOpen,
+  changeLog,
+  setChangeLog,
+  addToChangeLog,
 }) {
   const [show, setShow] = useState(false);
+  const [unchangedValue, setUnchangedValue] = useState(color);
+
+  // console.log("unchanged color : ", unchangedValue);
+  console.log("changeLog: ", changeLog);
 
   function convertcolor(colorStr) {
     var rgba = colorStr
@@ -26,6 +33,19 @@ export default function FontColorSelector({
 
   const handleChange = (color) => {
     onChange(
+      `rgb(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`
+    );
+  };
+
+  const handleChangeComplete = (color) => {
+    addToChangeLog({
+      operation: "update",
+      field: "fontColor",
+      newValue: `rgb(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`,
+      oldValue: unchangedValue,
+    });
+
+    setUnchangedValue(
       `rgb(${color.rgb.r},${color.rgb.g},${color.rgb.b},${color.rgb.a})`
     );
   };
@@ -87,7 +107,7 @@ export default function FontColorSelector({
             <SketchPicker
               color={convertcolor(color)}
               onChange={handleChange}
-              onChangeComplete={handleChange}
+              onChangeComplete={handleChangeComplete}
             />
           </div>
         )}

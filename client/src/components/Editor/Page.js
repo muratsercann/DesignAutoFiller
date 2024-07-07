@@ -13,6 +13,8 @@ export default function Page({
   scale,
   setScale,
   imageDetails,
+  undo,
+  redo,
 }) {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
@@ -179,6 +181,14 @@ export default function Page({
     }
   });
 
+  const handleUndo = () => {
+    undo();
+  };
+
+  const handleRedo = () => {
+    redo();
+  };
+
   return (
     <div className="pageSubContainer">
       <div className="pageContentParent">
@@ -203,6 +213,14 @@ export default function Page({
           )}cm x ${utils.pixelToCm(imageDetails.customHeight)}cm`}</span>
 
           <div title="" className="page-buttons-container">
+            <span title="Undo" className="add-text-button" onClick={handleUndo}>
+              &lt;
+            </span>
+
+            <span title="Undo" className="add-text-button" onClick={handleRedo}>
+              &gt;
+            </span>
+
             <span
               title="Add new text"
               className="add-text-button"

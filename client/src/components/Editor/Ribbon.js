@@ -15,6 +15,9 @@ export default function Ribbon({
   scale,
   isRibbonItemOpen,
   setIsRibbonItemOpen,
+  changeLog,
+  setChangeLog,
+  addToChangeLog,
 }) {
   const [rotationAngle, setRotationAngle] = useState(
     selectedItem?.rotationAngle || 0
@@ -153,6 +156,9 @@ export default function Ribbon({
               color={selectedItem?.fontColor || "black"}
               onChange={handleColorChange}
               setIsRibbonItemOpen={setIsRibbonItemOpen}
+              changeLog={changeLog}
+              setChangeLog={setChangeLog}
+              addToChangeLog={addToChangeLog}
             />
 
             <TextAlignment
