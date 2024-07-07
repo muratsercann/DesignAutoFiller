@@ -41,6 +41,19 @@ export default function Designer() {
   useEffect(() => {
     if (dataSource !== undefined && dataSource !== null)
       utils.setImportedDataToStorage(dataSource);
+
+    //todo if data source changes, reset databindings.
+
+    // if (page != null) {
+    //   const newSettings = {
+    //     ...page,
+    //     items: page.items.map((i) => {
+    //       return { ...i, dataColumn: null };
+    //     }),
+    //   };
+
+    //   setPage(newSettings);
+    // }
   }, [dataSource]);
 
   useEffect(() => {
