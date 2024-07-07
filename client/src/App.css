@@ -1,10 +1,13 @@
+:root {
+  --header-height: 64px;
+}
+
 .App {
   text-align: center;
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
   padding: 10px;
-  overflow-x: hidden;
 }
 
 .App-logo {
@@ -44,6 +47,13 @@
 
 /* msercan*/
 
+* {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
 img {
   pointer-events: none;
 }
@@ -81,38 +91,6 @@ img {
   font-family: system-ui;
   font-size: 21px;
   color: #8d6d1f;
-  /* background-color: yellow; */
-}
-
-/* .home {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  flex-flow: wrap;
-} */
-
-.home .header {
-  width: 100%;
-  height: 300px;
-  background-color: #0177a9;
-  color: white;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.home .header > h1 {
-  font-size: 75px;
-  font-weight: 300;
-}
-
-.home .header > p {
-  font-size: 35px;
-  font-weight: 400;
 }
 
 .home .savings {
@@ -160,38 +138,240 @@ img {
   align-items: center;
 }
 
+select {
+  cursor: pointer;
+}
 
-.paste-field {
+.disabled {
+  background-color: #ebecf0;
+  cursor: not-allowed;
+}
+
+.spinner-container {
   width: 100%;
-  height: 150px;
-  background-color: #b6b4b4;
-  color: #fffefe;
-  display: flex;
-  justify-items: center;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-}
-
-.paste-container {
-  width: 100%;
-  height: 250px;
-  background-color: aliceblue;
-  border-radius: 5px;
-  display: flex;
-  justify-items: center;
-  justify-content: center;
-  align-items: center;
-  
-}
-.paste-container:hover {
-  background-color: rgb(98, 157, 209);
-  color: white;
-}
-
-
-.paste-container > span{
+  height: 100%;
+  background-color: #bdbdbd6e;
   position: absolute;
-    left: calc(50% - 37px);
-    top: calc(50% - 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body > .spinner-container {
+  position: absolute;
+}
+
+/* button {
+  cursor: pointer !important;
+}
+button:hover {
+  cursor: pointer !important;
+} */
+
+/*Designer Component*/
+
+.designer-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  padding-left: 2rem;
+  gap: 1rem;
+  min-height: var(--header-height);
+  max-height: var(--header-height);
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+  border-bottom: 1px solid #f8f9fa0a;
+}
+
+.header > h2 {
+  color: #0e141b;
+  font-size: large;
+  font-weight: bold;
+}
+
+.header > .header-right {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-end;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header .create-new-button {
+  background-color: #0177a9;
+  padding: 8px 15px 8px 15px;
+  border-radius: 18px;
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 12px;
+}
+.header .create-new-button:hover {
+  background-color: #118ac3;
+}
+
+.designer-body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  justify-items: center;
+  flex-direction: row;
+  align-items: flex-start;
+  height: calc(100% - var(--header-height));
+  max-height: calc(100% - var(--header-height));
+  min-height: calc(100% - var(--header-height));
+}
+
+.component-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: auto;
+  /* padding: 10px; */
+}
+
+.side-left {
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.side-container {
+  max-width: 360px;
+  background-color: var(--bs-dark);
+  border-left: 1px solid #f8f9fa0a;
+  animation: expandWidth 0.5s forwards;
+  color: var(--bs-light);
+  overflow: auto;
+  position: relative;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.side-container > * input,
+.side-container > * select {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.side-container > * h6 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 360px;
+  }
+}
+
+.side-menu {
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  padding-top: 30px;
+  font-size: 15px;
+  box-shadow: 0px 20px 13px 0px #b2adad8f;
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+}
+
+.menu-item {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  width: 100%;
+  max-height: 100px;
+  padding: 30px 30px 30px 30px;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background-color: #e8edf333;
+}
+
+.menu-item:hover .label {
+  visibility: visible;
+  height: auto;
+  opacity: 1; /* Hover durumunda yazı görünür */
+  transform: translateY(0); /* Hover durumunda yazı yukarıya hareket eder */
+}
+
+.menu-item > .label {
+  width: 100%;
+  text-align: center;
+  visibility: hidden;
+  height: 0px;
+  opacity: 0; /* Başlangıçta yazı görünmez */
+  transform: translateY(20px); /* Başlangıçta 20px aşağıda konumlanır */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Geçiş efekti */
+}
+
+.menu-item > svg {
+  transition: opacity 0.3s ease;
+}
+
+.menu-item.selected {
+  background-color: #e8edf333;
+}
+
+.menu-item.selected > .label {
+  visibility: visible;
+}
+
+.menu-item > .con {
+  align-items: center;
+  display: flex;
+  justify-items: center;
+}
+
+/*input--*/
+.input-container {
+  position: relative;
+  width: 100%;
+  /* max-width: 400px; */
+  margin: 0 auto;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  box-sizing: border-box;
+}
+
+.input-container .icon {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  pointer-events: none;
 }

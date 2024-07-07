@@ -1,1 +1,0 @@
-var settingsData = {imageUrl:"https://r.resimlink.com/u-A1rvJDjhe.png",headerText:"DAVETLİSİNİZ",prefix:"Sn.",isPageNumberVisible:"True"}
