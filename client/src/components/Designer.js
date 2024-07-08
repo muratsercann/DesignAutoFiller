@@ -6,7 +6,7 @@ import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
 import { FaImages } from "react-icons/fa6";
 import * as utils from "../utils";
 import CreateNew from "./CreateNew";
-import Upload from "./Upload";
+import UploadImage from "./UploadImage";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
@@ -154,7 +154,21 @@ export default function Designer() {
               dataset={dataSource}
             />
           ) : (
-            <Upload setImageDetails={setImageDetails} onSuccess={setRefresh} />
+            <div
+              style={{ width: "70%" }}
+              className="container gap-5 d-flex flex-column flex-center justify-items-center justify-content-center align-items-center h-100"
+            >
+              <div style={{ fontSize: "32px", fontWeight: "600" }}>
+                Upload an image to start
+              </div>
+
+              <div style={{ height: "400px", width: "100%" }}>
+                <UploadImage
+                  style={{ padding: "30px !important" }}
+                  setImageDetails={setImageDetails}
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>

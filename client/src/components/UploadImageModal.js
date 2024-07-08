@@ -36,7 +36,7 @@ export default function UploadImageModal({ show, setShow, onContinue }) {
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton></Modal.Header>
 
-        <Modal.Body style={{ height: "400px", overflowX: "hidden" }}>
+        <Modal.Body style={{ height: "400px" }}>
           {page === pages.upload && (
             <UploadImage setImageDetails={setImageDetails} />
           )}

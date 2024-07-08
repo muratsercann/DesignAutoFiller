@@ -137,7 +137,7 @@ export default function ImportModal({
         <Modal.Header closeButton>
           {/* <Modal.Title>Upload File</Modal.Title> */}
         </Modal.Header>
-        <Modal.Body style={{ overflow: "auto" }}>
+        <Modal.Body style={{ height: "400px" }}>
           <div ref={pasteAreaRef} className="upload-file-body">
             <div className="upload-container">
               <div className="mb-3">

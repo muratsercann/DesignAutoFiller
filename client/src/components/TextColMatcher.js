@@ -33,6 +33,7 @@ export default function TextColMatcher({ settings, setSettings, dataset }) {
                 <span className="col-1">=</span>
                 <div className="col">
                   <select
+                    title={item.dataColumn}
                     value={item.dataColumn}
                     className="form-select"
                     onChange={(e) => handleChanges(item, e)}

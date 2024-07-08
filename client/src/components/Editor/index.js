@@ -3,7 +3,6 @@ import Page from "./Page";
 import "./editor.css";
 import Ribbon from "./Ribbon/index.js";
 import Range from "./Ribbon/Range.js";
-import Upload from "../Upload.js";
 
 export default function Editor({
   page,

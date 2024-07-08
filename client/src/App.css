@@ -398,7 +398,7 @@ button:hover {
 
 .upload-file-body {
   width: 100%;
-  height: 300px;
+  height: 90%;
   display: flex;
   justify-items: center;
   align-items: center;
@@ -406,6 +406,16 @@ button:hover {
   border: 2px dashed #a5a1a1;
   border-radius: 8px;
   font-weight: 500;
+}
+
+.upload-file-body:hover {
+  /* box-shadow: 0px 0px 30px 5px #9d9d9d;
+  border: 2px dashed #00b35c; */
+  background-color: #e2e2e2;
+}
+
+.upload-file-body:hover svg {
+  color: rgb(186, 186, 186) !important;
 }
 
 .file-input-wrapper {
@@ -464,4 +474,10 @@ button:hover {
 
 .matcher > * .row {
   align-items: center;
+}
+
+.form-select {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
