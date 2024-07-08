@@ -36,6 +36,13 @@ export const ImportData = memo(function ImportData({
       )}
 
       <div className="data-container">
+        <div className="data-container-header">
+          <div className="custom-icon-button" onClick={handleImportClick}>
+            <BiPlusCircle size={24} />
+            <span>Add</span>
+          </div>
+        </div>
+
         {
           <ImportModal
             isOpen={isModalOpen}
@@ -43,12 +50,6 @@ export const ImportData = memo(function ImportData({
             setShow={setIsModalOpen}
           />
         }
-        <div>
-          <div className="custom-icon-button" onClick={handleImportClick}>
-            <BiPlusCircle size={24} />
-            <span>Add</span>
-          </div>
-        </div>
 
         {dataset != null && dataset.length > 0 && (
           <>

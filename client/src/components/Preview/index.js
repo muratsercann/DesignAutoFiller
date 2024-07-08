@@ -13,7 +13,7 @@ export default function Preview({
   const maxWidth = width;
   let scale = 1;
 
-  if (imageDetails.customWidth > maxWidth) {
+  if (imageDetails && imageDetails.customWidth > maxWidth) {
     scale = maxWidth / imageDetails.customWidth;
   }
 
@@ -41,7 +41,7 @@ export default function Preview({
 
   return (
     <div ref={refContainer} className="preview-container">
-      {imageDetails && dataset && settings && (
+      {imageDetails && dataset && settings ? (
         <>
           {pages}
           {itemCount < dataset.length && (
@@ -50,6 +50,8 @@ export default function Preview({
             </div>
           )}
         </>
+      ) : (
+        <div>Nothing to show</div>
       )}
     </div>
   );
