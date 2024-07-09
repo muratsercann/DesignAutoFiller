@@ -115,8 +115,8 @@ export const ImportData = memo(function ImportData({
         ) : (
           <div style={{ fontWeight: "400", color: "var(--bs-gray-600)" }}>
             <p>
-              Cannot found a datasource imported. Please click add to import
-              your existing datasource.
+              No datasource could be found. Please click 'Add' to import your
+              existing datasource.
             </p>
             <p>
               Supported file formats are :{" "}
