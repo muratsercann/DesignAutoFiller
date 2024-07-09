@@ -5,6 +5,7 @@ import "../editor.css";
 import Form from "react-bootstrap/Form";
 import * as utils from "../../../utils";
 import "./styles/ribbon.css";
+import fonts from "./fonts";
 import TextAlignment from "./TextAlignment";
 
 export default function Ribbon({
@@ -120,22 +121,33 @@ export default function Ribbon({
     setRotationAngle(selectedItem.rotationAngle);
   }, [selectedItem]);
 
+  const handleFontChange = (e) => {
+    onItemChanged({
+      fontFamily: e.target.value,
+      fontWeight: "normal",
+    });
+  };
+
   return (
     <>
       <div className="ribbon">
         {selectedItem && (
           <>
             <Form.Select
-              aria-label="Default select example"
+              aria-label="Select a font"
               style={{ width: "150px" }}
+              onChange={handleFontChange}
+              value={selectedItem.fontFamily}
             >
-              <option value="1">Calibri</option>
-              <option value="2">Open Sans</option>
-              <option value="3">Time</option>
+              {fonts.sort().map((font) => (
+                <option style={{ fontFamily: font }} value={font}>
+                  {font.split(",")[0].replace(/"/g, "")}
+                </option>
+              ))}
             </Form.Select>
 
             <Form.Select
-              aria-label="Default select example"
+              aria-label="Font size"
               style={{ width: "75px" }}
               value={selectedItem?.fontSize || 12}
               onChange={handleFontSizeChange}
