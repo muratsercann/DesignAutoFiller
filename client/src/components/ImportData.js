@@ -51,7 +51,7 @@ export const ImportData = memo(function ImportData({
           />
         }
 
-        {dataset != null && dataset.length > 0 && (
+        {dataset != null && dataset.length > 0 ? (
           <>
             <Modal
               style={{ overflow: "auto", maxHeight: "80%" }}
@@ -112,6 +112,20 @@ export const ImportData = memo(function ImportData({
               dataset={dataSource?.dataset}
             />
           </>
+        ) : (
+          <div style={{ fontWeight: "400", color: "var(--bs-gray-600)" }}>
+            <p>
+              Cannot found a datasource imported. Please click add to import
+              your existing datasource.
+            </p>
+            <p>
+              Supported file formats are :{" "}
+              <span style={{ fontWeight: "500", color: "var(--bs-gray-500)" }}>
+                XLSX, CSV, JSON, TXT
+              </span>
+            </p>
+            <div></div>
+          </div>
         )}
       </div>
     </>
