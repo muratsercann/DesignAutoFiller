@@ -16,6 +16,8 @@ export default function Item({ item, datarow, scale }) {
       style={{
         position: "absolute",
         fontSize: item.fontSize * scale + "px",
+        fontFamily: item.fontFamily,
+        fontWeight: item.fontWeight,
         width: item?.width * scale + "px",
         color: item.fontColor,
         textAlign: item.textAlign,
