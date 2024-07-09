@@ -3,11 +3,10 @@ import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
-import "./editor.css";
 import { IoCloudUploadSharp } from "react-icons/io5";
 import { Spinner } from "react-bootstrap";
-import * as utils from "../../utils";
-export default function UploadImage({ setImageDetails }) {
+import * as utils from "../utils";
+export default function UploadImage({ setImageDetails, style = {} }) {
   const pasteAreaRef = useRef(null);
   const [error, setError] = useState(null);
   const [fileName, setFileName] = useState(null);
@@ -51,7 +50,7 @@ export default function UploadImage({ setImageDetails }) {
   };
 
   return (
-    <>
+    <div style={{ ...style, padding: "10px" }} className="w-100 h-100">
       <div ref={pasteAreaRef} className="upload-file-body">
         <div className="upload-container">
           <div className="mb-3">
@@ -100,7 +99,7 @@ export default function UploadImage({ setImageDetails }) {
         <span>Supported File Formats :</span>
         <span className="mx-1">PNG, JPEG, </span>
       </div>
-    </>
+    </div>
   );
 }
 

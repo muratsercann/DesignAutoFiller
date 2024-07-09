@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import * as utils from "../../utils";
-import "./editor.css";
+import * as utils from "../utils";
 export default function TextColMatcher({ settings, setSettings, dataset }) {
   const dataColumns = utils.getColNamesFromDataset(dataset);
 
@@ -34,6 +33,7 @@ export default function TextColMatcher({ settings, setSettings, dataset }) {
                 <span className="col-1">=</span>
                 <div className="col">
                   <select
+                    title={item.dataColumn}
                     value={item.dataColumn}
                     className="form-select"
                     onChange={(e) => handleChanges(item, e)}

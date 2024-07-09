@@ -375,3 +375,109 @@ button:hover {
   transform: translateY(-50%);
   pointer-events: none;
 }
+
+/*Upload.js*/
+.upload-image-page-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+/*UploadImage.js*/
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-file-body {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #a5a1a1;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.upload-file-body:hover {
+  /* box-shadow: 0px 0px 30px 5px #9d9d9d;
+  border: 2px dashed #00b35c; */
+  background-color: #e2e2e2;
+}
+
+.upload-file-body:hover svg {
+  color: rgb(186, 186, 186) !important;
+}
+
+.file-input-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.file-input-wrapper input[type="file"] {
+  display: none;
+}
+
+.file-input-button {
+  display: inline-block;
+  padding: 5px 22px;
+  background-color: #00b35c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.file-input-button:hover {
+  background-color: #029c52;
+}
+
+/*TextColMatcher.js*/
+/*TextColMatcher*/
+.matcher {
+  width: 100%;
+  display: flex;
+  margin-top: 2rem;
+  justify-items: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.matcher > * select {
+  /* width: 130px; */
+}
+
+.matcher .container {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: fit-content;
+  padding: 20px;
+}
+
+.matcher .container > * .col-5 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.matcher > * .row {
+  align-items: center;
+}
+
+.form-select {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

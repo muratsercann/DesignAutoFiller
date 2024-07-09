@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import UploadImage from "./UploadImage";
 import { useState } from "react";
-import Sizing from "./Sizing";
+import Sizing from "./Editor/Sizing";
 
 export default function UploadImageModal({ show, setShow, onContinue }) {
   const pages = {
@@ -36,7 +36,7 @@ export default function UploadImageModal({ show, setShow, onContinue }) {
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton></Modal.Header>
 
-        <Modal.Body style={{ height: "400px", overflowX: "hidden" }}>
+        <Modal.Body style={{ height: "400px" }}>
           {page === pages.upload && (
             <UploadImage setImageDetails={setImageDetails} />
           )}
