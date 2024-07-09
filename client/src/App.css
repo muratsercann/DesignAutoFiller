@@ -453,14 +453,12 @@ button:hover {
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-.matcher > * select {
-  /* width: 130px; */
+  font-weight: 400;
+  color: var(--bs-gray-400);
 }
 
 .matcher .container {
-  border: 1px solid lightgray;
+  border: 1px solid #d3d3d32b;
   border-radius: 5px;
   height: fit-content;
   padding: 20px;

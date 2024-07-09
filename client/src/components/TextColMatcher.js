@@ -29,7 +29,9 @@ export default function TextColMatcher({ settings, setSettings, dataset }) {
             </div>
             {settings.items.map((item, index) => (
               <div key={index} className="row mb-3">
-                <div className="col-5">{item.value}</div>
+                <div className="col-5" title={item.value}>
+                  {item.value}
+                </div>
                 <span className="col-1">=</span>
                 <div className="col">
                   <select
