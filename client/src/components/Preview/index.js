@@ -51,7 +51,9 @@ export default function Preview({
           )}
         </>
       ) : (
-        <div style={{ color: "var(--bs-gray-500)" }}></div>
+        <div style={{ color: "var(--bs-gray-500)", fontWeight: 400 }}>
+          Sorry! Nothing to show here.
+        </div>
       )}
     </div>
   );

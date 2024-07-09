@@ -39,7 +39,7 @@ export const ImportData = memo(function ImportData({
         <div className="data-container-header">
           <div className="custom-icon-button" onClick={handleImportClick}>
             <BiPlusCircle size={24} />
-            <span>Add</span>
+            <span>Import Your Data</span>
           </div>
         </div>
 
@@ -115,8 +115,11 @@ export const ImportData = memo(function ImportData({
         ) : (
           <div style={{ fontWeight: "400", color: "var(--bs-gray-600)" }}>
             <p>
-              No datasource could be found. Please click 'Add' to import your
-              existing datasource.
+              No datasource found. Click the '
+              <span style={{ fontWeight: 500, color: "var(--bs-gray-500)" }}>
+                Import Your Data
+              </span>
+              ' button above to upload your existing data.
             </p>
             <p>
               Supported file formats are :{" "}
