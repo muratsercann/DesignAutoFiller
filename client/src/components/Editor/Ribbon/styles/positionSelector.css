@@ -30,10 +30,10 @@
   font-weight: 500;
   color: var(--bs-dark);
   background-color: var(--bs-light);
-  border-radius: 5px;
+  border-radius: 10px;
   right: 12%;
-  top: 100%;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  top: 130%;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: flex-start;
   justify-items: center;
@@ -45,14 +45,13 @@
 
 .arrow {
   position: absolute;
-  bottom: 0px;
-  left: 20%;
-  transform: translateX(-50%);
+  top: -10px;
+  /* left: 20px; */
   width: 0px;
   height: 0px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent white;
+  border-color: transparent transparent var(--bs-dark);
 }
 
 .align .container > * span {

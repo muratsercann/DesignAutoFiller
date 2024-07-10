@@ -1,14 +1,17 @@
 .ribbon {
   width: 100%;
-  height: 50px;
+  min-height: 50px;
   display: flex;
   justify-items: center;
   justify-content: start;
   align-items: center;
   align-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
+
   gap: 8px;
   background-color: white;
+  padding: 8px;
   padding-left: 8px;
   padding-right: 8px;
   border-left: 1px solid var(--bs-gray-200);
@@ -26,4 +29,46 @@
 .ribbon select {
   font-size: 13px;
   font-weight: 500;
+}
+
+.custom-button {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  line-height: 20px;
+  padding-top: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.custom-button:not(.disabled):hover {
+  background-color: #ebecf0;
+}
+
+.custom-button.selected {
+  background-color: #ebecf0;
+}
+.custom-button.selected > .letter {
+  color: #a98501;
+}
+
+.custom-button > svg {
+  color: var(--bs-dark);
+}
+
+.custom-button.selected > svg {
+  color: #a98501;
+}
+
+.custom-button > .letter {
+  color: var(--bs-dark);
+  font-size: 18px;
+  font-family: sans-serif;
+  font-weight: bold;
 }

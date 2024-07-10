@@ -128,11 +128,12 @@ export default function Editor({
       fontSize: 12,
       fontColor: "grey",
       fontFamily: '"Roboto", sans-serif',
-      fontweight: 400,
+      fontWeight: 400,
+      fontStyle: "normal",
       width: 130,
       horizontalAlignment: "",
       verticalAlignment: "",
-      textAlign: "left",
+      textAlign: "center",
     };
 
     setPage((prevPage) => ({
