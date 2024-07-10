@@ -331,9 +331,9 @@ button:hover {
   text-align: center;
   visibility: hidden;
   height: 0px;
-  opacity: 0; /* Başlangıçta yazı görünmez */
-  transform: translateY(20px); /* Başlangıçta 20px aşağıda konumlanır */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Geçiş efekti */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .menu-item > svg {
@@ -346,6 +346,9 @@ button:hover {
 
 .menu-item.selected > .label {
   visibility: visible;
+  height: auto;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .menu-item > .con {
