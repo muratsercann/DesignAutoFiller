@@ -7,6 +7,8 @@ import * as utils from "../../../utils";
 import "./styles/ribbon.css";
 import fonts from "./fonts";
 import TextAlignment from "./TextAlignment";
+import BoldSelection from "./BoldSelection";
+import ItalicSelection from "./ItalicSelection";
 
 export default function Ribbon({
   selectedItemElement,
@@ -29,6 +31,13 @@ export default function Ribbon({
 
   const handleFontSizeChange = (e) => {
     onItemChanged({ fontSize: Number(e.target.value) });
+  };
+
+  const handleFontWeightChange = (weight) => {
+    onItemChanged({ fontWeight: weight });
+  };
+  const handleItalicChange = (style) => {
+    onItemChanged({ fontStyle: style });
   };
 
   const handleHorizontalAlignmentChange = (value) => {
@@ -129,7 +138,7 @@ export default function Ribbon({
   };
 
   return (
-    <>
+    <div>
       <div className="ribbon">
         {selectedItem && (
           <>
@@ -165,6 +174,16 @@ export default function Ribbon({
               color={selectedItem?.fontColor || "black"}
               onChange={handleColorChange}
               setIsRibbonItemOpen={setIsRibbonItemOpen}
+            />
+
+            <BoldSelection
+              fontWeight={selectedItem?.fontWeight}
+              onChange={handleFontWeightChange}
+            />
+
+            <ItalicSelection
+              fontStyle={selectedItem?.fontStyle}
+              onChange={handleItalicChange}
             />
 
             <TextAlignment
@@ -207,6 +226,6 @@ export default function Ribbon({
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

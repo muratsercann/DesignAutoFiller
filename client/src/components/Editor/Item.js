@@ -26,6 +26,7 @@ export default function Item({
         fontSize: item.fontSize * scale + "px",
         fontFamily: item.fontFamily,
         fontWeight: item.fontWeight,
+        fontStyle: item.fontStyle || "normal",
         width: item?.width * scale + "px",
         color: item.fontColor,
         textAlign: item.textAlign,
