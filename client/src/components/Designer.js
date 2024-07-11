@@ -10,6 +10,7 @@ import UploadImage from "./UploadImage";
 import { Spinner } from "react-bootstrap";
 import { IoClose } from "react-icons/io5";
 import Header from "./Header";
+import SideMenu from "./SideMenu";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
@@ -48,8 +49,6 @@ export default function Designer() {
     if (imageDetails != null) utils.setImageDetailsToStorage(imageDetails);
   }, [imageDetails]);
 
-  const iconSize = 24;
-
   const handleCloseButton = () => {
     setActivePage("edit");
   };
@@ -60,47 +59,7 @@ export default function Designer() {
 
       <div className="designer-body">
         <div className="side-left">
-          <div className="side-menu">
-            <div
-              className={`menu-item ${activePage === "edit" ? "selected" : ""}`}
-              title="Editor"
-              onClick={() => {
-                setActivePage("edit");
-              }}
-            >
-              <div className="icon">
-                <BsCollection size={iconSize} />
-              </div>
-              <div className="label">Editor</div>
-            </div>
-            <div
-              title="Data Set"
-              className={`menu-item ${activePage === "data" ? "selected" : ""}`}
-              onClick={() => {
-                setActivePage("data");
-              }}
-            >
-              <div className="icon">
-                <BsDatabase size={iconSize} />
-              </div>
-              <div className="label">Data Source</div>
-            </div>
-
-            <div
-              title="Preview"
-              className={`menu-item ${
-                activePage === "preview" ? "selected" : ""
-              }`}
-              onClick={() => {
-                setActivePage("preview");
-              }}
-            >
-              <div className="icon">
-                <BsEye size={iconSize} />
-              </div>
-              <div className="label">Preview</div>
-            </div>
-          </div>
+          <SideMenu activePage={activePage} setActivePage={setActivePage} />
 
           {activePage !== "edit" && (
             <div className="side-container">
