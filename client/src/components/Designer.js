@@ -9,13 +9,13 @@ import CreateNew from "./CreateNew";
 import UploadImage from "./UploadImage";
 import { Spinner } from "react-bootstrap";
 import { IoClose } from "react-icons/io5";
+import Header from "./Header";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
   const [dataSource, setDatasource] = useState(null);
   const [imageDetails, setImageDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ export default function Designer() {
     };
 
     fetchData();
-  }, [refresh]);
+  }, []);
 
   useEffect(() => {
     if (imageDetails != null && page != null) {
@@ -42,19 +42,6 @@ export default function Designer() {
 
   useEffect(() => {
     if (dataSource != null) utils.setImportedDataToStorage(dataSource);
-
-    //todo if data source changes, reset databindings.
-
-    // if (page != null) {
-    //   const newSettings = {
-    //     ...page,
-    //     items: page.items.map((i) => {
-    //       return { ...i, dataColumn: null };
-    //     }),
-    //   };
-
-    //   setPage(newSettings);
-    // }
   }, [dataSource]);
 
   useEffect(() => {
@@ -63,42 +50,14 @@ export default function Designer() {
 
   const iconSize = 24;
 
-  const refreshPage = () => {
-    setRefresh((prev) => prev + 1);
-  };
-
-  // if (loading)
-  //   return (
-  //     <div className="spinner-container">
-  //       <Spinner animation="border" variant="success" />
-  //     </div>
-  //   );
-  // else {
-  //   console.log("loading false..");
-  // }
-
   const handleCloseButton = () => {
     setActivePage("edit");
   };
 
   return (
     <div className="designer-container">
-      <div className="header">
-        <div className="d-flex">
-          <FaImages size={24} />
-        </div>
-        <div>
-          <h2>Designify</h2>
-        </div>
-        <div className="header-right">
-          <CreateNew
-            page={page}
-            setPage={setPage}
-            setImageDetails={setImageDetails}
-            onSuccess={refreshPage}
-          />
-        </div>
-      </div>
+      <Header page={page} setPage={setPage} setImageDetails={setImageDetails} />
+
       <div className="designer-body">
         <div className="side-left">
           <div className="side-menu">
@@ -167,6 +126,7 @@ export default function Designer() {
             </div>
           )}
         </div>
+
         <div className="component-container">
           {loading ? (
             <div className="spinner-container">
