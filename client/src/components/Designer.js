@@ -7,23 +7,30 @@ import { FaImages } from "react-icons/fa6";
 import * as utils from "../utils";
 import CreateNew from "./CreateNew";
 import UploadImage from "./UploadImage";
+import { Spinner } from "react-bootstrap";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
   const [dataSource, setDatasource] = useState(null);
   const [imageDetails, setImageDetails] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(0);
-  useEffect(() => {
-    setLoading(true);
-    const p = utils.getPageInfo();
-    const ds = utils.getImportedDataFromStorage();
-    const imgSt = utils.getImageDetailsFromStorage();
 
-    setPage(p);
-    setDatasource(ds);
-    setImageDetails(imgSt);
-    setLoading(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      const p = await utils.getPageInfo();
+      const ds = await utils.getImportedDataFromStorage();
+      const imgSt = await utils.getImageDetailsFromStorage();
+      const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      await wait(800);
+
+      setPage(p);
+      setDatasource(ds);
+      setImageDetails(imgSt);
+      setLoading(false);
+    };
+
+    fetchData();
   }, [refresh]);
 
   useEffect(() => {
@@ -55,11 +62,19 @@ export default function Designer() {
 
   const iconSize = 24;
 
-  if (loading) return <>loading</>;
-
   const refreshPage = () => {
     setRefresh((prev) => prev + 1);
   };
+
+  // if (loading)
+  //   return (
+  //     <div className="spinner-container">
+  //       <Spinner animation="border" variant="success" />
+  //     </div>
+  //   );
+  // else {
+  //   console.log("loading false..");
+  // }
 
   return (
     <div className="designer-container">
@@ -145,30 +160,38 @@ export default function Designer() {
           )}
         </div>
         <div className="component-container">
-          {imageDetails ? (
-            <Editor
-              page={page}
-              setPage={setPage}
-              imageDetails={imageDetails}
-              setImageDetails={setImageDetails}
-              dataset={dataSource}
-            />
-          ) : (
-            <div
-              style={{ width: "70%" }}
-              className="container gap-5 d-flex flex-column flex-center justify-items-center justify-content-center align-items-center h-100"
-            >
-              <div style={{ fontSize: "32px", fontWeight: "600" }}>
-                Upload an image to start
-              </div>
-
-              <div style={{ height: "400px", width: "100%" }}>
-                <UploadImage
-                  style={{ padding: "30px !important" }}
-                  setImageDetails={setImageDetails}
-                />
-              </div>
+          {loading ? (
+            <div className="spinner-container">
+              <Spinner animation="border" variant="success" />
             </div>
+          ) : (
+            <>
+              {imageDetails ? (
+                <Editor
+                  page={page}
+                  setPage={setPage}
+                  imageDetails={imageDetails}
+                  setImageDetails={setImageDetails}
+                  dataset={dataSource}
+                />
+              ) : (
+                <div
+                  style={{ width: "70%" }}
+                  className="container gap-5 d-flex flex-column flex-center justify-items-center justify-content-center align-items-center h-100"
+                >
+                  <div style={{ fontSize: "32px", fontWeight: "600" }}>
+                    Upload an image to start
+                  </div>
+
+                  <div style={{ height: "400px", width: "100%" }}>
+                    <UploadImage
+                      style={{ padding: "30px !important" }}
+                      setImageDetails={setImageDetails}
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
