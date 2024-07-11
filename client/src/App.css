@@ -489,7 +489,7 @@ button:hover {
   position: absolute;
   width: 25px;
   height: 25px;
-  background-color: #ffffff0d;
+  background-color: transparent;
   border-radius: 3px;
   top: 5px;
   right: 5px;
@@ -499,6 +499,13 @@ button:hover {
   align-items: center;
   cursor: pointer;
 }
+.close-button svg {
+  color: var(--bs-gray-500);
+}
 .close-button:hover {
   background-color: #ffffff26;
+}
+
+.close-button:hover > svg {
+  color: var(--bs-light);
 }
