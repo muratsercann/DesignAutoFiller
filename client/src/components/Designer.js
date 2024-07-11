@@ -8,6 +8,7 @@ import * as utils from "../utils";
 import CreateNew from "./CreateNew";
 import UploadImage from "./UploadImage";
 import { Spinner } from "react-bootstrap";
+import { IoCloseSharp } from "react-icons/io5";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
@@ -76,6 +77,10 @@ export default function Designer() {
   //   console.log("loading false..");
   // }
 
+  const handleCloseButton = () => {
+    setActivePage("edit");
+  };
+
   return (
     <div className="designer-container">
       <div className="header">
@@ -140,6 +145,9 @@ export default function Designer() {
 
           {activePage !== "edit" && (
             <div className="side-container">
+              <div className="close-button" onClick={handleCloseButton}>
+                <IoCloseSharp size={18} />
+              </div>
               {activePage === "data" && (
                 <ImportData
                   dataSource={dataSource}

@@ -259,6 +259,8 @@ button:hover {
   position: relative;
   font-size: 13px;
   font-weight: 600;
+  padding: 30px;
+  padding-top: 40px;
 }
 
 .side-container > * input,
@@ -481,4 +483,22 @@ button:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.close-button {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: #ffffff0d;
+  border-radius: 3px;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+}
+.close-button:hover {
+  background-color: #ffffff26;
 }

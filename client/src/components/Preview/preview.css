@@ -7,8 +7,8 @@
   justify-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-  padding-top: 20px;
-  margin-bottom: 20px;
+  /* padding-top: 20px;
+  margin-bottom: 20px; */
 }
 
 .preview-container > .pageContent {
