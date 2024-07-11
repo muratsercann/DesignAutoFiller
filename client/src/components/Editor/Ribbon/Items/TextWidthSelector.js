@@ -9,7 +9,7 @@ export default function TextWidthSelector({ value, onChange }) {
       <Form.Control
         type="number"
         value={value || 0}
-        onChange={onchange}
+        onChange={onChange}
         style={{ width: "74px" }}
         aria-label="Width(px)"
       />
