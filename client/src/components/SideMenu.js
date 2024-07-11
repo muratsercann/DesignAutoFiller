@@ -3,45 +3,37 @@ import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
 export default function SideMenu({ setActivePage, activePage }) {
   const iconSize = 24;
 
+  const menuItems = [
+    {
+      title: "Editor",
+      navigate: "edit",
+      icon: <BsCollection size={iconSize} />,
+    },
+    {
+      title: "Data Source",
+      navigate: "data",
+      icon: <BsDatabase size={iconSize} />,
+    },
+    { title: "Preview", navigate: "preview", icon: <BsEye size={iconSize} /> },
+  ];
+
   return (
     <div className="side-menu">
-      <div
-        className={`menu-item ${activePage === "edit" ? "selected" : ""}`}
-        title="Editor"
-        onClick={() => {
-          setActivePage("edit");
-        }}
-      >
-        <div className="icon">
-          <BsCollection size={iconSize} />
+      {menuItems.map((item, index) => (
+        <div
+          key={index}
+          className={`menu-item ${
+            activePage === item.navigate ? "selected" : ""
+          }`}
+          title={item.title}
+          onClick={() => {
+            setActivePage(item.navigate);
+          }}
+        >
+          <div className="icon">{item.icon}</div>
+          <div className="label">{item.title}</div>
         </div>
-        <div className="label">Editor</div>
-      </div>
-      <div
-        title="Data Set"
-        className={`menu-item ${activePage === "data" ? "selected" : ""}`}
-        onClick={() => {
-          setActivePage("data");
-        }}
-      >
-        <div className="icon">
-          <BsDatabase size={iconSize} />
-        </div>
-        <div className="label">Data Source</div>
-      </div>
-
-      <div
-        title="Preview"
-        className={`menu-item ${activePage === "preview" ? "selected" : ""}`}
-        onClick={() => {
-          setActivePage("preview");
-        }}
-      >
-        <div className="icon">
-          <BsEye size={iconSize} />
-        </div>
-        <div className="label">Preview</div>
-      </div>
+      ))}
     </div>
   );
 }
