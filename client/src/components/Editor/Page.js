@@ -4,7 +4,7 @@ import * as utils from "../../utils";
 export default function Page({
   page,
   handleAddNewText,
-  handleDeleteSelectedText,
+  handleDeleteSelectedItem,
   selectedItem,
   selectedItemElement,
   setSelectedItemElement,
@@ -53,6 +53,10 @@ export default function Page({
             translateY: newTranslateY,
             verticalAlignment: "",
           });
+          break;
+
+        case "Delete":
+          handleDeleteSelectedItem();
           break;
 
         default:
@@ -183,6 +187,7 @@ export default function Page({
     <div className="pageSubContainer">
       <div className="pageContentParent">
         <div
+          tabIndex={0}
           id="pageContent"
           className="pageContent"
           ref={itemRef}
@@ -214,7 +219,7 @@ export default function Page({
               <span
                 title="Delete"
                 className="remove-text-button"
-                onClick={handleDeleteSelectedText}
+                onClick={handleDeleteSelectedItem}
               >
                 x
               </span>

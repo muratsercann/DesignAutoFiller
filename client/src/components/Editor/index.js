@@ -127,12 +127,11 @@ export default function Editor({
     }));
   };
 
-  const deleteSelectedText = () => {
+  const deleteSelectedItem = () => {
     if (!selectedItem) {
       return;
     }
     deleteItem(selectedItem.id);
-
     unSelect();
   };
 
@@ -175,7 +174,7 @@ export default function Editor({
             handleSpaceClick={handleSpaceClick}
             setPage={setPage}
             handleAddNewText={addNewTextField}
-            handleDeleteSelectedText={deleteSelectedText}
+            handleDeleteSelectedItem={deleteSelectedItem}
             imageDetails={imageDetails}
           />
         </div>
