@@ -14,9 +14,6 @@ export default function CreateNew({
   };
 
   const handleContinue = (imageDetails) => {
-    setShowModal(false);
-    setImageDetails(imageDetails);
-    setPage({ ...page, items: [] });
     utils.clearUserSettingsFromStorage();
     utils.setImageDetailsToStorage(imageDetails);
 

@@ -36,8 +36,8 @@ export const ImportData = memo(function ImportData({
       )}
 
       <div className="data-container">
-        <div className="data-container-header">
-          <div className="custom-icon-button" onClick={handleImportClick}>
+        <div className="data-container-header" style={{ width: "100%" }}>
+          <div className="app-custom-button blue" onClick={handleImportClick}>
             <BiPlusCircle size={24} />
             <span>Import Your Data</span>
           </div>

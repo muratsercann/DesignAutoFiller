@@ -43,7 +43,6 @@ export default function FontColorSelector({
     setShow(!show);
 
     if (!show) {
-      console.log("set show tooltip false");
       setShowTooltip(false);
     }
   };

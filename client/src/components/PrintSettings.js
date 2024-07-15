@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
-import { BiColor } from "react-icons/bi";
 import * as utils from "../utils";
-import { BsJustify } from "react-icons/bs";
 import Preview from "./Preview";
 import { SlPrinter } from "react-icons/sl";
 const minWidth = 3;
@@ -18,6 +16,8 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
   const [height, setHeight] = useState(
     utils.pixelToCm(imageDetails?.naturalHeight)
   );
+
+  const disabled = dataset == null || dataset.length === 0;
 
   const [gap, setGap] = useState(defaultGap);
 
@@ -100,6 +100,8 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
         <div>
           <Form.Label>Width (cm) : </Form.Label>
           <Form.Control
+            className={`${disabled ? "disabled" : ""}`}
+            disabled={disabled}
             value={width}
             type="number"
             id="adjust-width"
@@ -112,6 +114,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
         <div>
           <Form.Label>Height (cm) : </Form.Label>
           <Form.Control
+            className="disabled"
             disabled={true}
             value={height}
             type="number"
@@ -125,6 +128,8 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
           <Form.Label>{`Gap between ${minGap}-${maxGap} cm :`}</Form.Label>
           <Form.Control
             value={gap}
+            className={`${disabled ? "disabled" : ""}`}
+            disabled={disabled}
             type="number"
             id="adjust-gap"
             min={minGap}
@@ -135,12 +140,15 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
         </div>
 
         <div
-          className="app-custom-button mt-3"
+          className={`app-custom-button blue mt-3 ${
+            disabled ? "disabled" : ""
+          }`}
           onClick={() => {
+            if (disabled) return;
             window.print();
           }}
         >
-          <SlPrinter className="mx-2" size={17} />
+          <SlPrinter size={17} />
           Print
         </div>
         <div style={{ fontWeight: "400", color: "var(--bs-gray-600)" }}>
@@ -158,7 +166,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
             You can enter a value from{" "}
             <span style={{ fontWeight: "700", color: "var(--bs-gray-500)" }}>
               {" "}
-              {minGap} to {maxGap}cm{" "}
+              {minGap} to {maxGap} cm{" "}
             </span>{" "}
             for gap between each duplicated design.
           </p>

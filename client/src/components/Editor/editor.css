@@ -117,20 +117,6 @@
   gap: 15px;
 }
 
-.data-container .app-custom-button {
-  width: 100%;
-  height: auto;
-  padding: 8px;
-  background-color: #80808045;
-  border-radius: 7px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.data-container .app-custom-button:hover {
-  background-color: #c2c0c06e;
-}
-
 .edit-footer {
   display: flex;
   gap: 20px;
