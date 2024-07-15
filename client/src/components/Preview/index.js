@@ -6,6 +6,7 @@ export default function Preview({
   imageDetails,
   dataset,
   width = 300,
+  gap = "0.5",
 }) {
   const refContainer = useRef(null);
   const [itemCount, setItemCount] = useState(100);
@@ -40,7 +41,11 @@ export default function Preview({
   };
 
   return (
-    <div ref={refContainer} className="preview-container">
+    <div
+      ref={refContainer}
+      className="preview-container"
+      style={{ gap: `${gap}cm` }}
+    >
       {imageDetails && dataset && settings ? (
         <>
           {pages}

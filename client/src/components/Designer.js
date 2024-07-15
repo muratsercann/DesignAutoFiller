@@ -82,7 +82,11 @@ export default function Designer() {
               )}
 
               {activePage === "print" && (
-                <PrintSettings imageDetails={imageDetails} />
+                <PrintSettings
+                  imageDetails={imageDetails}
+                  settings={page}
+                  dataset={dataSource?.dataset}
+                />
               )}
             </div>
           )}

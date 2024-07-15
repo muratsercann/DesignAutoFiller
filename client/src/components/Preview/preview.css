@@ -6,7 +6,7 @@
   align-items: center;
   justify-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+
   /* padding-top: 20px;
   margin-bottom: 20px; */
 }
@@ -17,7 +17,7 @@
 }
 
 .app-custom-button {
-  width: 80%;
+  width: 100%;
   height: auto;
   padding: 8px;
   background-color: #80808045;
