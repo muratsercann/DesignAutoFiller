@@ -25,7 +25,7 @@ export default function TextColMatcher({ settings, setSettings, dataset }) {
           <div className="container">
             <div className="row mb-3 text-center">
               <h6>Match Text - Column</h6>
-              <hr></hr>
+              <hr style={{ opacity: "0.1" }}></hr>
             </div>
             {settings.items.map((item, index) => (
               <div key={index} className="row mb-3">
