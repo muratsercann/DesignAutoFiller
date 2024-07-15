@@ -115,7 +115,7 @@ export default function Editor({
       fontFamily: '"Roboto", sans-serif',
       fontWeight: 400,
       fontStyle: "normal",
-      width: imageDetails.customWidth,
+      width: imageDetails.customWidth * 0.9,
       horizontalAlignment: "",
       verticalAlignment: "",
       textAlign: "center",
