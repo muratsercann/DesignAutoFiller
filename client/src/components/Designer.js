@@ -2,15 +2,13 @@ import { useEffect, useState } from "react";
 import Editor from "./Editor";
 import ImportData from "./ImportData";
 import Preview from "./Preview";
-import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
-import { FaImages } from "react-icons/fa6";
 import * as utils from "../utils";
-import CreateNew from "./CreateNew";
 import UploadImage from "./UploadImage";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { IoClose } from "react-icons/io5";
 import Header from "./Header";
 import SideMenu from "./SideMenu";
+import PrintSettings from "./PrintSettings";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
@@ -81,6 +79,10 @@ export default function Designer() {
                   imageDetails={imageDetails}
                   settings={page}
                 />
+              )}
+
+              {activePage === "print" && (
+                <PrintSettings imageDetails={imageDetails} />
               )}
             </div>
           )}

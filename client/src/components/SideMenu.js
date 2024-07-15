@@ -1,5 +1,5 @@
 import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
-
+import { SlPrinter } from "react-icons/sl";
 export default function SideMenu({ setActivePage, activePage }) {
   const iconSize = 24;
 
@@ -15,6 +15,11 @@ export default function SideMenu({ setActivePage, activePage }) {
       icon: <BsDatabase size={iconSize} />,
     },
     { title: "Preview", navigate: "preview", icon: <BsEye size={iconSize} /> },
+    {
+      title: "Print",
+      navigate: "print",
+      icon: <SlPrinter size={iconSize} />,
+    },
   ];
 
   return (

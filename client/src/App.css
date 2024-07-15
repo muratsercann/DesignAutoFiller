@@ -329,7 +329,7 @@ button:hover {
 }
 
 .menu-item > .label {
-  width: 100%;
+  width: auto;
   text-align: center;
   visibility: hidden;
   height: 0px;

@@ -17,7 +17,8 @@ export default function Header({ page, setPage, setImageDetails }) {
           setPage={setPage}
           setImageDetails={setImageDetails}
           onSuccess={() => {
-            navigate("/");
+            // navigate("/");
+            window.location.reload();
           }}
         />
       </div>
