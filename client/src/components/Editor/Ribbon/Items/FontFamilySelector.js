@@ -14,8 +14,8 @@ export default function FontFamilySelector({ fontFamily, onChange }) {
           onChange={onChange}
           value={fontFamily}
         >
-          {fonts.sort().map((font) => (
-            <option style={{ fontFamily: font }} value={font}>
+          {fonts.sort().map((font, index) => (
+            <option key={index} style={{ fontFamily: font }} value={font}>
               {font.split(",")[0].replace(/"/g, "")}
             </option>
           ))}

@@ -15,7 +15,7 @@ export default function BoldSelector({ fontWeight, onChange }) {
         className={`custom-button ${fontWeight === "bold" ? "selected" : ""}`}
         onClick={handleclick}
       >
-        <div class="letter" style={{ fontSize: "23px" }}>
+        <div className="letter" style={{ fontSize: "23px" }}>
           B
         </div>
       </div>
