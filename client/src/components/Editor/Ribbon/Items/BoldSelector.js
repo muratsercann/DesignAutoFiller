@@ -2,7 +2,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export default function BoldSelector({ fontWeight, onChange }) {
   const handleclick = (e) => {
-    if (fontWeight === "normal") onChange("bold");
+    if (fontWeight !== "bold") onChange("bold");
     else onChange("normal");
   };
 
