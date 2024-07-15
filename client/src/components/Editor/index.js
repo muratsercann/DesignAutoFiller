@@ -110,7 +110,7 @@ export default function Editor({
       rotationAngle: 0,
       translateX: 0,
       translateY: 0,
-      fontSize: 12,
+      fontSize: 18,
       fontColor: "grey",
       fontFamily: '"Roboto", sans-serif',
       fontWeight: 400,
