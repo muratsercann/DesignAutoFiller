@@ -100,7 +100,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
         <div>
           <Form.Label>Width (cm) : </Form.Label>
           <Form.Control
-            className={`${disabled ? "disabled" : ""}`}
+            className={`bg-dark text-light ${disabled ? "disabled" : ""}`}
             disabled={disabled}
             value={width}
             type="number"
@@ -114,7 +114,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
         <div>
           <Form.Label>Height (cm) : </Form.Label>
           <Form.Control
-            className="disabled"
+            className="bg-dark text-light disabled"
             disabled={true}
             value={height}
             type="number"
@@ -128,7 +128,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
           <Form.Label>{`Gap between ${minGap}-${maxGap} cm :`}</Form.Label>
           <Form.Control
             value={gap}
-            className={`${disabled ? "disabled" : ""}`}
+            className={`bg-dark text-light ${disabled ? "disabled" : ""}`}
             disabled={disabled}
             type="number"
             id="adjust-gap"

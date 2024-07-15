@@ -37,7 +37,7 @@ export default function TextColMatcher({ settings, setSettings, dataset }) {
                   <select
                     title={item.dataColumn}
                     value={item.dataColumn}
-                    className="form-select"
+                    className="form-select bg-dark text-light"
                     onChange={(e) => handleChanges(item, e)}
                   >
                     <option value={""}>none</option>

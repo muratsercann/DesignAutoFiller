@@ -463,7 +463,7 @@ button:hover {
 }
 
 .matcher .container {
-  border: 1px solid #d3d3d32b;
+  /* border: 1px solid #d3d3d32b; */
   border-radius: 5px;
   height: fit-content;
   padding: 20px;
