@@ -135,7 +135,6 @@ export default function Ribbon({
   const handleFontChange = (e) => {
     onItemChanged({
       fontFamily: e.target.value,
-      fontWeight: "normal",
     });
   };
 
