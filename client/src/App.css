@@ -151,7 +151,7 @@ select {
   width: 100%;
   height: 100%;
   /* background-color: #bdbdbd6e; */
-  background-color: #ebebeb1c;
+  background-color: #00000045;
   position: absolute;
   left: 0;
   top: 0;
@@ -502,6 +502,7 @@ button:hover {
   justify-items: center;
   align-items: center;
   cursor: pointer;
+  z-index: 111;
 }
 .close-button svg {
   color: var(--bs-gray-500);
@@ -517,7 +518,7 @@ button:hover {
 .app-custom-button {
   width: 100%;
   height: 35px;
-  background-color: #80808045;
+  background-color: #ffffff09;
   border-radius: 7px;
   text-align: center;
   cursor: pointer;
@@ -534,7 +535,7 @@ button:hover {
 }
 
 .app-custom-button:not(.disabled):hover {
-  background-color: #c2c0c06e;
+  background-color: #ffffff20;
 }
 
 .app-custom-button.blue {

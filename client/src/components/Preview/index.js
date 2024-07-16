@@ -8,10 +8,9 @@ import {
   useState,
 } from "react";
 import { Spinner } from "react-bootstrap";
+import * as utils from "../../utils";
+import { BiRefresh } from "react-icons/bi";
 export default function Preview({
-  settings,
-  imageDetails,
-  dataset,
   width = 300,
   gap = "0.5",
   lazyload = false,
@@ -20,24 +19,50 @@ export default function Preview({
     console.log("Content has fully loaded!");
   },
 }) {
-  const maxWidth = width;
-  let scale = 1;
-
+  const [scale, setScale] = useState(1);
+  const [itemCount, setItemCount] = useState(10);
   const refContainer = useRef(null);
-  const [itemCount, setItemCount] = useState(lazyload ? 10 : dataset.length);
-
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
 
-  if (imageDetails && imageDetails.customWidth > maxWidth) {
-    scale = maxWidth / imageDetails.customWidth;
-  }
+  const [settings, setSettings] = useState(null);
+  const [dataset, setDataset] = useState(null);
+  const [imageDetails, setImageDetails] = useState(null);
+  const [dataLoaded, setDataLoaded] = useState("");
+  const [deferredDataLoaded] = useDeferredValue(dataLoaded);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
-    setQuery("1");
-  }, []);
+    const fetchData = async () => {
+      const p = await utils.getPageInfo();
+      const ds = await utils.getImportedDataFromStorage();
+      const imgSt = await utils.getImageDetailsFromStorage();
+      const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      await wait(800);
 
-  const Result = useCallback(
+      setSettings(p);
+      setDataset(ds?.dataset);
+      setImageDetails(imgSt);
+      setItemCount(lazyload ? 10 : ds.dataset.length);
+
+      const maxWidth = width;
+      if (imgSt && imgSt.customWidth > maxWidth) {
+        setScale(maxWidth / imgSt.customWidth);
+      }
+
+      setDataLoaded("1");
+    };
+
+    fetchData();
+  }, [lazyload, width, refresh]);
+
+  useEffect(() => {
+    if (deferredDataLoaded === "1") {
+      setQuery("1");
+    }
+  }, [deferredDataLoaded]);
+
+  const Pages = useCallback(
     (query) => {
       if (query.query === "") {
         console.log("query is empty");
@@ -78,15 +103,29 @@ export default function Preview({
     }
   }, [deferredQuery, onLoaded]);
 
+  const handleRefreshClick = () => {
+    setDataLoaded("");
+    setRefresh((prev) => prev + 1);
+  };
+
   return (
     <div
       ref={refContainer}
       className="preview-container"
       style={{ gap: `${gap}cm` }}
     >
+      {dataLoaded === "" && (
+        <div className="spinner-container">
+          <Spinner animation="border" variant="success" />
+        </div>
+      )}
       {imageDetails && dataset && settings ? (
         <>
-          {<Result query={deferredQuery} />}
+          <div className="app-custom-button" onClick={handleRefreshClick}>
+            <BiRefresh size={24} color="var(--bs-light)" />
+            Refresh
+          </div>
+          <Pages query={deferredQuery} />
 
           {deferredQuery !== "" && itemCount < dataset.length && (
             <div className="app-custom-button" onClick={handleShowMore}>
@@ -95,9 +134,11 @@ export default function Preview({
           )}
         </>
       ) : (
-        <div style={{ color: "var(--bs-gray-500)", fontWeight: 400 }}>
-          Sorry! Nothing to show here.
-        </div>
+        dataLoaded !== "" && (
+          <div style={{ color: "var(--bs-gray-500)", fontWeight: 400 }}>
+            Sorry! Nothing to show here.
+          </div>
+        )
       )}
     </div>
   );

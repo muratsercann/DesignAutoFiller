@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { IoCloudUploadSharp } from "react-icons/io5";
 
-const maxFilesize = 300;
+const maxFilesize = 1200;
 export default function UploadImage({ setImageDetails, style = {} }) {
   const pasteAreaRef = useRef(null);
   const [fileName, setFileName] = useState(null);
