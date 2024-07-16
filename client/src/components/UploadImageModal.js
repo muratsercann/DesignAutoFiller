@@ -1,51 +1,29 @@
 import { Button, Modal } from "react-bootstrap";
 import UploadImage from "./UploadImage";
 import { useState } from "react";
-import Sizing from "./Editor/Sizing";
 
 export default function UploadImageModal({ show, setShow, onContinue }) {
-  const pages = {
-    upload: "upload",
-    sizing: "sizing",
-  };
-
   const [imageDetails, setImageDetails] = useState(null);
-  const [page, setPage] = useState(pages.upload);
 
   const handleClose = () => {
     setShow(false);
     setImageDetails(null);
-    setPage(pages.upload);
   };
 
-  const handleContinue = () => {
-    if (page === pages.upload) {
-      setPage(pages.sizing);
-    } else if (page === pages.sizing) {
-      onContinue(imageDetails);
-      handleClose();
-    }
-  };
-
-  const handleBack = () => {
-    setPage(pages.upload);
+  const handleUpload = () => {
+    onContinue(imageDetails);
+    handleClose();
   };
 
   return (
     <>
       <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton></Modal.Header>
+        <Modal.Header closeButton>
+          <h5>Upload an image</h5>
+        </Modal.Header>
 
         <Modal.Body style={{ height: "400px" }}>
-          {page === pages.upload && (
-            <UploadImage setImageDetails={setImageDetails} />
-          )}
-          {imageDetails && page === pages.sizing && (
-            <Sizing
-              imageDetails={imageDetails}
-              setImageDetails={setImageDetails}
-            />
-          )}
+          <UploadImage setImageDetails={setImageDetails} />
         </Modal.Body>
 
         <Modal.Footer>
@@ -54,16 +32,7 @@ export default function UploadImageModal({ show, setShow, onContinue }) {
               display: "flex",
               justifyContent: "flex-start",
             }}
-          >
-            <Button
-              variant="secondary"
-              onClick={handleBack}
-              style={{ float: "left" }}
-              disabled={page === pages.upload}
-            >
-              Back
-            </Button>
-          </div>
+          ></div>
           <div
             style={{
               display: "flex",
@@ -75,10 +44,10 @@ export default function UploadImageModal({ show, setShow, onContinue }) {
           >
             <Button
               variant="primary"
-              onClick={handleContinue}
+              onClick={handleUpload}
               disabled={imageDetails === null}
             >
-              Continue
+              Upload
             </Button>
           </div>
         </Modal.Footer>

@@ -150,11 +150,15 @@ select {
 .spinner-container {
   width: 100%;
   height: 100%;
-  background-color: #bdbdbd6e;
+  /* background-color: #bdbdbd6e; */
+  background-color: #00000045;
   position: absolute;
+  left: 0;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 11;
 }
 
 .modal-body > .spinner-container {
@@ -259,6 +263,8 @@ button:hover {
   position: relative;
   font-size: 13px;
   font-weight: 600;
+  padding: 30px;
+  padding-top: 40px;
 }
 
 .side-container > * input,
@@ -327,13 +333,13 @@ button:hover {
 }
 
 .menu-item > .label {
-  width: 100%;
+  width: auto;
   text-align: center;
   visibility: hidden;
   height: 0px;
-  opacity: 0; /* Başlangıçta yazı görünmez */
-  transform: translateY(20px); /* Başlangıçta 20px aşağıda konumlanır */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Geçiş efekti */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .menu-item > svg {
@@ -346,6 +352,9 @@ button:hover {
 
 .menu-item.selected > .label {
   visibility: visible;
+  height: auto;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .menu-item > .con {
@@ -458,7 +467,7 @@ button:hover {
 }
 
 .matcher .container {
-  border: 1px solid #d3d3d32b;
+  /* border: 1px solid #d3d3d32b; */
   border-radius: 5px;
   height: fit-content;
   padding: 20px;
@@ -478,4 +487,74 @@ button:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.close-button {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border-radius: 3px;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 111;
+}
+.close-button svg {
+  color: var(--bs-gray-500);
+}
+.close-button:hover {
+  background-color: #ffffff26;
+}
+
+.close-button:hover > svg {
+  color: var(--bs-light);
+}
+
+.app-custom-button {
+  width: 100%;
+  height: 35px;
+  background-color: #ffffff09;
+  border-radius: 7px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.app-custom-button.disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.app-custom-button:not(.disabled):hover {
+  background-color: #ffffff20;
+}
+
+.app-custom-button.blue {
+  background-color: #40d3ff45;
+}
+
+.app-custom-button.blue:not(.disabled):hover {
+  background-color: #00c4ff70;
+}
+
+input.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.7 !important;
+}
+
+.upload-error {
+  color: firebrick;
+  font-size: smaller;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
 }

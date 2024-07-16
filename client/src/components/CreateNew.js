@@ -14,9 +14,6 @@ export default function CreateNew({
   };
 
   const handleContinue = (imageDetails) => {
-    setShowModal(false);
-    setImageDetails(imageDetails);
-    setPage({ ...page, items: [] });
     utils.clearUserSettingsFromStorage();
     utils.setImageDetailsToStorage(imageDetails);
 
@@ -28,7 +25,7 @@ export default function CreateNew({
   return (
     <>
       <div className="create-new-button" onClick={handleUploadClick}>
-        Create New
+        Open an Image
       </div>
 
       <UploadImageModal

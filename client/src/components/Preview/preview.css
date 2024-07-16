@@ -6,30 +6,12 @@
   align-items: center;
   justify-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding-top: 20px;
-  margin-bottom: 20px;
+
+  /* padding-top: 20px;
+  margin-bottom: 20px; */
 }
 
 .preview-container > .pageContent {
   display: flex;
   position: relative !important;
-}
-
-.app-custom-button {
-  width: 80%;
-  height: auto;
-  padding: 8px;
-  background-color: #80808045;
-  border-radius: 7px;
-  text-align: center;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  justify-content: center;
-}
-
-.app-custom-button:hover {
-  background-color: #c2c0c06e;
 }

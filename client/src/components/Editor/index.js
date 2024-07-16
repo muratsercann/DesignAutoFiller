@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Page from "./Page";
 import "./editor.css";
 import Ribbon from "./Ribbon/index.js";
-import Range from "./Ribbon/Range.js";
+import Range from "./Range.js";
 
 export default function Editor({
   page,
@@ -14,7 +14,6 @@ export default function Editor({
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [scale, setScale] = useState(1.0);
   const pageContainerRef = useRef(null);
-  const [refresh, setRefresh] = useState(null);
   const [isRibbonItemOpen, setIsRibbonItemOpen] = useState(false);
 
   const getSelectedItem = () => {
@@ -45,21 +44,7 @@ export default function Editor({
 
   const handleWheel = (event) => {
     if (event.ctrlKey) {
-      // console.log(`event.elientXY (${event.clientX},${event.clientY})`);
-
       event.preventDefault();
-
-      // let container = document.getElementById("pageContainer");
-      // let page = document.getElementById("pageContent");
-      // const scrollHeight = container.scrollHeight;
-      // const scrollWidth = container.scrollWidth;
-
-      // const diff = (container.offsetWidth - page.offsetWidth) / 2;
-
-      // const scrollX = event.clientX + diff - 10;
-      // container.scrollLeft = scrollX;
-      // console.log("scroll left : ", scrollX);
-      // container.scrollTop = event.clientY;
 
       if (event.deltaY < 0) {
         if (scale + 0.18 >= 5.0) {
@@ -125,12 +110,12 @@ export default function Editor({
       rotationAngle: 0,
       translateX: 0,
       translateY: 0,
-      fontSize: 12,
+      fontSize: 18,
       fontColor: "grey",
       fontFamily: '"Roboto", sans-serif',
       fontWeight: 400,
       fontStyle: "normal",
-      width: 130,
+      width: imageDetails.customWidth * 0.9,
       horizontalAlignment: "",
       verticalAlignment: "",
       textAlign: "center",
@@ -142,12 +127,11 @@ export default function Editor({
     }));
   };
 
-  const deleteSelectedText = () => {
+  const deleteSelectedItem = () => {
     if (!selectedItem) {
       return;
     }
     deleteItem(selectedItem.id);
-
     unSelect();
   };
 
@@ -190,7 +174,7 @@ export default function Editor({
             handleSpaceClick={handleSpaceClick}
             setPage={setPage}
             handleAddNewText={addNewTextField}
-            handleDeleteSelectedText={deleteSelectedText}
+            handleDeleteSelectedItem={deleteSelectedItem}
             imageDetails={imageDetails}
           />
         </div>

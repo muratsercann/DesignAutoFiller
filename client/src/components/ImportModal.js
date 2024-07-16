@@ -4,7 +4,6 @@ import Modal from "react-bootstrap/Modal";
 import * as XLSX from "xlsx";
 import Papa from "papaparse";
 import { IoCloudUploadSharp } from "react-icons/io5";
-
 import { Spinner } from "react-bootstrap";
 
 export default function ImportModal({
@@ -82,6 +81,20 @@ export default function ImportModal({
       const extension = file.name.split(".").pop().toLowerCase();
 
       const parsedData = await parseData(extension, contents);
+
+      if (file.size > 1024 * 1024) {
+        setError(
+          `File size exceeds the maximum allowed limit of 1024 KB. Please choose a smaller file.`
+        );
+        return;
+      }
+
+      if (parsedData.length > 250) {
+        setError(
+          `The file exceeds the maximum allowed row count of 250. Please choose a file with fewer rows.`
+        );
+        return;
+      }
 
       setFileName(file.name);
       setData(parsedData);
@@ -176,11 +189,8 @@ export default function ImportModal({
                 </>
               )}
 
-              <div
-                className="upload-error"
-                style={{ color: "firebrick", fontSize: "smaller" }}
-              >
-                <span>{error || ""}</span>
+              <div className="upload-error">
+                <p>{error || ""}</p>
               </div>
             </div>
           </div>

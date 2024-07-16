@@ -81,7 +81,7 @@
 }
 
 .add-text-button:hover {
-  background-color: #d635b5;
+  background-color: #00c4ff;
   color: white;
 }
 
@@ -114,22 +114,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px;
   gap: 15px;
-}
-
-.data-container .app-custom-button {
-  width: 100%;
-  height: auto;
-  padding: 8px;
-  background-color: #80808045;
-  border-radius: 7px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.data-container .app-custom-button:hover {
-  background-color: #c2c0c06e;
 }
 
 .edit-footer {
