@@ -59,7 +59,7 @@ export default function Designer() {
         <div className="side-left">
           <SideMenu activePage={activePage} setActivePage={setActivePage} />
 
-          {activePage !== "edit" && (
+          {!loading && activePage !== "edit" && (
             <div className="side-container">
               <div className="close-button" onClick={handleCloseButton}>
                 <IoClose size={21} />
@@ -78,6 +78,7 @@ export default function Designer() {
                   dataset={dataSource?.dataset}
                   imageDetails={imageDetails}
                   settings={page}
+                  lazyload={true}
                 />
               )}
 

@@ -7,9 +7,10 @@ export default function Preview({
   dataset,
   width = 300,
   gap = "0.5",
+  lazyload = false,
 }) {
   const refContainer = useRef(null);
-  const [itemCount, setItemCount] = useState(100);
+  const [itemCount, setItemCount] = useState(lazyload ? 10 : dataset.length);
 
   const maxWidth = width;
   let scale = 1;
@@ -35,8 +36,8 @@ export default function Preview({
 
   const handleShowMore = () => {
     setItemCount((prev) => {
-      if (prev + 100 > dataset.length) return dataset.length - 1;
-      else return prev + 100;
+      if (prev + 10 > dataset.length) return dataset.length - 1;
+      else return prev + 10;
     });
   };
 

@@ -25,7 +25,7 @@ export default function CreateNew({
   return (
     <>
       <div className="create-new-button" onClick={handleUploadClick}>
-        Create New
+        Open an Image
       </div>
 
       <UploadImageModal

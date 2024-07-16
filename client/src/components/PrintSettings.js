@@ -23,7 +23,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
 
   const [lockRatioChecked, setLockRatioChecked] = useState(true);
 
-  if (imageDetails == null) {
+  if (imageDetails == null || settings == null || dataset == null) {
     return <></>;
   }
 
