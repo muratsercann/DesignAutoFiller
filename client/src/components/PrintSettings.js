@@ -3,8 +3,8 @@ import { Form, Spinner } from "react-bootstrap";
 import * as utils from "../utils";
 import Preview from "./Preview";
 import { SlPrinter } from "react-icons/sl";
-const minWidth = 3;
 
+const minWidth = 3;
 const defaultGap = 0.5;
 const minGap = 0;
 const maxGap = 3;
@@ -29,7 +29,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
 
   const [gap, setGap] = useState(defaultGap);
 
-  const [lockRatioChecked, setLockRatioChecked] = useState(true);
+  const lockRatioChecked = true;
 
   useEffect(() => {
     if (previewLoaded) {
@@ -37,9 +37,15 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
     }
   }, [previewLoaded]);
 
-  if (imageDetails == null || settings == null || dataset == null) {
-    return <></>;
-  }
+  useEffect(() => {
+    setPrintSettings(null);
+  }, [dataset, imageDetails, settings]);
+
+  if (imageDetails == null) return <>Not found an design to print.</>;
+
+  if (settings == null) return <>Something is wrong.</>;
+
+  if (dataset == null) return <>No dataset found.</>;
 
   const handleWidthChange = (e) => {
     if (e.target.value === "") {
@@ -67,14 +73,6 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
     setPrintSettings(null);
   };
 
-  const handleSaveRatioChange = (e) => {
-    setLockRatioChecked(e.target.checked);
-
-    if (e.target.checked) {
-      const newHeight = parseFloat((width / imageDetails.ratio).toFixed(2));
-      setHeight(newHeight);
-    }
-  };
   const handleBlur = () => {
     if (width === "" || width < minWidth) {
       setWidth(minWidth);
@@ -121,7 +119,6 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
       <div
         className="print-settings"
         style={{
-          color: "var(--bs-gray-400)",
           display: "flex",
           flexDirection: "column",
           gap: "10px",
