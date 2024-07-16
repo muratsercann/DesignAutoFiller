@@ -166,7 +166,8 @@ export default function Page({
         setScale(newScale);
       }
     } else if (ratio < 1) {
-      setScale(ratio - 0.3);
+      const val = ratio - 0.3 < 0.1 ? 0.1 : ratio - 0.3;
+      setScale(val);
     }
   }, [imageDetails]);
 
