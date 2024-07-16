@@ -11,7 +11,7 @@ import { Spinner } from "react-bootstrap";
 import * as utils from "../../utils";
 import { BiRefresh } from "react-icons/bi";
 export default function Preview({
-  width = 300,
+  width = 280,
   gap = "0.5",
   lazyload = false,
 
