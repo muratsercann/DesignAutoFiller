@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Form } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Form, Spinner } from "react-bootstrap";
 import * as utils from "../utils";
 import Preview from "./Preview";
 import { SlPrinter } from "react-icons/sl";
@@ -10,18 +10,32 @@ const minGap = 0;
 const maxGap = 3;
 
 export default function PrintSettings({ settings, imageDetails, dataset }) {
+  const imageNaturalWidth = utils.pixelToCm(imageDetails?.naturalWidth);
+  const imageNaturalHeight = utils.pixelToCm(imageDetails?.naturalHeight);
+
   const [width, setWidth] = useState(
-    utils.pixelToCm(imageDetails?.naturalWidth)
+    imageNaturalWidth > 5 ? 5 : imageNaturalWidth
   );
   const [height, setHeight] = useState(
-    utils.pixelToCm(imageDetails?.naturalHeight)
+    imageNaturalWidth > 5
+      ? parseFloat((5 / imageDetails.ratio).toFixed(2))
+      : imageNaturalHeight
   );
 
+  const [printSettings, setPrintSettings] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [previewLoaded, setPreviewLoaded] = useState(false);
   const disabled = dataset == null || dataset.length === 0;
 
   const [gap, setGap] = useState(defaultGap);
 
   const [lockRatioChecked, setLockRatioChecked] = useState(true);
+
+  useEffect(() => {
+    if (previewLoaded) {
+      window.print();
+    }
+  }, [previewLoaded]);
 
   if (imageDetails == null || settings == null || dataset == null) {
     return <></>;
@@ -30,6 +44,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
   const handleWidthChange = (e) => {
     if (e.target.value === "") {
       setWidth(e.target.value);
+      setPrintSettings(null);
       return;
     }
 
@@ -39,6 +54,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
       const newHeight = parseFloat((value / imageDetails.ratio).toFixed(2));
       setHeight(newHeight);
     }
+    setPrintSettings(null);
   };
 
   const handleHeightChange = (e) => {
@@ -48,6 +64,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
       const newWidth = parseFloat((value * imageDetails.ratio).toFixed(2));
       setWidth(newWidth);
     }
+    setPrintSettings(null);
   };
 
   const handleSaveRatioChange = (e) => {
@@ -65,11 +82,13 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
       setWidth(utils.pixelToCm(imageDetails.naturalWidth));
       setHeight(utils.pixelToCm(imageDetails.naturalHeight));
     }
+    setPrintSettings(null);
   };
 
   const handleGapChange = (e) => {
     if (e.target.value === "") {
       setGap(e.target.value);
+      setPrintSettings(null);
       return;
     }
 
@@ -79,11 +98,26 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
   const handleGapBlur = () => {
     if (gap === "" || gap < minGap) {
       setGap(minGap);
-    } else if (gap > maxGap) setGap(maxGap);
+    } else if (gap > maxGap) {
+      setGap(maxGap);
+    }
+    setPrintSettings(null);
+  };
+
+  const handlePrintClick = () => {
+    if (disabled) return;
+    setLoading(true);
+    setPreviewLoaded(false);
+    setPrintSettings({ width: utils.cmToPixel(width), gap: gap });
   };
 
   return (
     <>
+      {loading && (
+        <div className="spinner-container">
+          <Spinner animation="border" variant="success" />
+        </div>
+      )}
       <div
         className="print-settings"
         style={{
@@ -143,10 +177,7 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
           className={`app-custom-button blue mt-3 ${
             disabled ? "disabled" : ""
           }`}
-          onClick={() => {
-            if (disabled) return;
-            window.print();
-          }}
+          onClick={handlePrintClick}
         >
           <SlPrinter size={17} />
           Print
@@ -177,15 +208,20 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
           </p>
         </div>
       </div>
-
       <div className="print-preview" style={{ display: "none" }}>
-        <Preview
-          width={utils.cmToPixel(width)}
-          settings={settings}
-          dataset={dataset}
-          imageDetails={imageDetails}
-          gap={gap}
-        />
+        {printSettings != null && (
+          <Preview
+            width={printSettings.width}
+            gap={printSettings.gap}
+            settings={settings}
+            dataset={dataset}
+            imageDetails={imageDetails}
+            onLoaded={() => {
+              setLoading(false);
+              setPreviewLoaded(true);
+            }}
+          />
+        )}
       </div>
     </>
   );
