@@ -9,7 +9,11 @@ export default function BoldSelector({ fontWeight, onChange }) {
   return (
     <OverlayTrigger
       placement="bottom"
-      overlay={<Tooltip id="bold-button-tooltip">Bold</Tooltip>}
+      overlay={
+        <Tooltip className="custom-tooltip" id="bold-button-tooltip">
+          Bold
+        </Tooltip>
+      }
     >
       <div
         className={`custom-button ${fontWeight === "bold" ? "selected" : ""}`}

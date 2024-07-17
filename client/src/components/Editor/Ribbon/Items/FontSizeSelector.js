@@ -10,7 +10,11 @@ export default function FontSizeSelector({ fontSize, onChange }) {
   return (
     <OverlayTrigger
       placement="bottom"
-      overlay={<Tooltip id="font-size-tooltip">Font Size</Tooltip>}
+      overlay={
+        <Tooltip className="custom-tooltip" id="font-size-tooltip">
+          Font Size
+        </Tooltip>
+      }
     >
       <Form.Select
         aria-label="Font size"

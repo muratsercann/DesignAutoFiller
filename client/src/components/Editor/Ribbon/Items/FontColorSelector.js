@@ -80,7 +80,11 @@ export default function FontColorSelector({
     <>
       <OverlayTrigger
         placement="bottom"
-        overlay={<Tooltip id="font-color-tooltip">Font Color</Tooltip>}
+        overlay={
+          <Tooltip className="custom-tooltip" id="font-color-tooltip">
+            Font Color
+          </Tooltip>
+        }
         show={showTooltip}
         onToggle={handleToggle}
       >

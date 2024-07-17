@@ -4,7 +4,11 @@ export default function TextWidthSelector({ value, onChange }) {
   return (
     <OverlayTrigger
       placement="bottom"
-      overlay={<Tooltip id="text-width-tooltip">Width</Tooltip>}
+      overlay={
+        <Tooltip className="custom-tooltip" id="text-width-tooltip">
+          Width
+        </Tooltip>
+      }
     >
       <Form.Control
         type="number"

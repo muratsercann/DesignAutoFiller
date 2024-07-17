@@ -54,7 +54,11 @@ export default function TextAlignment({ align, setAlign, disabled }) {
   return (
     <OverlayTrigger
       placement="bottom"
-      overlay={<Tooltip id="text-alignment-tooltip">Align</Tooltip>}
+      overlay={
+        <Tooltip className="custom-tooltip" id="text-alignment-tooltip">
+          Align
+        </Tooltip>
+      }
     >
       <div
         className={`alignment ${disabled ? "disabled" : ""}`}

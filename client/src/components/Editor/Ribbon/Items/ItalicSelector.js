@@ -9,7 +9,11 @@ export default function ItalicSelector({ fontStyle, onChange }) {
   return (
     <OverlayTrigger
       placement="bottom"
-      overlay={<Tooltip id="italic-tooltip">Italic</Tooltip>}
+      overlay={
+        <Tooltip className="custom-tooltip" id="italic-tooltip">
+          Italic
+        </Tooltip>
+      }
     >
       <div
         className={`custom-button ${fontStyle === "italic" ? "selected" : ""}`}

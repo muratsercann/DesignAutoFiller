@@ -558,3 +558,31 @@ input.disabled {
   padding-right: 10px;
   text-align: center;
 }
+
+.custom-tooltip {
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+  border-radius: 10px;
+}
+
+.custom-tooltip .tooltip-inner {
+  background-color: var(--bs-dark);
+  color: var(--bs-light);
+  font-weight: 500;
+}
+
+.custom-tooltip[data-popper-placement^="top"] .tooltip-arrow::before {
+  border-top-color: var(--bs-dark);
+}
+
+.custom-tooltip[data-popper-placement^="bottom"] .tooltip-arrow::before {
+  border-bottom-color: var(--bs-dark);
+}
+
+.custom-tooltip[data-popper-placement^="left"] .tooltip-arrow::before {
+  border-left-color: var(--bs-dark);
+}
+
+.custom-tooltip[data-popper-placement^="right"] .tooltip-arrow::before {
+  border-right-color: var(--bs-dark);
+}

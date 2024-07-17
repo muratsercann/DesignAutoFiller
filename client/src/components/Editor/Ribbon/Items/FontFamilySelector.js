@@ -6,7 +6,11 @@ export default function FontFamilySelector({ fontFamily, onChange }) {
     <>
       <OverlayTrigger
         placement="bottom"
-        overlay={<Tooltip id="font-family-tooltip">Fonts</Tooltip>}
+        overlay={
+          <Tooltip className="custom-tooltip" id="font-family-tooltip">
+            Fonts
+          </Tooltip>
+        }
       >
         <Form.Select
           aria-label="Select a font"

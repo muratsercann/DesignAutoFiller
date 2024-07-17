@@ -5,7 +5,11 @@ export default function TextIntput({ value, onChange }) {
     <>
       <OverlayTrigger
         placement="bottom"
-        overlay={<Tooltip id="text-input-tooltip">Text value</Tooltip>}
+        overlay={
+          <Tooltip className="custom-tooltip" id="text-input-tooltip">
+            Text value
+          </Tooltip>
+        }
       >
         <Form.Control type="text" value={value || ""} onChange={onChange} />
       </OverlayTrigger>

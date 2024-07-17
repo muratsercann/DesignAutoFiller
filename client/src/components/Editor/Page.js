@@ -3,6 +3,7 @@ import Item from "./Item";
 import * as utils from "../../utils";
 import { BiTrash } from "react-icons/bi";
 import { IoIosAdd } from "react-icons/io";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 export default function Page({
   page,
   handleAddNewText,
@@ -211,21 +212,38 @@ export default function Page({
           )}cm x ${utils.pixelToCm(imageDetails.customHeight)}cm`}</span>
 
           <div title="" className="page-buttons-container">
-            <span
-              title="Add new text"
-              className="add-text-button"
-              onClick={handleAddNewText}
+            <OverlayTrigger
+              placement="left"
+              overlay={
+                <Tooltip className="custom-tooltip" id="add-text-item-tooltip">
+                  Add Text Item
+                </Tooltip>
+              }
             >
-              <IoIosAdd size={21} />
-            </span>
-            {selectedItem && (
-              <span
-                title="Delete"
-                className="remove-text-button"
-                onClick={handleDeleteSelectedItem}
-              >
-                <BiTrash size={21} />
+              <span className="add-text-button" onClick={handleAddNewText}>
+                <IoIosAdd size={21} />
               </span>
+            </OverlayTrigger>
+
+            {selectedItem && (
+              <OverlayTrigger
+                placement="left"
+                overlay={
+                  <Tooltip
+                    className="custom-tooltip"
+                    id="delete-text-item-tooltip"
+                  >
+                    Remove Selected{" "}
+                  </Tooltip>
+                }
+              >
+                <span
+                  className="remove-text-button"
+                  onClick={handleDeleteSelectedItem}
+                >
+                  <BiTrash size={21} />
+                </span>
+              </OverlayTrigger>
             )}
           </div>
 

@@ -4,7 +4,11 @@ export default function RotationSelector({ value, onChange }) {
   return (
     <OverlayTrigger
       placement="bottom"
-      overlay={<Tooltip id="rotation-tooltip">Rotate</Tooltip>}
+      overlay={
+        <Tooltip className="custom-tooltip" id="rotation-tooltip">
+          Rotate
+        </Tooltip>
+      }
     >
       <Form.Control
         type="number"
