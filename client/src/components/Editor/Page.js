@@ -1,6 +1,8 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Item from "./Item";
 import * as utils from "../../utils";
+import { BiTrash } from "react-icons/bi";
+import { IoIosAdd } from "react-icons/io";
 export default function Page({
   page,
   handleAddNewText,
@@ -214,7 +216,7 @@ export default function Page({
               className="add-text-button"
               onClick={handleAddNewText}
             >
-              +
+              <IoIosAdd size={21} />
             </span>
             {selectedItem && (
               <span
@@ -222,7 +224,7 @@ export default function Page({
                 className="remove-text-button"
                 onClick={handleDeleteSelectedItem}
               >
-                x
+                <BiTrash size={21} />
               </span>
             )}
           </div>

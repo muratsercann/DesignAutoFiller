@@ -63,44 +63,38 @@
 
 .page-buttons-container > * {
   margin-bottom: 10px;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
 
 .add-text-button {
-  background-color: #dddddd45;
-  padding: 10px;
   display: flex;
   justify-items: center;
   align-items: center;
   justify-content: center;
   color: #838383;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px 2px #644c4c29;
+  border-radius: 7px;
   cursor: pointer;
 }
 
 .add-text-button:hover {
   background-color: #00c4ff;
-  color: white;
+  color: var(--bs-light);
 }
 
 .remove-text-button {
-  background-color: #dddddd45;
-  padding: 10px;
   display: flex;
   justify-items: center;
   align-items: center;
   justify-content: center;
   color: #838383;
-  border-radius: 5px;
-  box-shadow: 0px 2px 4px 2px #644c4c29;
+  border-radius: 7px;
   cursor: pointer;
 }
 
 .remove-text-button:hover {
   background-color: #f03333;
-  color: white;
+  color: var(--bs-light);
 }
 
 .save-continue-button {
