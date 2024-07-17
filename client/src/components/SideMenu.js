@@ -1,5 +1,6 @@
 import { BsCollection, BsDatabase, BsEye } from "react-icons/bs";
 import { SlPrinter } from "react-icons/sl";
+import { MdOutlineHelp } from "react-icons/md";
 export default function SideMenu({ setActivePage, activePage }) {
   const iconSize = 24;
 
@@ -19,6 +20,11 @@ export default function SideMenu({ setActivePage, activePage }) {
       title: "Print",
       navigate: "print",
       icon: <SlPrinter size={iconSize} />,
+    },
+    {
+      title: "Help",
+      navigate: "help",
+      icon: <MdOutlineHelp size={iconSize} />,
     },
   ];
 

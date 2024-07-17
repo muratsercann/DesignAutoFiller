@@ -9,6 +9,7 @@ import { IoClose } from "react-icons/io5";
 import Header from "./Header";
 import SideMenu from "./SideMenu";
 import PrintSettings from "./PrintSettings";
+import Help from "./Help";
 export default function Designer() {
   const [activePage, setActivePage] = useState("edit");
   const [page, setPage] = useState(null);
@@ -89,6 +90,7 @@ export default function Designer() {
                   dataset={dataSource?.dataset}
                 />
               )}
+              {activePage === "help" && <Help />}
             </div>
           )}
         </div>
