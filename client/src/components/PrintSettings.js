@@ -41,11 +41,14 @@ export default function PrintSettings({ settings, imageDetails, dataset }) {
     setPrintSettings(null);
   }, [dataset, imageDetails, settings]);
 
-  if (imageDetails == null) return <>Not found an design to print.</>;
+  const warningStyle = { color: "var(--bs-gray-400)", fontWeight: "400" };
+  if (imageDetails == null)
+    return <div style={warningStyle}>Nothing to print.</div>;
 
-  if (settings == null) return <>Something is wrong.</>;
+  if (settings == null)
+    return <div style={warningStyle}>Something is wrong.</div>;
 
-  if (dataset == null) return <>No dataset found.</>;
+  if (dataset == null) return <div style={warningStyle}>No dataset found.</div>;
 
   const handleWidthChange = (e) => {
     if (e.target.value === "") {
