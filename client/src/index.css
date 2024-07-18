@@ -40,7 +40,8 @@ code {
   .side-menu,
   .component-container,
   .print-settings,
-  .close-button {
+  .close-button,
+  .app-custom-button {
     display: none !important;
   }
 
@@ -48,19 +49,31 @@ code {
   .side-container,
   .preview-container {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     min-width: 100% !important;
     background-color: transparent !important;
     padding: 0px !important;
     margin: 0px !important;
+
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    overflow: hidden !important;
   }
 
   .preview-container {
     justify-content: flex-start !important;
+    height: fit-content !important;
+    overflow: hidden !important;
   }
 
   .print-preview {
     display: block !important;
+  }
+
+  .pageContent,
+  img {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   @page {
