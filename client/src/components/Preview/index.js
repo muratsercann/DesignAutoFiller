@@ -92,7 +92,7 @@ export default function Preview({
 
   const handleShowMore = () => {
     setItemCount((prev) => {
-      if (prev + 10 > dataset.length) return dataset.length - 1;
+      if (prev + 10 > dataset.length) return dataset.length;
       else return prev + 10;
     });
   };
