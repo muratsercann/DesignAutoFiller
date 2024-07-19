@@ -31,13 +31,13 @@ code {
     height: fit-content;
     display: block;
     print-color-adjust: exact;
-    -webkit-print-color-adjust: exact; /* Safari, Chrome */
+    -webkit-print-color-adjust: exact;
   }
 
   body > * {
     overflow: hidden;
     print-color-adjust: exact;
-    -webkit-print-color-adjust: exact; /* Safari, Chrome */
+    -webkit-print-color-adjust: exact;
   }
 
   .header,
