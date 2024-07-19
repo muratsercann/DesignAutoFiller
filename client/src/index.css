@@ -30,10 +30,14 @@ code {
     overflow: auto;
     height: fit-content;
     display: block;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact; /* Safari, Chrome */
   }
 
   body > * {
     overflow: hidden;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact; /* Safari, Chrome */
   }
 
   .header,
