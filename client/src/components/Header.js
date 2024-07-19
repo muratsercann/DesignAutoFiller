@@ -8,8 +8,8 @@ export default function Header({ page, setPage, setImageDetails }) {
       <div className="d-flex">
         <FaImages size={24} />
       </div>
-      <div>
-        <h2>Designify</h2>
+      <div style={{ width: "500px" }}>
+        <h3>Design Duplicator</h3>
       </div>
       <div className="header-right">
         <CreateNew

@@ -47,6 +47,7 @@
 
 .header > *,
 .editor > *,
+.side-menu > *,
 .app-custom-button {
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
@@ -585,4 +586,111 @@ input.disabled {
 
 .custom-tooltip[data-popper-placement^="right"] .tooltip-arrow::before {
   border-right-color: var(--bs-dark);
+}
+
+.get-started {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: auto;
+  gap: 82px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: linear-gradient(
+    to bottom right,
+    #0fadcd,
+    #06d3fc,
+    #29dc9e,
+    #12ea9e
+  );
+}
+
+.get-started .step {
+  width: 60%;
+  position: relative;
+}
+
+.get-started * img {
+  width: 100%;
+  box-shadow: 0px 1px 8px 3px var(--bs-dark);
+  border-radius: 8px;
+}
+
+.get-started > * .get-started-step {
+  color: var(--bs-light);
+  font-weight: 600;
+  font-size: 18px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+/* .quick-start-button {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  width: 200px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: var(--bs-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bs-light);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quick-start-button:hover {
+  background-color: #065ad7;
+} */
+
+.quick-start-button {
+  position: fixed;
+  z-index: 2;
+  top: 20px;
+  right: 30px;
+  width: 200px;
+  height: 50px;
+  border-radius: 4px;
+  background-color: var(--bs-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bs-light);
+  font-weight: 600;
+  cursor: pointer;
+  background-image: linear-gradient(
+    to right,
+    var(--bs-blue) 0%,
+    var(--bs-blue) 50%,
+    #065ad7 50%,
+    #065ad7 100%
+  );
+  background-size: 200% 100%;
+  transition: background-position 0.5s ease;
+}
+
+.quick-start-button:hover {
+  background-position: -100% 0;
+}
+
+.get-started-header {
+  width: 90%;
+  height: auto;
+  margin-top: 57px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--bs-light);
+  font-size: 38px;
+  text-align: center;
+  flex-direction: column;
 }
