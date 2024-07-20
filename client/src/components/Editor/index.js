@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Page from "./Page";
 import "./editor.css";
-import Ribbon from "./Ribbon";
-import Range from "../Shared/Range.js";
-import Upload from "./Upload.js";
+import Ribbon from "./Ribbon/index.js";
+import Range from "./Range.js";
 
 export default function Editor({
   page,
@@ -15,7 +14,6 @@ export default function Editor({
   const [selectedItemElement, setSelectedItemElement] = useState(null);
   const [scale, setScale] = useState(1.0);
   const pageContainerRef = useRef(null);
-  const [refresh, setRefresh] = useState(null);
   const [isRibbonItemOpen, setIsRibbonItemOpen] = useState(false);
 
   const getSelectedItem = () => {
@@ -46,21 +44,7 @@ export default function Editor({
 
   const handleWheel = (event) => {
     if (event.ctrlKey) {
-      // console.log(`event.elientXY (${event.clientX},${event.clientY})`);
-
       event.preventDefault();
-
-      // let container = document.getElementById("pageContainer");
-      // let page = document.getElementById("pageContent");
-      // const scrollHeight = container.scrollHeight;
-      // const scrollWidth = container.scrollWidth;
-
-      // const diff = (container.offsetWidth - page.offsetWidth) / 2;
-
-      // const scrollX = event.clientX + diff - 10;
-      // container.scrollLeft = scrollX;
-      // console.log("scroll left : ", scrollX);
-      // container.scrollTop = event.clientY;
 
       if (event.deltaY < 0) {
         if (scale + 0.18 >= 5.0) {
@@ -126,13 +110,15 @@ export default function Editor({
       rotationAngle: 0,
       translateX: 0,
       translateY: 0,
-      fontSize: 12,
+      fontSize: 18,
       fontColor: "grey",
-      fontFamily: "",
-      width: 130,
+      fontFamily: '"Roboto", sans-serif',
+      fontWeight: 400,
+      fontStyle: "normal",
+      width: imageDetails.customWidth * 0.9,
       horizontalAlignment: "",
       verticalAlignment: "",
-      textAlign: "left",
+      textAlign: "center",
     };
 
     setPage((prevPage) => ({
@@ -141,12 +127,11 @@ export default function Editor({
     }));
   };
 
-  const deleteSelectedText = () => {
+  const deleteSelectedItem = () => {
     if (!selectedItem) {
       return;
     }
     deleteItem(selectedItem.id);
-
     unSelect();
   };
 
@@ -162,45 +147,41 @@ export default function Editor({
 
   return (
     <>
-      {imageDetails ? (
-        <div className="edit">
-          <Ribbon
-            selectedItemElement={selectedItemElement}
-            selectedItem={selectedItem}
-            onItemChanged={onItemChanged}
-            imageDetails={imageDetails}
+      <div className="edit">
+        <Ribbon
+          selectedItemElement={selectedItemElement}
+          selectedItem={selectedItem}
+          onItemChanged={onItemChanged}
+          imageDetails={imageDetails}
+          scale={scale}
+          isRibbonItemOpen={isRibbonItemOpen}
+          setIsRibbonItemOpen={setIsRibbonItemOpen}
+        />
+        <div
+          id="pageContainer"
+          className="pageContainer"
+          ref={pageContainerRef}
+          onClick={handleSpaceClick}
+        >
+          <Page
             scale={scale}
-            isRibbonItemOpen={isRibbonItemOpen}
-            setIsRibbonItemOpen={setIsRibbonItemOpen}
+            setScale={setScale}
+            page={page}
+            selectedItem={selectedItem}
+            selectedItemElement={selectedItemElement}
+            setSelectedItemElement={setSelectedItemElement}
+            onItemChanged={onItemChanged}
+            handleSpaceClick={handleSpaceClick}
+            setPage={setPage}
+            handleAddNewText={addNewTextField}
+            handleDeleteSelectedItem={deleteSelectedItem}
+            imageDetails={imageDetails}
           />
-          <div
-            id="pageContainer"
-            className="pageContainer"
-            ref={pageContainerRef}
-            onClick={handleSpaceClick}
-          >
-            <Page
-              scale={scale}
-              setScale={setScale}
-              page={page}
-              selectedItem={selectedItem}
-              selectedItemElement={selectedItemElement}
-              setSelectedItemElement={setSelectedItemElement}
-              onItemChanged={onItemChanged}
-              handleSpaceClick={handleSpaceClick}
-              setPage={setPage}
-              handleAddNewText={addNewTextField}
-              handleDeleteSelectedText={deleteSelectedText}
-              imageDetails={imageDetails}
-            />
-          </div>
-          <div className="edit-footer">
-            <Range scale={scale} setScale={setScale} />
-          </div>
         </div>
-      ) : (
-        <Upload setImageDetails={setImageDetails} onSuccess={setRefresh} />
-      )}
+        <div className="edit-footer">
+          <Range scale={scale} setScale={setScale} />
+        </div>
+      </div>
     </>
   );
 }

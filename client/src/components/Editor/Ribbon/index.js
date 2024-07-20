@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
-import FontColorSelector from "../Shared/FontColorSelector";
-import PositionSelector from "../Shared/PositionSelector";
-import "./editor.css";
-import Form from "react-bootstrap/Form";
-import * as utils from "../../utils";
+import FontColorSelector from "./Items/FontColorSelector";
+import PositionSelector from "./Items/PositionSelector";
+import "../editor.css";
+import * as utils from "../../../utils";
+import "./styles/ribbon.css";
+import TextAlignment from "./Items/TextAlignment";
+import BoldSelector from "./Items/BoldSelector";
+import ItalicSelector from "./Items/ItalicSelector";
 
-import TextAlignment from "../Shared/TextAlignment";
+import FontFamilySelector from "./Items/FontFamilySelector";
+import FontSizeSelector from "./Items/FontSizeSelector";
+import TextWidthSelector from "./Items/TextWidthSelector";
+import RotationSelector from "./Items/RotationSelector";
+import TextIntput from "./Items/TextInput";
 
 export default function Ribbon({
   selectedItemElement,
@@ -28,6 +35,13 @@ export default function Ribbon({
 
   const handleFontSizeChange = (e) => {
     onItemChanged({ fontSize: Number(e.target.value) });
+  };
+
+  const handleFontWeightChange = (weight) => {
+    onItemChanged({ fontWeight: weight });
+  };
+  const handleItalicChange = (style) => {
+    onItemChanged({ fontStyle: style });
   };
 
   const handleHorizontalAlignmentChange = (value) => {
@@ -60,8 +74,6 @@ export default function Ribbon({
   const handleTextAlignment = (value) => {
     onItemChanged({ textAlign: value });
   };
-
-  const fontSizes = [7, 9, 11, 12, 15, 18, 20, 21, 24, 28, 32, 44, 55];
 
   const handleTextChange = (e) => {
     onItemChanged({ value: e.target.value });
@@ -120,34 +132,26 @@ export default function Ribbon({
     setRotationAngle(selectedItem.rotationAngle);
   }, [selectedItem]);
 
+  const handleFontChange = (e) => {
+    onItemChanged({
+      fontFamily: e.target.value,
+    });
+  };
+
   return (
-    <>
+    <div>
       <div className="ribbon">
         {selectedItem && (
           <>
-            <Form.Select
-              aria-label="Default select example"
-              style={{ width: "150px" }}
-            >
-              <option value="1">Calibri</option>
-              <option value="2">Open Sans</option>
-              <option value="3">Time</option>
-            </Form.Select>
+            <FontFamilySelector
+              fontFamily={selectedItem.fontFamily}
+              onChange={handleFontChange}
+            />
 
-            <Form.Select
-              aria-label="Default select example"
-              style={{ width: "75px" }}
-              value={selectedItem?.fontSize || 12}
+            <FontSizeSelector
+              fontSize={selectedItem.fontSize}
               onChange={handleFontSizeChange}
-            >
-              {fontSizes.map((item, index) => {
-                return (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </Form.Select>
+            />
 
             <FontColorSelector
               color={selectedItem?.fontColor || "black"}
@@ -155,34 +159,34 @@ export default function Ribbon({
               setIsRibbonItemOpen={setIsRibbonItemOpen}
             />
 
+            <BoldSelector
+              fontWeight={selectedItem?.fontWeight}
+              onChange={handleFontWeightChange}
+            />
+
+            <ItalicSelector
+              fontStyle={selectedItem?.fontStyle}
+              onChange={handleItalicChange}
+            />
+
             <TextAlignment
               align={selectedItem?.textAlign || "left"}
               setAlign={handleTextAlignment}
             />
 
-            <Form.Control
-              type="text"
-              value={selectedItem?.value || ""}
+            <TextIntput
+              value={selectedItem.value}
               onChange={handleTextChange}
             />
 
-            <Form.Control
-              type="number"
-              title="Width"
-              value={selectedItem?.width || 0}
+            <TextWidthSelector
+              value={selectedItem.width}
               onChange={handleItemWidthChange}
-              style={{ width: "74px" }}
-              aria-label="Width(px)"
             />
 
-            <Form.Control
-              type="number"
-              title="Rotation Angle (deg)"
+            <RotationSelector
               value={rotationAngle}
               onChange={handleRotationChange}
-              style={{ width: "74px" }}
-              aria-label="rotationAngle"
-              as={"input"}
             />
 
             <PositionSelector
@@ -195,6 +199,6 @@ export default function Ribbon({
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }

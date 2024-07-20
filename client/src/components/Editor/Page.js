@@ -1,10 +1,13 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Item from "./Item";
 import * as utils from "../../utils";
+import { BiTrash } from "react-icons/bi";
+import { IoIosAdd } from "react-icons/io";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 export default function Page({
   page,
   handleAddNewText,
-  handleDeleteSelectedText,
+  handleDeleteSelectedItem,
   selectedItem,
   selectedItemElement,
   setSelectedItemElement,
@@ -53,6 +56,10 @@ export default function Page({
             translateY: newTranslateY,
             verticalAlignment: "",
           });
+          break;
+
+        case "Delete":
+          handleDeleteSelectedItem();
           break;
 
         default:
@@ -162,7 +169,8 @@ export default function Page({
         setScale(newScale);
       }
     } else if (ratio < 1) {
-      setScale(ratio - 0.3);
+      const val = ratio - 0.3 < 0.1 ? 0.1 : ratio - 0.3;
+      setScale(val);
     }
   }, [imageDetails]);
 
@@ -183,6 +191,7 @@ export default function Page({
     <div className="pageSubContainer">
       <div className="pageContentParent">
         <div
+          tabIndex={0}
           id="pageContent"
           className="pageContent"
           ref={itemRef}
@@ -203,21 +212,38 @@ export default function Page({
           )}cm x ${utils.pixelToCm(imageDetails.customHeight)}cm`}</span>
 
           <div title="" className="page-buttons-container">
-            <span
-              title="Add new text"
-              className="add-text-button"
-              onClick={handleAddNewText}
+            <OverlayTrigger
+              placement="left"
+              overlay={
+                <Tooltip className="custom-tooltip" id="add-text-item-tooltip">
+                  Add Text Item
+                </Tooltip>
+              }
             >
-              +
-            </span>
-            {selectedItem && (
-              <span
-                title="Delete"
-                className="remove-text-button"
-                onClick={handleDeleteSelectedText}
-              >
-                x
+              <span className="add-text-button" onClick={handleAddNewText}>
+                <IoIosAdd size={21} />
               </span>
+            </OverlayTrigger>
+
+            {selectedItem && (
+              <OverlayTrigger
+                placement="left"
+                overlay={
+                  <Tooltip
+                    className="custom-tooltip"
+                    id="delete-text-item-tooltip"
+                  >
+                    Remove Selected{" "}
+                  </Tooltip>
+                }
+              >
+                <span
+                  className="remove-text-button"
+                  onClick={handleDeleteSelectedItem}
+                >
+                  <BiTrash size={21} />
+                </span>
+              </OverlayTrigger>
             )}
           </div>
 

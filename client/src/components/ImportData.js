@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import * as utils from "../../utils";
+import * as utils from "../utils";
 import { Button, Modal, Spinner, Table } from "react-bootstrap";
 import TextColMatcher from "./TextColMatcher";
 import ImportModal from "./ImportModal";
@@ -36,6 +36,13 @@ export const ImportData = memo(function ImportData({
       )}
 
       <div className="data-container">
+        <div className="data-container-header" style={{ width: "100%" }}>
+          <div className="app-custom-button blue" onClick={handleImportClick}>
+            <BiPlusCircle size={24} />
+            <span>Import Your Data</span>
+          </div>
+        </div>
+
         {
           <ImportModal
             isOpen={isModalOpen}
@@ -43,14 +50,8 @@ export const ImportData = memo(function ImportData({
             setShow={setIsModalOpen}
           />
         }
-        <div>
-          <div className="custom-icon-button" onClick={handleImportClick}>
-            <BiPlusCircle size={24} />
-            <span>Add</span>
-          </div>
-        </div>
 
-        {dataset != null && dataset.length > 0 && (
+        {dataset != null && dataset.length > 0 ? (
           <>
             <Modal
               style={{ overflow: "auto", maxHeight: "80%" }}
@@ -111,6 +112,23 @@ export const ImportData = memo(function ImportData({
               dataset={dataSource?.dataset}
             />
           </>
+        ) : (
+          <div style={{ fontWeight: "400", color: "var(--bs-gray-600)" }}>
+            <p>
+              No datasource found. Click the '
+              <span style={{ fontWeight: 500, color: "var(--bs-gray-500)" }}>
+                Import Your Data
+              </span>
+              ' button above to upload your existing data.
+            </p>
+            <p>
+              Supported file formats are :{" "}
+              <span style={{ fontWeight: "500", color: "var(--bs-gray-500)" }}>
+                XLSX, CSV, JSON, TXT
+              </span>
+            </p>
+            <div></div>
+          </div>
         )}
       </div>
     </>

@@ -30,35 +30,58 @@ code {
     overflow: auto;
     height: fit-content;
     display: block;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   body > * {
     overflow: hidden;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   .header,
-  .side-menu {
+  .side-menu,
+  .component-container,
+  .print-settings,
+  .close-button,
+  .app-custom-button {
     display: none !important;
   }
 
-  .component-container {
-    display: none !important;
-  }
-
-  .preview-container {
-    width: 100% !important;
-    height: 100% !important;
-  }
   .side-left,
   .side-container,
   .preview-container {
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     min-width: 100% !important;
     background-color: transparent !important;
+    padding: 0px !important;
+    margin: 0px !important;
+
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    overflow: hidden !important;
+  }
+
+  .preview-container {
+    justify-content: flex-start !important;
+    height: fit-content !important;
+    overflow: hidden !important;
+  }
+
+  .print-preview {
+    display: block !important;
+  }
+
+  .pageContent,
+  img {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   @page {
     margin: 0;
+    padding: 0;
   }
 }

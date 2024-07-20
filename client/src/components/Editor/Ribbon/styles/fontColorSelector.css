@@ -1,0 +1,15 @@
+.custom-button > .color {
+  width: 20px;
+  height: 3px;
+  border-radius: 7px;
+  /* background-color: blue; */
+}
+
+.custom-button:not(.disabled):hover {
+  background-color: #ebecf0;
+  cursor: pointer;
+}
+
+.sketch-picker {
+  z-index: 999999;
+}

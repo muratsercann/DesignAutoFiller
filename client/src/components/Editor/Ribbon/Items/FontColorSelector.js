@@ -1,6 +1,7 @@
 import { SketchPicker } from "react-color";
-import "./styles/fontColorSelector.css";
+import "../styles/fontColorSelector.css";
 import { useEffect, useRef, useState } from "react";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export default function FontColorSelector({
   color,
@@ -9,6 +10,7 @@ export default function FontColorSelector({
   setIsRibbonItemOpen,
 }) {
   const [show, setShow] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   function convertcolor(colorStr) {
     var rgba = colorStr
@@ -39,6 +41,10 @@ export default function FontColorSelector({
     }
 
     setShow(!show);
+
+    if (!show) {
+      setShowTooltip(false);
+    }
   };
 
   useEffect(() => {
@@ -63,35 +69,53 @@ export default function FontColorSelector({
     };
   });
 
+  const handleToggle = (toggled) => {
+    if (show && toggled) setShowTooltip(false);
+    else {
+      setShowTooltip(toggled);
+    }
+  };
+
   return (
     <>
-      <div style={{ position: "relative" }}>
-        <div
-          className={`custom-button ${disabled ? "disabled" : ""}`}
-          onClick={handleClick}
-          ref={pickerButtonRef}
-        >
-          <div className="letter">A</div>
-          <div style={{ backgroundColor: color }} className="color"></div>
-        </div>
-        {show && (
+      <OverlayTrigger
+        placement="bottom"
+        overlay={
+          <Tooltip className="custom-tooltip" id="font-color-tooltip">
+            Font Color
+          </Tooltip>
+        }
+        show={showTooltip}
+        onToggle={handleToggle}
+      >
+        <div style={{ position: "relative" }}>
           <div
-            ref={pickerRef}
-            style={{
-              position: "absolute",
-              left: "0px",
-              top: "100%",
-              zIndex: "99999",
-            }}
+            className={`custom-button ${disabled ? "disabled" : ""}`}
+            onClick={handleClick}
+            ref={pickerButtonRef}
           >
-            <SketchPicker
-              color={convertcolor(color)}
-              onChange={handleChange}
-              onChangeComplete={handleChange}
-            />
+            <div className="letter">A</div>
+            <div style={{ backgroundColor: color }} className="color"></div>
           </div>
-        )}
-      </div>
+          {show && (
+            <div
+              ref={pickerRef}
+              style={{
+                position: "absolute",
+                left: "0px",
+                top: "100%",
+                zIndex: "99999",
+              }}
+            >
+              <SketchPicker
+                color={convertcolor(color)}
+                onChange={handleChange}
+                onChangeComplete={handleChange}
+              />
+            </div>
+          )}
+        </div>
+      </OverlayTrigger>
     </>
   );
 }

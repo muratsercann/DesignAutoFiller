@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import "./styles/positionSelector.css";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import "../styles/positionSelector.css";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import {
@@ -21,7 +21,9 @@ export default function PositionSelector({
   const [show, setShow] = useState(false);
   const refPosition = useRef(null);
   const refPositionButton = useRef(null);
-
+  const refArrow = useRef(null);
+  const [style, setStyle] = useState({});
+  const [arrowStyle, setArrowStyle] = useState({});
   const handleClick = () => {
     setShow(!show);
   };
@@ -56,6 +58,44 @@ export default function PositionSelector({
     };
   });
 
+  useLayoutEffect(() => {
+    if (show && refPositionButton.current && refPosition.current) {
+      const buttonRect = refPositionButton.current.getBoundingClientRect();
+      const alignRect = refPosition.current.getBoundingClientRect();
+      const editorRect = document
+        .querySelector(".edit")
+        .getBoundingClientRect();
+
+      let newPositionStyle = {};
+      let newArrowStyle = {};
+
+      const centerAvailable =
+        editorRect.right - buttonRect.right >
+          alignRect.width / 2 - buttonRect.width / 2 &&
+        buttonRect.left - editorRect.left >
+          alignRect.width / 2 - buttonRect.width / 2;
+
+      const rigthAvailable =
+        editorRect.right - buttonRect.right + 20 > alignRect.width;
+      const leftAvailable =
+        buttonRect.left - editorRect.left + 20 > alignRect.width;
+
+      if (centerAvailable) {
+        newPositionStyle.left = buttonRect.width / 2 - alignRect.width / 2;
+        newArrowStyle.right = alignRect.width / 2 - 5;
+      } else if (rigthAvailable) {
+        newPositionStyle.left = 0;
+        newArrowStyle.left = 20;
+      } else if (leftAvailable) {
+        newPositionStyle.right = 0;
+        newArrowStyle.right = 20;
+      }
+
+      setStyle(newPositionStyle);
+      setArrowStyle(newArrowStyle);
+    }
+  }, [show]);
+
   const iconsize = 24;
   return (
     <div className="positionSelector">
@@ -69,7 +109,8 @@ export default function PositionSelector({
 
       {show && (
         <>
-          <div ref={refPosition} className="align">
+          <div ref={refPosition} className="align" style={style}>
+            <div ref={refArrow} className="arrow" style={arrowStyle} />
             <div className="container">
               <Row>
                 <Col>
@@ -157,8 +198,6 @@ export default function PositionSelector({
               </Row>
             </div>
           </div>
-
-          <div className="arrow" />
         </>
       )}
     </div>

@@ -1,22 +1,30 @@
 import { useRef, useState } from "react";
-import Button from "react-bootstrap/esm/Button";
-import Modal from "react-bootstrap/Modal";
-import * as XLSX from "xlsx";
-import Papa from "papaparse";
-import "./editor.css";
 import { IoCloudUploadSharp } from "react-icons/io5";
-import { Spinner } from "react-bootstrap";
-import * as utils from "../../utils";
-export default function UploadImage({ setImageDetails }) {
+
+const maxFilesize = 1024;
+export default function UploadImage({ setImageDetails, style = {} }) {
   const pasteAreaRef = useRef(null);
-  const [error, setError] = useState(null);
   const [fileName, setFileName] = useState(null);
+  const [error, setError] = useState(null);
   const inputRef = useRef(null);
 
   const handleFileUpload = async (e) => {
-    // setIsLoading(true);
     setError(null);
+    setFileName(null);
+    setImageDetails(null);
+
     const file = e.target.files[0];
+
+    if (file == null) {
+      return;
+    }
+
+    if (file.size > maxFilesize * 1024) {
+      setError(
+        `File size exceeds the maximum allowed limit of ${maxFilesize} KB. Please choose a smaller file.`
+      );
+      return;
+    }
 
     const base64String = await convertToBase64(file);
     const dataUrl = `data:${file.type};base64,${base64String}`;
@@ -34,7 +42,6 @@ export default function UploadImage({ setImageDetails }) {
       };
 
       setImageDetails(imageDetails);
-      //   setIsLoading(false);
     };
 
     img.onerror = () => {
@@ -51,7 +58,7 @@ export default function UploadImage({ setImageDetails }) {
   };
 
   return (
-    <>
+    <div style={{ ...style, padding: "10px" }} className="w-100 h-100">
       <div ref={pasteAreaRef} className="upload-file-body">
         <div className="upload-container">
           <div className="mb-3">
@@ -82,25 +89,22 @@ export default function UploadImage({ setImageDetails }) {
                   color: "#4d4d4d",
                 }}
               >
-                <span>{fileName}</span>
+                <span> {fileName}</span>
               </div>
             </>
           )}
 
-          <div
-            className="upload-error"
-            style={{ color: "firebrick", fontSize: "smaller" }}
-          >
-            <span>{error || ""}</span>
+          <div className="upload-error">
+            <p> {error || ""}</p>
           </div>
         </div>
       </div>
 
       <div className="mt-3" style={{ fontSize: "14px", fontWeight: "500" }}>
-        <span>Supported File Formats :</span>
-        <span className="mx-1">PNG, JPEG, </span>
+        <span>Maximum allowed limit:</span>
+        <span className="mx-1">{maxFilesize} KB </span>
       </div>
-    </>
+    </div>
   );
 }
 

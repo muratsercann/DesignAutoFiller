@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import * as utils from "../../utils";
-import "./editor.css";
+import * as utils from "../utils";
 export default function TextColMatcher({ settings, setSettings, dataset }) {
   const dataColumns = utils.getColNamesFromDataset(dataset);
 
@@ -26,16 +25,19 @@ export default function TextColMatcher({ settings, setSettings, dataset }) {
           <div className="container">
             <div className="row mb-3 text-center">
               <h6>Match Text - Column</h6>
-              <hr></hr>
+              <hr style={{ opacity: "0.1" }}></hr>
             </div>
             {settings.items.map((item, index) => (
               <div key={index} className="row mb-3">
-                <div className="col-5">{item.value}</div>
+                <div className="col-5" title={item.value}>
+                  {item.value}
+                </div>
                 <span className="col-1">=</span>
                 <div className="col">
                   <select
+                    title={item.dataColumn}
                     value={item.dataColumn}
-                    className="form-select"
+                    className="form-select bg-dark text-light"
                     onChange={(e) => handleChanges(item, e)}
                   >
                     <option value={""}>none</option>
