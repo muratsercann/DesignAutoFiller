@@ -27,7 +27,7 @@ export default function GetStarted() {
   ];
 
   const handleStartClick = () => {
-    navigate("/");
+    navigate("/editor");
   };
 
   return (
