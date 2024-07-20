@@ -35,7 +35,7 @@ export default function GetStarted() {
       <div className="get-started">
         <div className="get-started-header">
           <p style={{ fontSize: "65px" }}>Welcome to Design Duplicator.</p>
-          <p>Here are the quides on how to use it.</p>
+          <p>Here are the guides on how to use it.</p>
         </div>
         <div className="quick-start-button" onClick={handleStartClick}>
           Quick Start
