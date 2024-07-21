@@ -160,6 +160,8 @@ select {
   align-items: center;
   justify-content: center;
   z-index: 11;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .modal-body > .spinner-container {
