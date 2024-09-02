@@ -46,7 +46,7 @@ To run the application locally, follow these steps:
    git clone https://github.com/muratsercann/DesignAutoFiller.git
 2. **Install the dependencies:**
    ```bash
-   cd DesignAutofiller
+   cd client
    npm install
 3. **Start the application:**
    ```bash
